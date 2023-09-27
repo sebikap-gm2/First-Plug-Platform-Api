@@ -1,33 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const billingInformation = {
-  country: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true,
-  },
-  state: {
-    type: String,
-    required: true,
-  },
-  zipcode: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  apartment: {
-    type: String,
-    required: true,
-  },
-};
-
 const userSchema = mongoose.Schema({
   fullname: {
     type: String,
@@ -52,6 +25,30 @@ const userSchema = mongoose.Schema({
     required: true,
   },
   contactPhoneNumber: {
+    type: String,
+    required: true,
+  },
+   country: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  state: {
+    type: String,
+    required: true,
+  },
+  zipcode: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  apartment: {
     type: String,
     required: true,
   },
