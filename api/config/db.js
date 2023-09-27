@@ -16,5 +16,4 @@ mongoose.connection.on("connected", () => {
   console.log("Connected to database");
 });
 
-
 module.exports = connectToDatabase;
