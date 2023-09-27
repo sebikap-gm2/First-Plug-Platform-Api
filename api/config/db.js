@@ -8,12 +8,12 @@ const connectToDatabase = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log(`Database is connected to ${process.env.MONGO_URI}`);
+    console.log(
+      `Base de datos conectada correctamente ${process.env.MONGO_URI}`
+    );
   } catch (error) {
-    console.error("Database connection error:", error);
+    console.error("Error en la conexión a la base de datos:", error);
   }
 };
 
-connectToDatabase();
-
-module.exports = mongoose;
+module.exports = connectToDatabase;
