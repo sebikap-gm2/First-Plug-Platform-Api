@@ -1,15 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const billingInformationSchema = mongoose.Schema({
-  country: String,
-  city: String,
-  state: String,
-  zipcode: String,
-  address: String,
-  apartment: String,
-});
-
 const userSchema = mongoose.Schema({
   fullname: String,
   email: String,
@@ -17,7 +8,14 @@ const userSchema = mongoose.Schema({
   salt: String,
   companyName: String,
   contactPhoneNumber: String,
-  billingInformation: billingInformationSchema,
+  billingInformation: {
+    country: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    address: String,
+    apartment: String,
+  },
 });
 
 userSchema.methods.validatePassword = async (password) => {
