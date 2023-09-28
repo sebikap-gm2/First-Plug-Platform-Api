@@ -18,7 +18,7 @@ const userSchema = mongoose.Schema({
   },
   salt: {
     type: String,
-    required: true,
+    required: false,
   },
   companyName: {
     type: String,
@@ -28,7 +28,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-   country: {
+  country: {
     type: String,
     required: true,
   },
@@ -54,9 +54,13 @@ const userSchema = mongoose.Schema({
   },
 });
 
-userSchema.methods.validatePassword = async (password) => {
-  const hashedPassword = await bcrypt.hash(password, this.salt);
-  return this.password === hashedPassword;
+userSchema.methods.validatePassword = async function (password) {
+  try {
+    const hashedPassword = await bcrypt.hash(password, this.salt);
+    return this.password === hashedPassword;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 userSchema.methods.generateHash = async (password, salt) => {
