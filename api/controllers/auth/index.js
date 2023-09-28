@@ -41,6 +41,7 @@ const register = async (req, res) => {
 
     res.status(201).json(newUser);
   } catch (error) {
+    res.status(401).json("Error at register", error);
     console.log({ error });
   }
 };
@@ -52,7 +53,7 @@ const login = async (req, res) => {
     const userToCheck = await User.findOne({ email: email }).exec();
 
     if (!userToCheck) {
-      return res.sendStatus(401);
+      return res.status(400).send("This mail does not exists!");
     }
 
     const pwCheck = await userToCheck.validatePassword(password);
@@ -74,6 +75,7 @@ const login = async (req, res) => {
       res.send(payload);
     }
   } catch (error) {
+    res.status(401).json("Error at register", error);
     console.log({ error });
   }
 };

@@ -15,7 +15,7 @@ app.use(
     credentials: true,
   })
 );
-app.use("/", routes);
+app.use("/api", routes);
 app.get("/", (req, res) => {
   res.send("ok");
 });
