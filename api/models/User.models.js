@@ -22,35 +22,35 @@ const userSchema = mongoose.Schema({
   },
   companyName: {
     type: String,
-    required: true,
+    required: false,
   },
   contactPhoneNumber: {
     type: String,
-    required: true,
+    required: false,
   },
   country: {
     type: String,
-    required: true,
+    required: false,
   },
   city: {
     type: String,
-    required: true,
+    required: false,
   },
   state: {
     type: String,
-    required: true,
+    required: false,
   },
   zipcode: {
     type: String,
-    required: true,
+    required: false,
   },
   address: {
     type: String,
-    required: true,
+    required: false,
   },
   apartment: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 
