@@ -7,6 +7,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const UserSchema = require("./models/User.models");
 const routes = require("./routes");
+
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(
@@ -16,9 +17,6 @@ app.use(
   })
 );
 app.use("/api", routes);
-app.get("/", (req, res) => {
-  res.send("ok");
-});
 
 (async () => {
   await connectToDatabase();

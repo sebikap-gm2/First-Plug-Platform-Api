@@ -41,8 +41,8 @@ const register = async (req, res) => {
 
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(401).json("Error at register", error);
-    console.log({ error });
+    res.status(401).json({ "Error at register": error });
+    console.log(error);
   }
 };
 
