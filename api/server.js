@@ -5,7 +5,7 @@ const connectToDatabase = require("./config/db");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
-const UserSchema = require("./models/User.models");
+const UsersSchema = require("./models/Users.models");
 const routes = require("./routes");
 
 app.use(express.json());
@@ -16,7 +16,13 @@ app.use(
     credentials: true,
   })
 );
+
 app.use("/api", routes);
+
+// Error Middleware
+app.use((req, res) => {
+  res.sendStatus(500);
+});
 
 (async () => {
   await connectToDatabase();
