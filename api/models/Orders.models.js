@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 
 const OrdersSchema = mongoose.Schema({
-  fullname: {
-    type: String,
-    required: true,
-  },
+  teamMember: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TeamMember",
+    },
+  ],
   status: {
     type: String,
+    enum: [
+      "order confirmed",
+      "order canceled",
+      "confirmation pending",
+      "payment pending",
+    ],
+    default: "confirmation pending",
     required: true,
   },
   date: {
