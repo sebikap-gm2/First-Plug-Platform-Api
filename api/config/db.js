@@ -30,7 +30,7 @@ const checkEnvVariables = () => {
 
   if (missingVariables.length > 0) {
     console.error(
-      `Las siguientes variables de entorno son necesarias en el archivo .env: ${missingVariables.join(
+      `This enviroment variables are required in the .env file: ${missingVariables.join(
         ", "
       )}`
     );
