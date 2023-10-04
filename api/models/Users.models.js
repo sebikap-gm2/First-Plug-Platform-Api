@@ -19,55 +19,69 @@ const UsersSchema = mongoose.Schema({
   salt: {
     type: String,
     required: false,
+    default: "",
   },
   companyName: {
     type: String,
     required: false,
+    default: "",
   },
   contactPhoneNumber: {
     type: String,
     required: false,
+    default: "",
+    match: /^(\+\d{1,3}[- ]?)?\d{10}$/,
   },
   country: {
     type: String,
     required: false,
+    default: "",
   },
   city: {
     type: String,
     required: false,
+    default: "",
   },
   state: {
     type: String,
     required: false,
+    default: "",
   },
   zipcode: {
     type: String,
     required: false,
+    default: "",
+    match: /^\d+$/,
   },
   address: {
     type: String,
     required: false,
+    default: "",
   },
   apartment: {
     type: String,
     required: false,
+    default: "",
   },
   teams: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Teams",
+      default: [],
     },
   ],
   shipments: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Shipments",
+      default: [],
     },
   ],
   orders: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Orders",
+      default: [],
     },
   ],
 });
