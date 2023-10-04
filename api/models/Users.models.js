@@ -52,18 +52,24 @@ const UsersSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-  teams: {
-    type: [String],
-    required: false,
-  },
-  shipments: {
-    type: [String],
-    required: false,
-  },
-  orders: {
-    type: [String],
-    required: false,
-  },
+  teams: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Teams",
+    },
+  ],
+  shipments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Shipments",
+    },
+  ],
+  orders: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Orders",
+    },
+  ],
 });
 
 UsersSchema.methods.validatePassword = async function (password) {
