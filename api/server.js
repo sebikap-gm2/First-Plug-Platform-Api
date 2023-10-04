@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const connectToDatabase = require("./config/db");
+const checkEnvVariables = require("./config/envCheck");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
@@ -25,6 +26,7 @@ app.use((req, res) => {
 });
 
 (async () => {
+  await checkEnvVariables();
   await connectToDatabase();
 
   app.listen(process.env.PORT, () => {
