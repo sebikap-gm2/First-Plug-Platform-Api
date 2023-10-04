@@ -52,6 +52,7 @@ const TeamsMemberSchema = mongoose.Schema({
   },
   additionalInfo: {
     type: String,
+    require: false,
     default: "",
   },
   teams: [
