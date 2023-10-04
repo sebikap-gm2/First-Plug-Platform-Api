@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-TeamsMemberSchema = mongoose.Schema({
+const TeamsMemberSchema = mongoose.Schema({
   lastName: {
     type: String,
     require: true,
