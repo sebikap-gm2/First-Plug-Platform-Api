@@ -11,35 +11,35 @@ const ProductsSchema = mongoose.Schema({
   },
   color: {
     type: String,
-    require: false,
+    default: "",
   },
   screen: {
     type: String,
-    require: false,
+    default: "",
   },
   keyboard: {
     type: String,
-    require: false,
+    default: "",
   },
   processor: {
     type: String,
-    require: false,
+    default: "",
   },
   ram: {
     type: String,
-    require: false,
+    default: "",
   },
   storage: {
     type: String,
-    require: false,
+    default: "",
   },
   gpu: {
     type: String,
-    require: false,
+    default: "",
   },
   serialNumber: {
     type: String,
-    require: false,
+    default: "",
   },
   price: {
     type: String,
