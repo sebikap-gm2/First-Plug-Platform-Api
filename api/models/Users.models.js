@@ -52,6 +52,18 @@ const UsersSchema = mongoose.Schema({
     type: String,
     required: false,
   },
+  teams: {
+    type: [String],
+    required: false,
+  },
+  shipments: {
+    type: [String],
+    required: false,
+  },
+  orders: {
+    type: [String],
+    required: false,
+  },
 });
 
 UsersSchema.methods.validatePassword = async function (password) {
