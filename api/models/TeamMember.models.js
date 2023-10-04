@@ -21,6 +21,7 @@ const TeamsMemberSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    match: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
   },
   jobPosition: {
     type: String,
