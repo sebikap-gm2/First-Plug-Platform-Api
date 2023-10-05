@@ -15,6 +15,11 @@ class TeamMembersControllers {
     const { idMember } = req.params;
     try {
       const teamMember = await TeamMembersServices.getById(idMember);
+
+      if (!teamMember) {
+        res.status(404).json({ message: "the team member was not found" });
+      }
+
       res.status(200).json(teamMember);
     } catch (error) {
       console.log(error);
@@ -41,9 +46,16 @@ class TeamMembersControllers {
   static async updateById(req, res, next) {
     const { idMember } = req.params;
     try {
-      const teamMember = await TeamMembersServices.update(idMember, req.body);
+      const updatedTeamMember = await TeamMembersServices.update(
+        idMember,
+        req.body
+      );
 
-      res.status(200).json(teamMember);
+      if (!updatedTeamMember) {
+        res.status(404).json({ message: "the team member was not found" });
+      }
+
+      res.status(200).json(updatedTeamMember);
     } catch (error) {
       next();
     }
@@ -53,6 +65,10 @@ class TeamMembersControllers {
     const { idMember } = req.params;
     try {
       const deletedTeamMember = await TeamMembersServices.delete(idMember);
+
+      if (!deletedTeamMember) {
+        res.status(404).json({ message: "the team member was not found" });
+      }
 
       res.status(200).json(deletedTeamMember);
     } catch (error) {
