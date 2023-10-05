@@ -38,9 +38,27 @@ class TeamMembersControllers {
     }
   }
 
-  static updateById(req, res) {}
+  static async updateById(req, res, next) {
+    const { idMember } = req.params;
+    try {
+      const teamMember = await TeamMembersServices.update(idMember, req.body);
 
-  static deleteById(req, res) {}
+      res.status(200).json(teamMember);
+    } catch (error) {
+      next();
+    }
+  }
+
+  static async deleteById(req, res, next) {
+    const { idMember } = req.params;
+    try {
+      const deletedTeamMember = await TeamMembersServices.delete(idMember);
+
+      res.status(200).json(deletedTeamMember);
+    } catch (error) {
+      next();
+    }
+  }
 }
 
 module.exports = TeamMembersControllers;

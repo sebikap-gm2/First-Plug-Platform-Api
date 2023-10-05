@@ -16,6 +16,14 @@ class TeamMembersServices {
   static async create(data) {
     return await TeamMembers.create(data);
   }
+
+  static async update(id, data) {
+    return await TeamMembers.findByIdAndUpdate(id, data);
+  }
+
+  static async delete(_id) {
+    return await TeamMembers.findByIdAndDelete(_id);
+  }
 }
 
 module.exports = TeamMembersServices;
