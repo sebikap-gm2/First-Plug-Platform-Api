@@ -18,7 +18,7 @@ class TeamMembersServices {
   }
 
   static async update(id, data) {
-    return await TeamMembers.findByIdAndUpdate(id, data);
+    return await TeamMembers.findByIdAndUpdate(id, data, { new: true });
   }
 
   static async delete(_id) {
