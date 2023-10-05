@@ -1,15 +1,32 @@
 const TeamMembersServices = require("../services/teamMembers.services");
 
 class TeamMembersControllers {
-  static getAll(req, res) {}
+  static async getAll(req, res, next) {
+    try {
+      const teamMembers = await TeamMembersServices.getAll();
 
-  static getById(req, res) {}
+      res.status(200).json(teamMembers);
+    } catch (error) {
+      next();
+    }
+  }
+
+  static async getById(req, res, next) {
+    const { idMember } = req.params;
+    try {
+      const teamMember = await TeamMembersServices.getById(idMember);
+      res.status(200).json(teamMember);
+    } catch (error) {
+      console.log(error);
+      next();
+    }
+  }
 
   static async create(req, res, next) {
     try {
-      const TeamMember = await TeamMembersServices.getByEmail(req.body.email);
+      const teamMember = await TeamMembersServices.getOne(req.body.email);
 
-      if (TeamMember) {
+      if (teamMember) {
         return res.status(400).send("This mail has been already");
       }
 
