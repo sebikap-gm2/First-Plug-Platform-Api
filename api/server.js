@@ -6,7 +6,6 @@ const checkEnvVariables = require("./config/envCheck");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
-const UsersSchema = require("./models/Users.models");
 const routes = require("./routes");
 
 app.use(express.json());
