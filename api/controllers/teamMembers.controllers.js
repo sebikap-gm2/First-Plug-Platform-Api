@@ -7,7 +7,7 @@ class TeamMembersControllers {
 
       res.status(200).json(teamMembers);
     } catch (error) {
-      next();
+      next(error);
     }
   }
 
@@ -22,8 +22,7 @@ class TeamMembersControllers {
 
       res.status(200).json(teamMember);
     } catch (error) {
-      console.log(error);
-      next();
+      next(error);
     }
   }
 
@@ -39,7 +38,7 @@ class TeamMembersControllers {
 
       res.status(201).json(newTeamMember);
     } catch (error) {
-      next();
+      next(error);
     }
   }
 
@@ -72,7 +71,7 @@ class TeamMembersControllers {
 
       res.status(200).json(deletedTeamMember);
     } catch (error) {
-      next();
+      next(error);
     }
   }
 }
