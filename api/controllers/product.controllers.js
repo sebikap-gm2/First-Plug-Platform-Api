@@ -1,16 +1,16 @@
 const ProductServices = require("../services/product.services");
 
 class ProductControllers {
-  static async getAllProducts(req, res) {
+  static async getAllProducts(req, res, next) {
     try {
       const allProducts = await ProductServices.findAllProducts();
       res.status(200).json(allProducts);
     } catch (error) {
-      res.status(500).json({ error: "Error to found all products" });
+      next(error);
     }
   }
 
-  static async getProductById(req, res) {
+  static async getProductById(req, res, next) {
     const { idProduct } = req.params;
     try {
       const product = await ProductServices.findProductsById(idProduct);
@@ -19,11 +19,11 @@ class ProductControllers {
       }
       res.status(200).json(product);
     } catch (error) {
-      res.status(500).json({ error: "Error to found product" });
+      next(error);
     }
   }
 
-  static async updateProduct(req, res) {
+  static async updateProduct(req, res, next) {
     try {
       const productId = req.params.idProduct;
       const newData = req.body;
@@ -39,29 +39,29 @@ class ProductControllers {
 
       res.status(200).json({ message: "Product update succesfully" });
     } catch (error) {
-      res.status(500).json({ error: "Error to update product" });
+      next(error);
     }
   }
 
-  static async createProduct(req, res) {
+  static async createProduct(req, res, next) {
     try {
       const productData = req.body;
 
       const newProduct = await ProductServices.createNewProduct(productData);
       res.status(201).json(newProduct);
     } catch (error) {
-      res.status(500).json({ error: "Error to create new product" });
+      next(error);
     }
   }
 
-  static async deleteProduct(req, res) {
+  static async deleteProduct(req, res, next) {
     try {
       const { idProduct } = req.params;
       const deleteProduct = await ProductServices.deleteProductById(idProduct);
 
       res.status(200).json(deleteProduct);
     } catch (error) {
-      res.status(500).json({ error: "Error to delete product" });
+      next(error);
     }
   }
 }
