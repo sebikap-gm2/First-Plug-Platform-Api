@@ -4,44 +4,19 @@ const AuthServices = require("../services/auth.services");
 class AuthControllers {
   static async register(req, res) {
     try {
-      const {
-        email,
-        password,
-        fullname,
-        companyName,
-        contactPhoneNumber,
-        country,
-        city,
-        state,
-        zipcode,
-        address,
-        apartment,
-      } = req.body;
+      const { email } = req.body;
 
-      const userToCheck = await AuthServices.getOneUser(email);
+      const user = await AuthServices.getUserbyEmail(email);
 
-      if (userToCheck) {
+      if (user) {
         return res.status(400).send("This mail has been already registered!");
       }
 
-      const newUser = await AuthServices.createUser({
-        email,
-        password,
-        fullname,
-        companyName,
-        contactPhoneNumber,
-        country,
-        city,
-        state,
-        zipcode,
-        address,
-        apartment,
-      });
+      await AuthServices.createUser(req.body);
 
-      res.status(201).json(newUser);
+      res.status(201).json("User register succed");
     } catch (error) {
-      res.status(401).json({ "Error at register": error });
-      console.log(error);
+      res.status(401).json("Error at register");
     }
   }
 
@@ -49,41 +24,33 @@ class AuthControllers {
     try {
       const { email, password } = req.body;
 
-      const userToCheck = await AuthServices.getOneUser(email);
+      const user = await AuthServices.getUserbyEmail(email);
 
-      if (!userToCheck) {
-        return res.status(400).send("This mail does not exists!");
+      if (!user) {
+        return res.status(404).send("This mail does not exists!");
       }
 
-      const pwCheck = await userToCheck.validatePassword(password);
+      const isValid = await user.validatePassword(password);
 
-      if (!pwCheck) {
+      if (!isValid) {
         return res.status(401).send("Wrong password! Please try again");
-      } else {
-        const payload = {
-          id: userToCheck.id,
-          email: userToCheck.email,
-          fullname: userToCheck.fullname,
-        };
-
-        const token = generateToken(payload);
-
-        res.setHeader("Authorization", `Bearer ${token}`);
-
-        res.send(payload);
       }
+
+      const payload = {
+        id: user.id,
+        email: user.email,
+        fullname: user.fullname,
+      };
+
+      const token = generateToken(payload);
+
+      res.send({ user: payload, token });
     } catch (error) {
-      res.status(401).json("Error at register", error);
-      console.log({ error });
+      res.status(500).json("Error at login");
     }
   }
 
-  static logout(req, res) {
-    res.removeHeaders("Authorization");
-    res.sendStatus(204);
-  }
-
-  static me(req, res) {
+  static async me(req, res) {
     res.send(req.user);
   }
 }
