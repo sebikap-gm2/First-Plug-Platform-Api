@@ -35,7 +35,7 @@ class OrderControllers {
       const { idOrder } = req.params;
       const orders = await OrderServices.updateOrder(idOrder, req.body);
 
-      res.status(201).json({ updatedOrder: orders });
+      res.status(200).json({ updatedOrder: orders });
     } catch (error) {
       next(error);
     }
@@ -46,7 +46,7 @@ class OrderControllers {
       const orders = await OrderServices.deleteOrder(idOrder);
 
       res
-        .status(201)
+        .status(200)
         .json({ msg: "Order deleted succesfully", deletedOrder: orders });
     } catch (error) {
       next(error);
