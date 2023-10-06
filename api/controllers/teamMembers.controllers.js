@@ -56,7 +56,7 @@ class TeamMembersControllers {
 
       res.status(200).json(updatedTeamMember);
     } catch (error) {
-      next();
+      next(error);
     }
   }
 
