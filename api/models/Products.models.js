@@ -58,6 +58,11 @@ const ProductsSchema = mongoose.Schema({
     enum: ["Available", "Delivered"],
     require: true,
   },
+  imgUrl: {
+    type: String,
+    required: false,
+    default: "",
+  },
 });
 
 const Products = mongoose.model("Products", ProductsSchema);
