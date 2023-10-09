@@ -63,6 +63,11 @@ const ProductsSchema = mongoose.Schema({
     required: false,
     default: "",
   },
+  quantity: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 });
 
 const Products = mongoose.model("Products", ProductsSchema);
