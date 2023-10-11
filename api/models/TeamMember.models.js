@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const TeamsMemberSchema = mongoose.Schema({
+  firstName: {
+    type: String,
+    require: true,
+  },
   lastName: {
     type: String,
     require: true,
@@ -13,15 +17,15 @@ const TeamsMemberSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  DNI: {
-    type: String,
-    require: true,
-  },
   email: {
     type: String,
     required: true,
     unique: true,
     match: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
+  },
+  DNI: {
+    type: String,
+    require: false,
   },
   jobPosition: {
     type: String,
