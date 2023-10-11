@@ -4,8 +4,8 @@ class OrderServices {
   static async getAllOrders() {
     return await Orders.find();
   }
-  static async getOneOrder(oderId) {
-    return await Orders.findById(oderId);
+  static async getOneOrder(orderId) {
+    return await Orders.findById(orderId);
   }
 
   static async createOrder(data) {
