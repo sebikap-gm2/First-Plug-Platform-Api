@@ -5,10 +5,13 @@ const TeamsSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  teamMember: {
-    type: Array,
-    require: false,
-  },
+  teamMember: [
+    {
+      default: [],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "TeamMember",
+    },
+  ],
 });
 
 const Teams = mongoose.model("Teams", TeamsSchema);

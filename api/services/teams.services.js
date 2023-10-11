@@ -2,11 +2,15 @@ const Teams = require("../models/Teams.models");
 
 class TeamsServices {
   static async getAllTeams() {
-    return await Teams.find();
+    return await Teams.find().populate("teamMember");
   }
 
   static async createTeam(data) {
     return await Teams.create(data);
+  }
+
+  static async getOneTeam(id) {
+    return await Teams.findById(id);
   }
 
   static async updateTeam(id, data) {
