@@ -44,7 +44,9 @@ class AuthControllers {
 
       const token = generateToken(payload);
 
-      res.send({ user: payload, token });
+      const response = { ...payload, token };
+
+      res.send(response);
     } catch (error) {
       res.status(500).json("Error at login");
     }
