@@ -2,7 +2,7 @@ const TeamMembers = require("../models/TeamMember.models");
 
 class TeamMembersServices {
   static async getAll() {
-    return await TeamMembers.find().exec();
+    return await TeamMembers.find();
   }
 
   static async getOne(identifier) {

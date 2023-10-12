@@ -60,13 +60,11 @@ const TeamsMemberSchema = mongoose.Schema({
     require: false,
     default: "",
   },
-  teams: [
-    {
-      default: [],
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Teams",
-    },
-  ],
+  teams: {
+    type: Array,
+    require: false,
+    default: [],
+  },
 });
 
 const TeamMember = mongoose.model("TeamMember", TeamsMemberSchema);
