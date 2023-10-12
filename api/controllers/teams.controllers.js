@@ -43,13 +43,15 @@ class TeamsController {
         return res.status(401).send("User is already in this team");
       }
       team.teamMember.push(memberId);
+      teamMember.teams.push(team.name);
 
       await team.save();
+      await teamMember.save();
 
       res.status(200).json({
         message: "Team member add succesfully.",
         team,
-        memberId,
+        teamMember,
       });
     } catch (error) {
       next(error);
@@ -81,12 +83,16 @@ class TeamsController {
         (member) => member.toString() !== memberId
       );
 
+      teamMember.teams = teamMember.teams.filter(
+        (member) => member !== team.name
+      );
       await team.save();
+      await teamMember.save();
 
       res.status(200).json({
         message: "Team member has been deleted succesfully.",
         team,
-        memberId,
+        teamMember,
       });
     } catch (error) {
       next(error);
