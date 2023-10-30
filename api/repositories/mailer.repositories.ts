@@ -1,6 +1,9 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+import nodemailer from "nodemailer";
+
+dotenv.config();
+
 const { MAIL, MAIL_PW } = process.env;
-const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   service: "Gmail",
@@ -10,25 +13,23 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function sendMail(code, email) {
-  const mailOptions = {
+function sendMail(code: string, email: string) {
+  const mailOptions: nodemailer.SendMailOptions = {
     from: MAIL,
     to: email,
-    subject: "Inicio de sesion",
+    subject: "Login",
     html: `<span> ${code} </span>`,
   };
 
-  transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error("Error al enviar el correo:", error);
-      return { message: "Error al enviar el correo:" + error };
+      console.error("Error sending email:", error);
+      return { message: "Error sending email:" + error };
     } else {
-      console.log("Correo electrónico enviado:", info.response);
-      return { message: "Mail enviado!" };
+      console.log("Email send:", info.response);
+      return { message: "Mail sent!" };
     }
   });
 }
 
-module.exports = {
-  sendMail,
-};
+export { sendMail };
