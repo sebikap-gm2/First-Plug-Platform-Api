@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const checkEnvVariables = () => {
+export const checkEnvVariables = () => {
   const requiredEnvVariables = [
     "PORT",
     "SECRET_PASSWORD",
@@ -25,5 +25,3 @@ const checkEnvVariables = () => {
     process.exit(1);
   }
 };
-
-module.exports = checkEnvVariables;
