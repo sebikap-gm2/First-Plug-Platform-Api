@@ -4,7 +4,8 @@
   "description": "Web platform focused on inventory management, acquisition and control.",
   "main": "./api/server.js",
   "scripts": {
-    "server": "nodemon ./api/server.js"
+    "server": "cross-env nodemon ./api/server.js",
+    "start": "cross-env node ./api/server.js"
   },
   "keywords": [
     "backend",
@@ -23,6 +24,7 @@
     "nodemailer": "^6.9.5"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1"
