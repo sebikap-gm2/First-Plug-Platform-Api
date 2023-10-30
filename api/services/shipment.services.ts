@@ -4,16 +4,16 @@ class ShipmentServices {
   static async getAllShipments() {
     return await Shipments.find();
   }
-  static async getOneShipment(id) {
+  static async getOneShipment(id: string) {
     return await Shipments.findById(id);
   }
-  static async createShipment(data) {
+  static async createShipment(data: any) {
     return await Shipments.create(data);
   }
-  static async deleteShipment(id) {
+  static async deleteShipment(id: string) {
     return await Shipments.findByIdAndDelete(id);
   }
-  static async updateShipment(id, data) {
+  static async updateShipment(id: string, data: any) {
     return await Shipments.findByIdAndUpdate(id, data);
   }
 }
