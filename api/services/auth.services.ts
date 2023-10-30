@@ -5,7 +5,7 @@ class AuthServices {
     return await User.findOne({ email: email }).exec();
   }
 
-  static async createUser(data: object) {
+  static async createUser(data: string) {
     return await User.create(data);
   }
 }
