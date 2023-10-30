@@ -1,14 +1,16 @@
-require("dotenv").config();
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 export const checkEnvVariables = () => {
-  const requiredEnvVariables = [
+  const requiredEnvVariables: string[] = [
     "PORT",
     "SECRET_PASSWORD",
     "MONGO_URI",
     "FIRST_PLUG_PLATFORM_CLIENT_HOST",
   ];
 
-  const missingVariables = [];
+  const missingVariables: string[] = [];
 
   requiredEnvVariables.forEach((envVariable) => {
     if (!process.env[envVariable]) {
@@ -18,7 +20,7 @@ export const checkEnvVariables = () => {
 
   if (missingVariables.length > 0) {
     console.error(
-      `This enviroment variables are required in the .env file: ${missingVariables.join(
+      `These environment variables are required in the .env file: ${missingVariables.join(
         ", "
       )}`
     );
