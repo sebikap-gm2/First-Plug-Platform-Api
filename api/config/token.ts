@@ -1,14 +1,26 @@
-const jwt = require("jsonwebtoken");
+import jwt, { JwtPayload } from "jsonwebtoken";
 
-const SECRET = process.env.SECRET_PASSWORD;
+const SECRET: string = process.env.SECRET_PASSWORD || "";
 
-function generateToken(payload: string) {
-  const token = jwt.sign({ payload }, SECRET);
-  return token;
+interface UserPayload extends JwtPayload {
+  id: number;
+  email: string;
 }
 
-function validateToken(token: string) {
-  return jwt.verify(token, SECRET);
+function generateToken(payload: UserPayload): string {
+  return jwt.sign(payload, SECRET);
 }
 
-module.exports = { generateToken, validateToken };
+function validateToken(token: string): UserPayload | null {
+  try {
+    const decoded = jwt.verify(token, SECRET);
+    if (typeof decoded === "object" && decoded !== null) {
+      return decoded as UserPayload;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export { generateToken, validateToken };

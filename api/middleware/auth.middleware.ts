@@ -1,23 +1,38 @@
-const { validateToken } = require("../config/token");
+import { Request, Response, NextFunction } from "express";
+import { validateToken } from "../config/token";
+
+interface UserPayload {
+  id: number;
+  email: string;
+}
+
+declare module "express-serve-static-core" {
+  interface Request {
+    user?: UserPayload;
+  }
+}
 
 class AuthMiddleware {
-  static validateUser(req, res, next) {
-    const authorizationHeader = req.headers.authorization;
+  static validateUser(req: Request, res: Response, next: NextFunction): void {
+    const authorizationHeader = req.headers.authorization as string | undefined;
 
     if (!authorizationHeader) {
-      return res.status(401).json({ message: "Missing authentication token" });
+      res.status(401).json({ message: "Missing authentication token" });
+      return;
     }
 
     const [bearer, token] = authorizationHeader.split(" ");
 
     if (bearer !== "Bearer" || !token) {
-      return res.status(401).send("Invalid authorization header");
+      res.status(401).send("Invalid authorization header");
+      return;
     }
 
-    const user = validateToken(token);
+    const user = validateToken(token) as UserPayload;
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid authorization token" });
+      res.status(401).json({ message: "Invalid authorization token" });
+      return;
     }
 
     req.user = user;
@@ -25,4 +40,4 @@ class AuthMiddleware {
   }
 }
 
-module.exports = AuthMiddleware;
+export default AuthMiddleware;
