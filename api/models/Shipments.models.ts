@@ -37,6 +37,4 @@ const ShipmentSchema = new mongoose.Schema({
   ],
 });
 
-const Shipment = mongoose.model("Shipments", ShipmentSchema);
-
-export default Shipment;
+export default mongoose.model("Shipments", ShipmentSchema);

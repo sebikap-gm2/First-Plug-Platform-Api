@@ -1,7 +1,8 @@
-const TeamMembersServices = require("../services/teamMembers.services");
+import { Request, Response, NextFunction } from "express";
+import TeamMembersServices from "../services/teamMembers.services";
 
 class TeamMembersControllers {
-  static async getAll(req, res, next) {
+  static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const teamMembers = await TeamMembersServices.getAll();
 
@@ -11,7 +12,7 @@ class TeamMembersControllers {
     }
   }
 
-  static async getById(req, res, next) {
+  static async getById(req: Request, res: Response, next: NextFunction) {
     const { idMember } = req.params;
     try {
       const teamMember = await TeamMembersServices.getById(idMember);
@@ -26,7 +27,7 @@ class TeamMembersControllers {
     }
   }
 
-  static async create(req, res, next) {
+  static async create(req: Request, res: Response, next: NextFunction) {
     try {
       const teamMember = await TeamMembersServices.getOne(req.body.email);
 
@@ -42,7 +43,7 @@ class TeamMembersControllers {
     }
   }
 
-  static async updateById(req, res, next) {
+  static async updateById(req: Request, res: Response, next: NextFunction) {
     const { idMember } = req.params;
     try {
       const updatedTeamMember = await TeamMembersServices.update(
@@ -60,7 +61,7 @@ class TeamMembersControllers {
     }
   }
 
-  static async deleteById(req, res, next) {
+  static async deleteById(req: Request, res: Response, next: NextFunction) {
     const { idMember } = req.params;
     try {
       const deletedTeamMember = await TeamMembersServices.delete(idMember);
@@ -76,4 +77,4 @@ class TeamMembersControllers {
   }
 }
 
-module.exports = TeamMembersControllers;
+export default TeamMembersControllers;
