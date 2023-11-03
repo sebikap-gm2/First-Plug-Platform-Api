@@ -1,7 +1,8 @@
-const OrderServices = require("../services/orders.services");
+import { Request, Response, NextFunction } from "express";
+import OrderServices from "../services/orders.services";
 
 class OrderControllers {
-  static async getOrders(req, res, next) {
+  static async getOrders(req: Request, res: Response, next: NextFunction) {
     try {
       const orders = await OrderServices.getAllOrders();
 
@@ -11,7 +12,7 @@ class OrderControllers {
     }
   }
 
-  static async getOrderById(req, res, next) {
+  static async getOrderById(req: Request, res: Response, next: NextFunction) {
     try {
       const { idOrder } = req.params;
       const orders = await OrderServices.getOneOrder(idOrder);
@@ -21,7 +22,7 @@ class OrderControllers {
       next(error);
     }
   }
-  static async newOrder(req, res, next) {
+  static async newOrder(req: Request, res: Response, next: NextFunction) {
     try {
       const orders = await OrderServices.createOrder(req.body);
 
@@ -30,7 +31,7 @@ class OrderControllers {
       next(error);
     }
   }
-  static async updateOrder(req, res, next) {
+  static async updateOrder(req: Request, res: Response, next: NextFunction) {
     try {
       const { idOrder } = req.params;
       const orders = await OrderServices.updateOrder(idOrder, req.body);
@@ -40,7 +41,7 @@ class OrderControllers {
       next(error);
     }
   }
-  static async deleteOrder(req, res, next) {
+  static async deleteOrder(req: Request, res: Response, next: NextFunction) {
     try {
       const { idOrder } = req.params;
       const orders = await OrderServices.deleteOrder(idOrder);
@@ -54,4 +55,4 @@ class OrderControllers {
   }
 }
 
-module.exports = OrderControllers;
+export default OrderControllers;

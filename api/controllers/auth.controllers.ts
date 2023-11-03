@@ -10,7 +10,8 @@ class AuthControllers {
       const user = await AuthServices.getUserbyEmail(email);
 
       if (user) {
-        return res.status(400).send("This mail has been already registered!");
+        res.status(400).send("This mail has been already registered!");
+        return;
       }
 
       await AuthServices.createUser(req.body);
@@ -28,13 +29,15 @@ class AuthControllers {
       const user = await AuthServices.getUserbyEmail(email);
 
       if (!user) {
-        return res.status(404).send("This mail does not exists!");
+        res.status(404).send("This mail does not exists!");
+        return;
       }
 
       const isValid = await user.validatePassword(password);
 
       if (!isValid) {
-        return res.status(401).send("Wrong password! Please try again");
+        res.status(401).send("Wrong password! Please try again");
+        return;
       }
 
       const payload = {

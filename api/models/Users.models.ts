@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
-export interface IUser extends Document {
+export interface User extends Document {
   fullname: string;
   email: string;
   password: string;
@@ -21,7 +21,7 @@ export interface IUser extends Document {
   generateHash(password: string, salt: string): Promise<string>;
 }
 
-const UsersSchema = new mongoose.Schema<IUser>({
+const UsersSchema = new mongoose.Schema<User>({
   fullname: {
     type: String,
     required: true,
@@ -98,7 +98,7 @@ const UsersSchema = new mongoose.Schema<IUser>({
 });
 
 UsersSchema.methods.validatePassword = async function (
-  this: IUser,
+  this: User,
   password: string
 ): Promise<boolean> {
   try {
@@ -117,7 +117,7 @@ UsersSchema.methods.generateHash = async function (
   return bcrypt.hash(password, salt);
 };
 
-UsersSchema.pre<IUser>("save", async function (next) {
+UsersSchema.pre<User>("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
@@ -134,4 +134,4 @@ UsersSchema.pre<IUser>("save", async function (next) {
   }
 });
 
-export default mongoose.model<IUser>("Users", UsersSchema);
+export default mongoose.model<User>("Users", UsersSchema);

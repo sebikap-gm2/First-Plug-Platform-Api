@@ -1,64 +1,27 @@
-const Orders = require("../models/Orders.models");
+import Orders from "../models/Orders.models";
+import { ProductType, OrderType } from "api/types/types";
 
-const ProductStatus = ["Available", "Delivered"] as const;
-const OrderStatus = [
-  "order confirmed",
-  "order canceled",
-  "confirmation pending",
-  "payment pending",
-] as const;
-
-type Product = {
-  _id: string;
-  category: string;
-  model: string;
-  color: string;
-  screen: string;
-  keyboard: string;
-  processor: string;
-  ram: string;
-  status: (typeof ProductStatus)[number];
-  imgUrl: string;
-  quantity: number;
-  __v: number;
-};
-
-type Order = {
-  _id: string;
-  teamMember: string;
-  status: (typeof OrderStatus)[number];
-  date: Date;
-  totalPrice: number;
-  products: Product[];
-  __v: number;
-};
-
-type CreationOrder = Omit<Omit<Product, "_id">, "__v">;
-
-type DeleteOrder = {
-  msg: string;
-  deletedOrder: Order;
-};
+type CreationOrder = Omit<Omit<ProductType, "_id">, "__v">;
 
 class OrderServices {
-  static async getAllOrders(): Promise<Order[]> {
+  static async getAllOrders(): Promise<OrderType[]> {
     return await Orders.find();
   }
-  static async getOneOrder(orderId: Order["_id"]): Promise<Order> {
+  static async getOneOrder(orderId: OrderType["_id"]) {
     return await Orders.findById(orderId);
   }
 
-  static async createOrder(data: CreationOrder): Promise<Order> {
+  static async createOrder(data: CreationOrder) {
     return await Orders.create(data);
   }
 
-  static async updateOrder(id: Order["_id"], data: Order): Promise<Order> {
-    return await Orders.findOneAndUpdate(id, data);
+  static async updateOrder(id: OrderType["_id"], data: OrderType) {
+    return await Orders.findOneAndUpdate({ id }, data);
   }
 
-  static async deleteOrder(id: Order["_id"]): Promise<DeleteOrder> {
-    return await Orders.findOneAndDelete(id);
+  static async deleteOrder(id: OrderType["_id"]) {
+    return await Orders.findOneAndDelete({ id });
   }
 }
 
-module.exports = OrderServices;
+export default OrderServices;

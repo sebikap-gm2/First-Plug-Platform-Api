@@ -1,18 +1,14 @@
-import User, { IUser } from "../models/Users.models";
+import User from "../models/Users.models";
+import { UserType } from "api/types/types";
 
-type User = {
-  _id: number;
-  fullname: string;
-  email: string;
-  password: string;
-};
+type CreationUser = Omit<Omit<UserType, "_id">, "_v">;
 
 class AuthServices {
-  static async getUserbyEmail(email: string): Promise<IUser | null> {
+  static async getUserbyEmail(email: string) {
     return await User.findOne({ email: email }).exec();
   }
 
-  static async createUser(data: User): Promise<User> {
+  static async createUser(data: CreationUser) {
     return await User.create(data);
   }
 }
