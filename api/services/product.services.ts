@@ -1,47 +1,31 @@
-const Product = require("../models/Products.models");
+import Product from "../models/Products.models";
+import { ProductType } from "api/types/types";
 
-const ProductStatus = ["Available", "Delivered"] as const;
-
-type Product = {
-  _id: string;
-  category: string;
-  model: string;
-  color: string;
-  screen: string;
-  keyboard: string;
-  processor: string;
-  ram: string;
-  status: (typeof ProductStatus)[number];
-  imgUrl: string;
-  quantity: number;
-  __v: number;
-};
-
-type CreationProduct = Omit<Omit<Product, "_id">, "__v">;
+type CreationProduct = Omit<Omit<ProductType, "_id">, "__v">;
 
 class ProductServices {
-  static async findAllProducts(): Promise<Product[]> {
+  static async findAllProducts(): Promise<ProductType[]> {
     return await Product.find();
   }
 
-  static async findProductsById(productId: Product["_id"]): Promise<Product> {
+  static async findProductsById(productId: ProductType["_id"]) {
     return await Product.findById(productId);
   }
 
   static async updateOneProduct(
-    productId: Product["_id"],
-    newData: Product
-  ): Promise<Product> {
+    productId: ProductType["_id"],
+    newData: ProductType
+  ) {
     return await Product.findByIdAndUpdate(productId, newData, { new: true });
   }
 
-  static async createNewProduct(data: CreationProduct): Promise<Product> {
+  static async createNewProduct(data: CreationProduct) {
     return await Product.create(data);
   }
 
-  static async deleteProductById(productId: Product["_id"]): Promise<Product> {
-    return await Product.findOneAndRemove(productId);
+  static async deleteProductById(productId: ProductType["_id"]) {
+    return await Product.findOneAndRemove({ productId });
   }
 }
 
-module.exports = ProductServices;
+export default ProductServices;
