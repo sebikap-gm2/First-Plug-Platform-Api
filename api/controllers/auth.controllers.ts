@@ -1,8 +1,9 @@
-const { generateToken } = require("../config/token");
-const AuthServices = require("../services/auth.services");
+import { generateToken } from "../config/token";
+import AuthServices from "../services/auth.services";
+import { Request, Response } from "express";
 
 class AuthControllers {
-  static async register(req, res) {
+  static async register(req: Request, res: Response) {
     try {
       const { email } = req.body;
 
@@ -20,7 +21,7 @@ class AuthControllers {
     }
   }
 
-  static async login(req, res) {
+  static async login(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
 
@@ -37,7 +38,7 @@ class AuthControllers {
       }
 
       const payload = {
-        id: user.id,
+        id: user._id,
         email: user.email,
         fullname: user.fullname,
       };
@@ -52,9 +53,9 @@ class AuthControllers {
     }
   }
 
-  static async me(req, res) {
+  static async me(req: Request, res: Response) {
     res.send(req.user);
   }
 }
 
-module.exports = AuthControllers;
+export default AuthControllers;

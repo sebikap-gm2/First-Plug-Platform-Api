@@ -1,13 +1,14 @@
-const User = require("../models/Users.models");
+import User, { IUser } from "../models/Users.models";
 
 type User = {
-  fullName: string;
+  _id: number;
+  fullname: string;
   email: string;
   password: string;
 };
 
 class AuthServices {
-  static async getUserbyEmail(email: string): Promise<User> {
+  static async getUserbyEmail(email: string): Promise<IUser | null> {
     return await User.findOne({ email: email }).exec();
   }
 
@@ -16,4 +17,4 @@ class AuthServices {
   }
 }
 
-module.exports = AuthServices;
+export default AuthServices;
