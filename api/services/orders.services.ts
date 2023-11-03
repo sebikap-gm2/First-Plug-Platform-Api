@@ -4,17 +4,17 @@ class OrderServices {
   static async getAllOrders() {
     return await Orders.find();
   }
-  static async getOneOrder(orderId) {
+  static async getOneOrder(orderId: string) {
     return await Orders.findById(orderId);
   }
 
-  static async createOrder(data) {
+  static async createOrder(data: any) {
     return await Orders.create(data);
   }
-  static async updateOrder(id, data) {
+  static async updateOrder(id: string, data: any) {
     return await Orders.findOneAndUpdate(id, data);
   }
-  static async deleteOrder(id) {
+  static async deleteOrder(id: string) {
     return await Orders.findOneAndDelete(id);
   }
 }

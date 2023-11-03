@@ -1,11 +1,11 @@
 const User = require("../models/Users.models");
 
 class AuthServices {
-  static async getUserbyEmail(email) {
+  static async getUserbyEmail(email: string) {
     return await User.findOne({ email: email }).exec();
   }
 
-  static async createUser(data) {
+  static async createUser(data: string) {
     return await User.create(data);
   }
 }
