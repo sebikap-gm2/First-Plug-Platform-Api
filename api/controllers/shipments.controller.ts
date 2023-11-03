@@ -1,7 +1,7 @@
-const ShipmentServices = require("../services/shipment.services");
-
+import { Request, Response, NextFunction } from "express";
+import ShipmentServices from "../services/shipment.services";
 class ShipmentsController {
-  static async getShipments(req, res, next) {
+  static async getShipments(req: Request, res: Response, next: NextFunction) {
     try {
       const allShipments = await ShipmentServices.getAllShipments();
       if (!allShipments) {
@@ -12,7 +12,7 @@ class ShipmentsController {
       next(error);
     }
   }
-  static async getOneShipment(req, res, next) {
+  static async getOneShipment(req: Request, res: Response, next: NextFunction) {
     try {
       const oneShipment = await ShipmentServices.getOneShipment(req.params.id);
 
@@ -24,7 +24,7 @@ class ShipmentsController {
       next(error);
     }
   }
-  static async createShipment(req, res, next) {
+  static async createShipment(req: Request, res: Response, next: NextFunction) {
     try {
       const newShipment = await ShipmentServices.createShipment(req.body);
 
@@ -33,7 +33,7 @@ class ShipmentsController {
       next(error);
     }
   }
-  static async updateShipment(req, res, next) {
+  static async updateShipment(req: Request, res: Response, next: NextFunction) {
     try {
       const newShipment = await ShipmentServices.updateShipment(
         req.params.id,
@@ -45,7 +45,7 @@ class ShipmentsController {
       next(error);
     }
   }
-  static async deleteShipment(req, res, next) {
+  static async deleteShipment(req: Request, res: Response, next: NextFunction) {
     try {
       const newShipment = await ShipmentServices.deleteShipment(req.params.id);
 
@@ -56,4 +56,4 @@ class ShipmentsController {
   }
 }
 
-module.exports = ShipmentsController;
+export default ShipmentsController;

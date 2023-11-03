@@ -1,48 +1,28 @@
-const Shipments = require("../models/Shipments.models");
+import { ShipmentType } from "api/types/types";
+import Shipments from "../models/Shipments.models";
 
-type Shipment = {
-  _id: string;
-  fullName: string;
-  date: Date;
-  quantityProducts: string;
-  type: string;
-  trackingNumber: string;
-  trackigURL: string;
-  price: string;
-  orders: string[];
-  __v: string;
-};
-
-type CreationShipment = Omit<Omit<Shipment, "_id">, "__v">;
-
-type DeleteShipment = {
-  msg: string;
-  deletedShipment: Shipment;
-};
+type CreationShipment = Omit<Omit<ShipmentType, "_id">, "__v">;
 
 class ShipmentServices {
-  static async getAllShipments(): Promise<Shipment[]> {
+  static async getAllShipments(): Promise<ShipmentType[]> {
     return await Shipments.find();
   }
 
-  static async getOneShipment(id: Shipment["_id"]): Promise<Shipment> {
+  static async getOneShipment(id: ShipmentType["_id"]) {
     return await Shipments.findById(id);
   }
 
-  static async createShipment(data: CreationShipment): Promise<Shipment> {
+  static async createShipment(data: CreationShipment) {
     return await Shipments.create(data);
   }
 
-  static async deleteShipment(id: Shipment["_id"]): Promise<DeleteShipment> {
+  static async deleteShipment(id: ShipmentType["_id"]) {
     return await Shipments.findByIdAndDelete(id);
   }
 
-  static async updateShipment(
-    id: Shipment["_id"],
-    data: CreationShipment
-  ): Promise<Shipment> {
+  static async updateShipment(id: ShipmentType["_id"], data: CreationShipment) {
     return await Shipments.findByIdAndUpdate(id, data);
   }
 }
 
-module.exports = ShipmentServices;
+export default ShipmentServices;

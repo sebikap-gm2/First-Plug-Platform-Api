@@ -54,3 +54,16 @@ export type OrderType = {
   products: ProductType[];
   __v: number;
 };
+
+export type ShipmentType = {
+  _id: string;
+  fullName: string;
+  date: Date;
+  quantityProducts: string;
+  type: string;
+  trackingNumber: string;
+  trackigURL: string;
+  price: string;
+  orders: string[];
+  __v: string;
+};
