@@ -5,19 +5,19 @@ class ProductServices {
     return await Product.find();
   }
 
-  static async findProductsById(productId) {
+  static async findProductsById(productId: string) {
     return await Product.findById(productId);
   }
 
-  static async updateOneProduct(productId, newData) {
+  static async updateOneProduct(productId: string, newData: any) {
     return await Product.findByIdAndUpdate(productId, newData, { new: true });
   }
 
-  static async createNewProduct(data) {
+  static async createNewProduct(data: any) {
     return await Product.create(data);
   }
 
-  static async deleteProductById(productId) {
+  static async deleteProductById(productId: string) {
     return await Product.findOneAndRemove(productId);
   }
 }

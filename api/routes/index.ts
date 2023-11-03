@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+export const router = express.Router();
 
 const authRoutes = require("./auth.routes");
 
@@ -17,5 +17,3 @@ router.use("/orders", ordersRoutes);
 router.use("/shipments", shipmentRoutes);
 
 router.use("/products", productRoutes);
-
-module.exports = router;
