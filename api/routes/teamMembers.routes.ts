@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const TeamMembersControllers = require("../controllers/teamMembers.controllers");
+import TeamMembersControllers from "../controllers/teamMembers.controllers";
 
 router.get("/", TeamMembersControllers.getAll);
 router.get("/:idMember", TeamMembersControllers.getById);
@@ -9,4 +9,4 @@ router.post("/", TeamMembersControllers.create);
 router.put("/:idMember", TeamMembersControllers.updateById);
 router.delete("/:idMember", TeamMembersControllers.deleteById);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const express = require("express");
-const TeamsController = require("../controllers/teams.controllers");
+import express from "express";
+import TeamsController from "../controllers/teams.controllers";
 
 const router = express.Router();
 
@@ -13,4 +13,4 @@ router.delete(
   TeamsController.deleteTeamMemberFromTeam
 );
 
-module.exports = router;
+export default router;
