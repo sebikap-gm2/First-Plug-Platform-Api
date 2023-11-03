@@ -13,7 +13,7 @@ class TeamMembersServices {
   }
 
   static async getById(_id: TeamMemberType["_id"]) {
-    return await TeamMembers.findById({ _id });
+    return await TeamMembers.findById(_id);
   }
 
   static async create(data: CreationMember) {

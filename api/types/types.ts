@@ -67,3 +67,10 @@ export type ShipmentType = {
   orders: string[];
   __v: string;
 };
+
+export type TeamType = {
+  _id: string;
+  name: string;
+  teamMember: TeamMemberType[];
+  __v: number;
+};

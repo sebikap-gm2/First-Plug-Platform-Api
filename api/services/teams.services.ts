@@ -1,58 +1,28 @@
-const Teams = require("../models/Teams.models");
+import Teams from "../models/Teams.models";
+import { TeamType } from "api/types/types";
 
-type TeamMember = {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  phone: string;
-  email: string;
-  jobPosition: string;
-  city: string;
-  zipCode: string;
-  address: string;
-  appartment: string;
-  joiningDate: Date;
-  timeSlotForDelivery: string;
-  additionalInfo: string;
-  teams: string[];
-  v: number;
-};
-
-type Team = {
-  _id: string;
-  name: string;
-  teamMember: TeamMember[];
-  v: number;
-};
-
-type createTeam = Omit<Omit<Team, "_id">, "__v">;
-
-type DeleteTeam = {
-  msg: string;
-  deletedShipment: Team;
-};
+type createTeam = Omit<Omit<TeamType, "_id">, "__v">;
 
 class TeamsServices {
-  static async getAllTeams(): Promise<Team[]> {
+  static async getAllTeams() {
     return await Teams.find().populate("teamMember");
   }
 
-  static async createTeam(data: createTeam): Promise<Team> {
+  static async createTeam(data: createTeam) {
     return await Teams.create(data);
   }
 
-  static async getOneTeam(id: Team["_id"]): Promise<Team> {
+  static async getOneTeam(id: TeamType["_id"]) {
     return await Teams.findById(id);
   }
 
-  static async updateTeam(id: Team["_id"], data: Team): Promise<Team> {
+  static async updateTeam(id: TeamType["_id"], data: TeamType) {
     return await Teams.findByIdAndUpdate(id, data, { new: true });
   }
 
-  static async deleteTeam(id: Team["_id"], data: Team): Promise<DeleteTeam> {
-    return await Teams.findByIdAndDelete(id, data);
+  static async deleteTeam(id: TeamType["_id"]) {
+    return await Teams.findByIdAndDelete(id);
   }
 }
 
-module.exports = TeamsServices;
+export default TeamsServices;

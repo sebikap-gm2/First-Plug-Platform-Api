@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const TeamsSchema = mongoose.Schema({
+const TeamsSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
@@ -14,6 +14,4 @@ const TeamsSchema = mongoose.Schema({
   ],
 });
 
-const Teams = mongoose.model("Teams", TeamsSchema);
-
-module.exports = Teams;
+export default mongoose.model("Teams", TeamsSchema);
