@@ -4,8 +4,8 @@
   "description": "Web platform focused on inventory management, acquisition and control.",
   "main": "./api/server.js",
   "scripts": {
-    "server": "cross-env nodemon ./api/server.js",
-    "start": "cross-env node ./api/server.js"
+    "server": "cross-env nodemon ./api/server.ts",
+    "start": "cross-env node ./api/server.ts"
   },
   "keywords": [
     "backend",
