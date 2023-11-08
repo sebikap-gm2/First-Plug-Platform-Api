@@ -7,11 +7,11 @@ interface UserPayload extends JwtPayload {
   email: string;
 }
 
-function generateToken(payload: UserPayload) {
+export function generateToken(payload: UserPayload) {
   return jwt.sign(payload, SECRET);
 }
 
-function validateToken(token: string): UserPayload | null {
+export function validateToken(token: string): UserPayload | null {
   try {
     const decoded = jwt.verify(token, SECRET);
     if (typeof decoded === "object" && decoded !== null) {
@@ -22,5 +22,3 @@ function validateToken(token: string): UserPayload | null {
     return null;
   }
 }
-
-export { generateToken, validateToken };
