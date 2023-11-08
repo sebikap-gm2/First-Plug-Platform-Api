@@ -56,4 +56,4 @@ class ShipmentsController {
   }
 }
 
-export default ShipmentsController;
+export { ShipmentsController };

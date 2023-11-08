@@ -131,4 +131,4 @@ class TeamsController {
   }
 }
 
-export default TeamsController;
+export { TeamsController };

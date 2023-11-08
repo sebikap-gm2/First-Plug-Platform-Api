@@ -1,12 +1,12 @@
 import express from "express";
 const router = express.Router();
 
-import TeamMembersControllers from "../controllers/teamMembers.controllers";
+import { TeamMembersController } from "../controllers/teamMembers.controller";
 
-router.get("/", TeamMembersControllers.getAll);
-router.get("/:idMember", TeamMembersControllers.getById);
-router.post("/", TeamMembersControllers.create);
-router.put("/:idMember", TeamMembersControllers.updateById);
-router.delete("/:idMember", TeamMembersControllers.deleteById);
+router.get("/", TeamMembersController.getAll);
+router.get("/:idMember", TeamMembersController.getById);
+router.post("/", TeamMembersController.create);
+router.put("/:idMember", TeamMembersController.updateById);
+router.delete("/:idMember", TeamMembersController.deleteById);
 
 export default router;

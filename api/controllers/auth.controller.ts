@@ -2,7 +2,7 @@ import { generateToken } from "../config/token";
 import AuthServices from "../services/auth.services";
 import { Request, Response } from "express";
 
-class AuthControllers {
+class AuthController {
   static async register(req: Request, res: Response) {
     try {
       const { email } = req.body;
@@ -61,4 +61,4 @@ class AuthControllers {
   }
 }
 
-export default AuthControllers;
+export { AuthController };

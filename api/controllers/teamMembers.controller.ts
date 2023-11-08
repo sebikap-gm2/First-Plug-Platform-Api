@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import TeamMembersServices from "../services/teamMembers.services";
 
-class TeamMembersControllers {
+class TeamMembersController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const teamMembers = await TeamMembersServices.getAll();
@@ -77,4 +77,4 @@ class TeamMembersControllers {
   }
 }
 
-export default TeamMembersControllers;
+export { TeamMembersController };

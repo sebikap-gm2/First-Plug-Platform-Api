@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import ProductServices from "../services/product.services";
 
-class ProductControllers {
+class ProductController {
   static async getAllProducts(req: Request, res: Response, next: NextFunction) {
     try {
       const allProducts = await ProductServices.findAllProducts();
@@ -67,4 +67,4 @@ class ProductControllers {
   }
 }
 
-export default ProductControllers;
+export { ProductController };
