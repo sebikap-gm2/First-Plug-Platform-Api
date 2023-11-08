@@ -7,7 +7,7 @@ interface UserPayload extends JwtPayload {
   email: string;
 }
 
-function generateToken(payload: UserPayload): string {
+function generateToken(payload: UserPayload) {
   return jwt.sign(payload, SECRET);
 }
 
