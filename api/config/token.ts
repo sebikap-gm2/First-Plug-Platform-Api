@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 
-const SECRET: string = process.env.SECRET_PASSWORD || "";
+const SECRET = process.env.SECRET_PASSWORD || "";
 
 interface UserPayload extends JwtPayload {
   id: number;
