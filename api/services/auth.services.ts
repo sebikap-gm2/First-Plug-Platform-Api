@@ -1,7 +1,5 @@
 import User from "../models/Users.models";
-import { UserType } from "api/types/index";
-
-type CreationUser = Omit<Omit<UserType, "_id">, "_v">;
+import { CreationUser } from "api/types/index";
 
 class AuthServices {
   static async getUserbyEmail(email: string) {

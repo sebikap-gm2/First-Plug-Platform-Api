@@ -76,3 +76,5 @@ export type TeamType = {
 };
 
 export type CreationOrder = Omit<Omit<ProductType, "_id">, "__v">;
+
+export type CreationUser = Omit<Omit<UserType, "_id">, "_v">;
