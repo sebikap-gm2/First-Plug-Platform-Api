@@ -24,7 +24,7 @@ class AuthMiddleware {
       return;
     }
 
-    const user = validateToken(token) as UserPayload;
+    const user = validateToken(token);
 
     if (!user) {
       res.status(401).json({ message: "Invalid authorization token" });

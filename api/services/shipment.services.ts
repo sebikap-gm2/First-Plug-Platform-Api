@@ -1,4 +1,4 @@
-import { ShipmentType } from "api/types/types";
+import { ShipmentType } from "api/types/index";
 import Shipments from "../models/Shipments.models";
 
 type CreationShipment = Omit<Omit<ShipmentType, "_id">, "__v">;

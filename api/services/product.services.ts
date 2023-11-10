@@ -1,5 +1,5 @@
 import Product from "../models/Products.models";
-import { ProductType } from "api/types/types";
+import { ProductType } from "api/types/index";
 
 type CreationProduct = Omit<Omit<ProductType, "_id">, "__v">;
 

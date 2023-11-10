@@ -1,5 +1,5 @@
 import Orders from "../models/Orders.models";
-import { ProductType, OrderType } from "api/types/types";
+import { ProductType, OrderType } from "api/types/index";
 
 type CreationOrder = Omit<Omit<ProductType, "_id">, "__v">;
 

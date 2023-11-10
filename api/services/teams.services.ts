@@ -1,5 +1,5 @@
 import Teams from "../models/Teams.models";
-import { TeamType } from "api/types/types";
+import { TeamType } from "api/types/index";
 
 type createTeam = Omit<Omit<TeamType, "_id">, "__v">;
 

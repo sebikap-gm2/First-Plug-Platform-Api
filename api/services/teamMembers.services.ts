@@ -1,5 +1,5 @@
 import TeamMembers from "../models/TeamMember.models";
-import { TeamMemberType } from "api/types/types";
+import { TeamMemberType } from "api/types/index";
 
 type CreationMember = Omit<Omit<TeamMemberType, "_id">, "v">;
 
