@@ -1,10 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { validateToken } from "../config/token";
-
-interface UserPayload {
-  id: number;
-  email: string;
-}
+import { UserPayload } from "../config/token";
 
 declare module "express-serve-static-core" {
   interface Request {
