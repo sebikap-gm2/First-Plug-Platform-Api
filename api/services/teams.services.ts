@@ -1,14 +1,12 @@
 import Teams from "../models/Teams.models";
-import { TeamType } from "api/types/index";
-
-type createTeam = Omit<Omit<TeamType, "_id">, "__v">;
+import { TeamType, CreationTeam } from "api/types/index";
 
 class TeamsServices {
   static async getAllTeams() {
     return await Teams.find().populate("teamMember");
   }
 
-  static async createTeam(data: createTeam) {
+  static async createTeam(data: CreationTeam) {
     return await Teams.create(data);
   }
 

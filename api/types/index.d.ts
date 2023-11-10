@@ -84,3 +84,5 @@ export type CreationProduct = Omit<Omit<ProductType, "_id">, "__v">;
 export type CreationShipment = Omit<Omit<ShipmentType, "_id">, "__v">;
 
 export type CreationMember = Omit<Omit<TeamMemberType, "_id">, "v">;
+
+export type CreationTeam = Omit<Omit<TeamType, "_id">, "__v">;
