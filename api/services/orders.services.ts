@@ -1,7 +1,5 @@
 import Orders from "../models/Orders.models";
-import { ProductType, OrderType } from "api/types/index";
-
-type CreationOrder = Omit<Omit<ProductType, "_id">, "__v">;
+import { ProductType, OrderType, CreationOrder } from "api/types/index";
 
 class OrderServices {
   static async getAllOrders(): Promise<OrderType[]> {

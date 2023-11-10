@@ -74,3 +74,5 @@ export type TeamType = {
   teamMember: TeamMemberType[];
   __v: number;
 };
+
+export type CreationOrder = Omit<Omit<ProductType, "_id">, "__v">;
