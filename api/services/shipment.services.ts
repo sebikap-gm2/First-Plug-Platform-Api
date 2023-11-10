@@ -1,7 +1,5 @@
-import { ShipmentType } from "api/types/index";
+import { ShipmentType, CreationShipment } from "api/types/index";
 import Shipments from "../models/Shipments.models";
-
-type CreationShipment = Omit<Omit<ShipmentType, "_id">, "__v">;
 
 class ShipmentServices {
   static async getAllShipments(): Promise<ShipmentType[]> {
