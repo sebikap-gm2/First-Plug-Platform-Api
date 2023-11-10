@@ -1,7 +1,5 @@
 import Product from "../models/Products.models";
-import { ProductType } from "api/types/index";
-
-type CreationProduct = Omit<Omit<ProductType, "_id">, "__v">;
+import { ProductType, CreationProduct } from "api/types/index";
 
 class ProductServices {
   static async findAllProducts(): Promise<ProductType[]> {
