@@ -1,27 +1,27 @@
 import { Product } from "../models/Products.models";
-import { ProductType, CreationProduct } from "api/types/index";
+import { MongoProduct, Product as ProductType } from "api/types/index";
 
 export class ProductServices {
-  static async findAllProducts(): Promise<ProductType[]> {
+  static async findAllProducts(): Promise<MongoProduct[]> {
     return await Product.find();
   }
 
-  static async findProductsById(productId: ProductType["_id"]) {
+  static async findProductsById(productId: MongoProduct["_id"]) {
     return await Product.findById(productId);
   }
 
   static async updateOneProduct(
-    productId: ProductType["_id"],
-    newData: ProductType
+    productId: MongoProduct["_id"],
+    newData: MongoProduct
   ) {
     return await Product.findByIdAndUpdate(productId, newData, { new: true });
   }
 
-  static async createNewProduct(data: CreationProduct) {
+  static async createNewProduct(data: ProductType) {
     return await Product.create(data);
   }
 
-  static async deleteProductById(productId: ProductType["_id"]) {
+  static async deleteProductById(productId: MongoProduct["_id"]) {
     return await Product.findOneAndRemove({ productId });
   }
 }

@@ -1,4 +1,4 @@
-import { ShipmentType, CreationShipment } from "api/types/index";
+import { Shipment as ShipmentType, MongoShipment } from "api/types/index";
 import { Shipment } from "../models/Shipments.models";
 
 export class ShipmentServices {
@@ -6,19 +6,19 @@ export class ShipmentServices {
     return await Shipment.find();
   }
 
-  static async getOneShipment(id: ShipmentType["_id"]) {
+  static async getOneShipment(id: MongoShipment["_id"]) {
     return await Shipment.findById(id);
   }
 
-  static async createShipment(data: CreationShipment) {
+  static async createShipment(data: ShipmentType) {
     return await Shipment.create(data);
   }
 
-  static async deleteShipment(id: ShipmentType["_id"]) {
+  static async deleteShipment(id: MongoShipment["_id"]) {
     return await Shipment.findByIdAndDelete(id);
   }
 
-  static async updateShipment(id: ShipmentType["_id"], data: CreationShipment) {
+  static async updateShipment(id: MongoShipment["_id"], data: ShipmentType) {
     return await Shipment.findByIdAndUpdate(id, data);
   }
 }

@@ -1,13 +1,15 @@
-export type UserType = {
-  _id: number;
+export type User = {
   fullname: string;
   email: string;
   password: string;
-  _v: number;
 };
 
-export type ProductType = {
+export type MongoUser = User & {
   _id: string;
+  __v: number;
+};
+
+export type Product = {
   category: string;
   model: string;
   color: string;
@@ -18,11 +20,14 @@ export type ProductType = {
   status: ["Available", "Delivered"];
   imgUrl: string;
   quantity: number;
+};
+
+export type MongoProduct = Product & {
+  _id: string;
   __v: number;
 };
 
-export type TeamMemberType = {
-  _id: string;
+export type TeamMember = {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
@@ -37,12 +42,15 @@ export type TeamMemberType = {
   timeSlotForDelivery: string;
   additionalInfo: string;
   teams: string[];
+};
+
+export type MongoTeamMember = TeamMember & {
+  _id: string;
   __v: number;
 };
 
-export type OrderType = {
-  _id: string;
-  teamMember: TeamMemberType[];
+export type Order = {
+  teamMember: TeamMember[];
   status: [
     "order confirmed",
     "order canceled",
@@ -51,12 +59,15 @@ export type OrderType = {
   ];
   date: Date;
   totalPrice: number;
-  products: ProductType[];
+  products: Product[];
+};
+
+export type MongoOrder = Order & {
+  _id: string;
   __v: number;
 };
 
-export type ShipmentType = {
-  _id: string;
+export type Shipment = {
   fullName: string;
   date: Date;
   quantityProducts: string;
@@ -65,24 +76,19 @@ export type ShipmentType = {
   trackigURL: string;
   price: string;
   orders: string[];
-  __v: string;
 };
 
-export type TeamType = {
+export type MongoShipment = Shipment & {
   _id: string;
-  name: string;
-  teamMember: TeamMemberType[];
   __v: number;
 };
 
-export type CreationOrder = Omit<Omit<ProductType, "_id">, "__v">;
+export type Team = {
+  name: string;
+  teamMember: TeamMember[];
+};
 
-export type CreationUser = Omit<Omit<UserType, "_id">, "_v">;
-
-export type CreationProduct = Omit<Omit<ProductType, "_id">, "__v">;
-
-export type CreationShipment = Omit<Omit<ShipmentType, "_id">, "__v">;
-
-export type CreationMember = Omit<Omit<TeamMemberType, "_id">, "v">;
-
-export type CreationTeam = Omit<Omit<TeamType, "_id">, "__v">;
+export type MongoTeam = Team & {
+  _id: string;
+  __v: number;
+};
