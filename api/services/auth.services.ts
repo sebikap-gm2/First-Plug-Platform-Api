@@ -1,7 +1,7 @@
-import User from "../models/Users.models";
+import { User } from "../models/Users.models";
 import { CreationUser } from "api/types/index";
 
-class AuthServices {
+export class AuthServices {
   static async getUserbyEmail(email: string) {
     return await User.findOne({ email: email }).exec();
   }
@@ -10,5 +10,3 @@ class AuthServices {
     return await User.create(data);
   }
 }
-
-export default AuthServices;

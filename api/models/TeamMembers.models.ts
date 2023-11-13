@@ -67,4 +67,4 @@ const TeamsMemberSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("TeamMember", TeamsMemberSchema);
+export const TeamMember = mongoose.model("TeamMember", TeamsMemberSchema);

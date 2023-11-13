@@ -1,7 +1,7 @@
-import Product from "../models/Products.models";
+import { Product } from "../models/Products.models";
 import { ProductType, CreationProduct } from "api/types/index";
 
-class ProductServices {
+export class ProductServices {
   static async findAllProducts(): Promise<ProductType[]> {
     return await Product.find();
   }
@@ -25,5 +25,3 @@ class ProductServices {
     return await Product.findOneAndRemove({ productId });
   }
 }
-
-export default ProductServices;

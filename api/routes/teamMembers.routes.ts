@@ -9,4 +9,4 @@ router.post("/", TeamMembersController.create);
 router.put("/:idMember", TeamMembersController.updateById);
 router.delete("/:idMember", TeamMembersController.deleteById);
 
-export default router;
+export { router as teamMembersRoutes };

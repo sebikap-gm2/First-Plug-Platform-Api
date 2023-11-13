@@ -13,4 +13,4 @@ router.delete(
   TeamsController.deleteTeamMemberFromTeam
 );
 
-export default router;
+export { router as teamsRoutes };

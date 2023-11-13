@@ -1,26 +1,24 @@
 import { ShipmentType, CreationShipment } from "api/types/index";
-import Shipments from "../models/Shipments.models";
+import { Shipment } from "../models/Shipments.models";
 
-class ShipmentServices {
+export class ShipmentServices {
   static async getAllShipments(): Promise<ShipmentType[]> {
-    return await Shipments.find();
+    return await Shipment.find();
   }
 
   static async getOneShipment(id: ShipmentType["_id"]) {
-    return await Shipments.findById(id);
+    return await Shipment.findById(id);
   }
 
   static async createShipment(data: CreationShipment) {
-    return await Shipments.create(data);
+    return await Shipment.create(data);
   }
 
   static async deleteShipment(id: ShipmentType["_id"]) {
-    return await Shipments.findByIdAndDelete(id);
+    return await Shipment.findByIdAndDelete(id);
   }
 
   static async updateShipment(id: ShipmentType["_id"], data: CreationShipment) {
-    return await Shipments.findByIdAndUpdate(id, data);
+    return await Shipment.findByIdAndUpdate(id, data);
   }
 }
-
-export default ShipmentServices;

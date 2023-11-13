@@ -1,25 +1,23 @@
-import Orders from "../models/Orders.models";
+import { Order } from "../models/Orders.models";
 import { OrderType, CreationOrder } from "api/types/index";
 
-class OrderServices {
+export class OrderServices {
   static async getAllOrders(): Promise<OrderType[]> {
-    return await Orders.find();
+    return await Order.find();
   }
   static async getOneOrder(orderId: OrderType["_id"]) {
-    return await Orders.findById(orderId);
+    return await Order.findById(orderId);
   }
 
   static async createOrder(data: CreationOrder) {
-    return await Orders.create(data);
+    return await Order.create(data);
   }
 
   static async updateOrder(id: OrderType["_id"], data: OrderType) {
-    return await Orders.findOneAndUpdate({ id }, data);
+    return await Order.findOneAndUpdate({ id }, data);
   }
 
   static async deleteOrder(id: OrderType["_id"]) {
-    return await Orders.findOneAndDelete({ id });
+    return await Order.findOneAndDelete({ id });
   }
 }
-
-export default OrderServices;

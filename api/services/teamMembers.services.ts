@@ -1,30 +1,28 @@
-import TeamMembers from "../models/TeamMember.models";
+import { TeamMember } from "../models/TeamMembers.models";
 import { TeamMemberType, CreationMember } from "api/types/index";
 
-class TeamMembersServices {
+export class TeamMembersServices {
   static async getAll(): Promise<TeamMemberType[]> {
-    return await TeamMembers.find();
+    return await TeamMember.find();
   }
 
   static async getOne(identifier: TeamMemberType["_id"]) {
-    return await TeamMembers.findOne({ identifier }).exec();
+    return await TeamMember.findOne({ identifier }).exec();
   }
 
   static async getById(_id: TeamMemberType["_id"]) {
-    return await TeamMembers.findById(_id);
+    return await TeamMember.findById(_id);
   }
 
   static async create(data: CreationMember) {
-    return await TeamMembers.create(data);
+    return await TeamMember.create(data);
   }
 
   static async update(id: TeamMemberType["_id"], data: TeamMemberType) {
-    return await TeamMembers.findByIdAndUpdate(id, data, { new: true });
+    return await TeamMember.findByIdAndUpdate(id, data, { new: true });
   }
 
   static async delete(_id: TeamMemberType["_id"]) {
-    return await TeamMembers.findByIdAndDelete(_id);
+    return await TeamMember.findByIdAndDelete(_id);
   }
 }
-
-export default TeamMembersServices;

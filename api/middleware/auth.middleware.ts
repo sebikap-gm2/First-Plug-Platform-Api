@@ -8,7 +8,7 @@ declare module "express-serve-static-core" {
   }
 }
 
-class AuthMiddleware {
+export class AuthMiddleware {
   static validateUser(req: Request, res: Response, next: NextFunction): void {
     const authorizationHeader = req.headers.authorization as string | undefined;
 
@@ -35,5 +35,3 @@ class AuthMiddleware {
     next();
   }
 }
-
-export default AuthMiddleware;

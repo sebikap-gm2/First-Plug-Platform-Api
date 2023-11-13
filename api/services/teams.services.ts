@@ -1,26 +1,24 @@
-import Teams from "../models/Teams.models";
 import { TeamType, CreationTeam } from "api/types/index";
+import { Team } from "../models/Teams.models";
 
-class TeamsServices {
+export class TeamsServices {
   static async getAllTeams() {
-    return await Teams.find().populate("teamMember");
+    return await Team.find().populate("teamMember");
   }
 
   static async createTeam(data: CreationTeam) {
-    return await Teams.create(data);
+    return await Team.create(data);
   }
 
   static async getOneTeam(id: TeamType["_id"]) {
-    return await Teams.findById(id);
+    return await Team.findById(id);
   }
 
   static async updateTeam(id: TeamType["_id"], data: TeamType) {
-    return await Teams.findByIdAndUpdate(id, data, { new: true });
+    return await Team.findByIdAndUpdate(id, data, { new: true });
   }
 
   static async deleteTeam(id: TeamType["_id"]) {
-    return await Teams.findByIdAndDelete(id);
+    return await Team.findByIdAndDelete(id);
   }
 }
-
-export default TeamsServices;

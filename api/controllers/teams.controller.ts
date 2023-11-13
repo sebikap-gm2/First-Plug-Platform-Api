@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import TeamMembersServices from "../services/teamMembers.services";
-import TeamsServices from "../services/teams.services";
+import { TeamMembersServices } from "../services/teamMembers.services";
+import { TeamsServices } from "../services/teams.services";
 
 class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {

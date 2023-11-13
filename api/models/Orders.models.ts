@@ -34,4 +34,4 @@ const OrdersSchema = new mongoose.Schema({
   ],
 });
 
-export default mongoose.model("Orders", OrdersSchema);
+export const Order = mongoose.model("Orders", OrdersSchema);

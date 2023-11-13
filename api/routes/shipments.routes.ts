@@ -9,4 +9,4 @@ router.post("/", ShipmentsController.createShipment);
 router.delete("/:id", ShipmentsController.deleteShipment);
 router.put("/:id", ShipmentsController.updateShipment);
 
-export default router;
+export { router as shipmentRoutes };

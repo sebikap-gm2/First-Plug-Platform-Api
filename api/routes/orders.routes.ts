@@ -9,4 +9,4 @@ router.post("/", OrderController.newOrder);
 router.put("/:idOrder", OrderController.updateOrder);
 router.delete("/:idOrder", OrderController.deleteOrder);
 
-export default router;
+export { router as ordersRoutes };
