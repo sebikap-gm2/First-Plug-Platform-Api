@@ -1,5 +1,5 @@
 import { User } from "../models/Users.models";
-import { User as UserType } from "api/types/index";
+import { User as UserType } from "../types/User";
 
 export class AuthServices {
   static async getUserbyEmail(email: string) {

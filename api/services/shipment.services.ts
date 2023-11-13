@@ -1,4 +1,4 @@
-import { Shipment as ShipmentType, MongoShipment } from "api/types/index";
+import { Shipment as ShipmentType, MongoShipment } from "../types/shipment";
 import { Shipment } from "../models/Shipments.models";
 
 export class ShipmentServices {

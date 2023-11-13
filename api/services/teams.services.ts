@@ -1,4 +1,4 @@
-import { Team as TeamType, MongoTeam } from "api/types/index";
+import { Team as TeamType, MongoTeam } from "../types/team";
 import { Team } from "../models/Teams.models";
 
 export class TeamsServices {

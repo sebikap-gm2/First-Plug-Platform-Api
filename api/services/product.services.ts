@@ -1,5 +1,5 @@
 import { Product } from "../models/Products.models";
-import { MongoProduct, Product as ProductType } from "api/types/index";
+import { MongoProduct, Product as ProductType } from "../types/product";
 
 export class ProductServices {
   static async findAllProducts(): Promise<MongoProduct[]> {
