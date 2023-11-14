@@ -28,7 +28,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 (async () => {
-  await checkEnvVariables();
+  checkEnvVariables();
   await connectToDatabase();
 
   app.listen(PORT, () => {
