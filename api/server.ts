@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(
   cors({
-    origin: process.env.FIRST_PLUG_PLATFORM_CLIENT_HOST || "",
+    origin: env.FIRST_PLUG_PLATFORM_CLIENT_HOST,
     credentials: true,
   })
 );
