@@ -1,14 +1,14 @@
 import dotenv from "dotenv";
 import express, { Application, Request, Response, NextFunction } from "express";
 import { connectToDatabase } from "./config/db";
-import { checkEnvVariables } from "./config/envCheck";
+import { env } from "./config/envCheck";
 import cors from "cors";
 import morgan from "morgan";
 import { router } from "./routes";
 
 dotenv.config();
 const app: Application = express();
-const PORT: number = parseInt(process.env.PORT || "3000", 10);
+const PORT: string = env.PORT || "3000";
 
 app.use(express.json());
 app.use(morgan("tiny"));
@@ -28,7 +28,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 (async () => {
-  checkEnvVariables();
   await connectToDatabase();
 
   app.listen(PORT, () => {
