@@ -1,16 +1,14 @@
 import express from "express";
 import { TeamsController } from "../controllers";
 
-const router = express.Router();
+export const teamsRoutes = express.Router();
 
-router.get("/", TeamsController.getAll);
-router.post("/", TeamsController.newTeam);
-router.post("/addTeam", TeamsController.addTeamMemberToTeam);
-router.put("/:idTeam", TeamsController.updateTeam);
-router.delete("/:idTeam", TeamsController.deleteTeam);
-router.delete(
+teamsRoutes.get("/", TeamsController.getAll);
+teamsRoutes.post("/", TeamsController.newTeam);
+teamsRoutes.post("/addTeam", TeamsController.addTeamMemberToTeam);
+teamsRoutes.put("/:idTeam", TeamsController.updateTeam);
+teamsRoutes.delete("/:idTeam", TeamsController.deleteTeam);
+teamsRoutes.delete(
   "/deleteMember/:teamId/:memberId",
   TeamsController.deleteTeamMemberFromTeam
 );
-
-export { router as teamsRoutes };

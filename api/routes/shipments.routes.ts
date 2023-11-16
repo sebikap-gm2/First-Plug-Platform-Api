@@ -1,12 +1,10 @@
 import express from "express";
-const router = express.Router();
+export const shipmentRoutes = express.Router();
 
 import { ShipmentsController } from "../controllers";
 
-router.get("/", ShipmentsController.getShipments);
-router.get("/:id", ShipmentsController.getOneShipment);
-router.post("/", ShipmentsController.createShipment);
-router.delete("/:id", ShipmentsController.deleteShipment);
-router.put("/:id", ShipmentsController.updateShipment);
-
-export { router as shipmentRoutes };
+shipmentRoutes.get("/", ShipmentsController.getShipments);
+shipmentRoutes.get("/:id", ShipmentsController.getOneShipment);
+shipmentRoutes.post("/", ShipmentsController.createShipment);
+shipmentRoutes.delete("/:id", ShipmentsController.deleteShipment);
+shipmentRoutes.put("/:id", ShipmentsController.updateShipment);

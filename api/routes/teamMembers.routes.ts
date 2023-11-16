@@ -1,12 +1,10 @@
 import express from "express";
-const router = express.Router();
+export const teamMembersRoutes = express.Router();
 
 import { TeamMembersController } from "../controllers";
 
-router.get("/", TeamMembersController.getAll);
-router.get("/:idMember", TeamMembersController.getById);
-router.post("/", TeamMembersController.create);
-router.put("/:idMember", TeamMembersController.updateById);
-router.delete("/:idMember", TeamMembersController.deleteById);
-
-export { router as teamMembersRoutes };
+teamMembersRoutes.get("/", TeamMembersController.getAll);
+teamMembersRoutes.get("/:idMember", TeamMembersController.getById);
+teamMembersRoutes.post("/", TeamMembersController.create);
+teamMembersRoutes.put("/:idMember", TeamMembersController.updateById);
+teamMembersRoutes.delete("/:idMember", TeamMembersController.deleteById);

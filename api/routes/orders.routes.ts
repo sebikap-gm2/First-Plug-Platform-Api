@@ -1,12 +1,10 @@
 import express from "express";
-const router = express.Router();
+export const ordersRoutes = express.Router();
 
 import { OrderController } from "../controllers";
 
-router.get("/", OrderController.getOrders);
-router.get("/:idOrder", OrderController.getOrderById);
-router.post("/", OrderController.newOrder);
-router.put("/:idOrder", OrderController.updateOrder);
-router.delete("/:idOrder", OrderController.deleteOrder);
-
-export { router as ordersRoutes };
+ordersRoutes.get("/", OrderController.getOrders);
+ordersRoutes.get("/:idOrder", OrderController.getOrderById);
+ordersRoutes.post("/", OrderController.newOrder);
+ordersRoutes.put("/:idOrder", OrderController.updateOrder);
+ordersRoutes.delete("/:idOrder", OrderController.deleteOrder);
