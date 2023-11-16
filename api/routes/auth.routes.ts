@@ -1,11 +1,9 @@
 import express from "express";
-const router = express.Router();
+export const authRoutes = express.Router();
 
-import { AuthController } from "../controllers"
+import { AuthController } from "../controllers";
 import { AuthMiddleware } from "../middleware/auth.middleware";
 
-router.post("/register", AuthController.register);
-router.post("/login", AuthController.login);
-router.get("/me", AuthMiddleware.validateUser, AuthController.me);
-
-export { router as authRoutes };
+authRoutes.post("/register", AuthController.register);
+authRoutes.post("/login", AuthController.login);
+authRoutes.get("/me", AuthMiddleware.validateUser, AuthController.me);
