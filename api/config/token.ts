@@ -1,12 +1,8 @@
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { env } from "./envCheck";
+import { UserPayload } from "api/types";
 
 const SECRET = env.SECRET_PASSWORD;
-
-export interface UserPayload extends JwtPayload {
-  id: number;
-  email: string;
-}
 
 export function generateToken(payload: UserPayload) {
   return jwt.sign(payload, SECRET);
