@@ -1,5 +1,5 @@
-import { Shipment as ShipmentType, MongoShipment } from "../types/shipment";
-import { Shipment } from "../models/Shipments.models";
+import { Shipment as ShipmentType, MongoShipment } from "../types";
+import { Shipment } from "../models";
 
 export class ShipmentServices {
   static async getAllShipments(): Promise<ShipmentType[]> {

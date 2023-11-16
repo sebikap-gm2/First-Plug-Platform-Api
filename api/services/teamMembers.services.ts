@@ -1,8 +1,5 @@
-import { TeamMember } from "../models/TeamMembers.models";
-import {
-  TeamMember as TeamMemberType,
-  MongoTeamMember,
-} from "../types/teamMember";
+import { TeamMember } from "../models";
+import { TeamMember as TeamMemberType, MongoTeamMember } from "../types";
 
 export class TeamMembersServices {
   static async getAll(): Promise<TeamMemberType[]> {
