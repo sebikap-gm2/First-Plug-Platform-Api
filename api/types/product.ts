@@ -8,7 +8,7 @@ export type Product = {
   ram: string;
   status: ["Available", "Delivered"];
   imgUrl: string;
-  quantity: number;
+  stock: number;
 };
 
 export type MongoProduct = Product & {

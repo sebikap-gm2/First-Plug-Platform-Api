@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
 export interface UserEntity extends Document {
-  fullname: string;
+  name: string;
   email: string;
   password: string;
   salt: string;
@@ -22,7 +22,7 @@ export interface UserEntity extends Document {
 }
 
 const UsersSchema = new mongoose.Schema<UserEntity>({
-  fullname: {
+  name: {
     type: String,
     required: true,
   },
