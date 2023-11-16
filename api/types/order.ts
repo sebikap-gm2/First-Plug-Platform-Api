@@ -10,7 +10,6 @@ export type Order = {
     "payment pending"
   ];
   date: Date;
-  totalPrice: number;
   products: Product[];
 };
 
