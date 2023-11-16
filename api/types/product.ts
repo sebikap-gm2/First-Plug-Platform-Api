@@ -1,4 +1,5 @@
 export type Product = {
+  _id: string;
   category: string;
   model: string;
   color: string;
@@ -9,9 +10,5 @@ export type Product = {
   status: ["Available", "Delivered"];
   imgUrl: string;
   stock: number;
-};
-
-export type MongoProduct = Product & {
-  _id: string;
   __v: number;
 };

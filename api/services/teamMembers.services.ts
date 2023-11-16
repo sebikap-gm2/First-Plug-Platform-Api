@@ -1,30 +1,30 @@
 import { TeamMemberRepository } from "../models";
-import { TeamMember as TeamMemberType, MongoTeamMember } from "../types";
+import { TeamMember } from "../types";
 
 export class TeamMembersServices {
-  static async getAll(): Promise<TeamMemberType[]> {
+  static async getAll(): Promise<TeamMember[]> {
     return await TeamMemberRepository.find();
   }
 
-  static async getOne(identifier: MongoTeamMember["_id"]) {
+  static async getOne(identifier: TeamMember["_id"]) {
     return await TeamMemberRepository.findOne({ identifier }).exec();
   }
 
-  static async getById(_id: MongoTeamMember["_id"]) {
+  static async getById(_id: TeamMember["_id"]) {
     return await TeamMemberRepository.findById(_id);
   }
 
-  static async create(data: TeamMemberType) {
+  static async create(data: TeamMember) {
     return await TeamMemberRepository.create(data);
   }
 
-  static async update(id: MongoTeamMember["_id"], data: TeamMemberType) {
+  static async update(id: TeamMember["_id"], data: TeamMember) {
     return await TeamMemberRepository.findByIdAndUpdate(id, data, {
       new: true,
     });
   }
 
-  static async delete(_id: MongoTeamMember["_id"]) {
+  static async delete(_id: TeamMember["_id"]) {
     return await TeamMemberRepository.findByIdAndDelete(_id);
   }
 }

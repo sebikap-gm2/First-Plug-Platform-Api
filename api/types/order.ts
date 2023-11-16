@@ -2,10 +2,12 @@ import { TeamMember } from "./teamMember";
 import { Product } from "./product";
 
 export type Order = {
+  _id: string;
   teamMember: TeamMember[];
   status: OrderStatus;
   date: Date;
   products: Product[];
+  __v: number;
 };
 
 export const OrderStatuses = {
@@ -16,8 +18,3 @@ export const OrderStatuses = {
 } as const;
 
 export type OrderStatus = keyof typeof OrderStatuses;
-
-export type MongoOrder = Order & {
-  _id: string;
-  __v: number;
-};

@@ -1,4 +1,5 @@
 export type TeamMember = {
+  _id: string;
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
@@ -13,9 +14,5 @@ export type TeamMember = {
   timeSlotForDelivery: string;
   additionalInfo: string;
   teams: string[];
-};
-
-export type MongoTeamMember = TeamMember & {
-  _id: string;
   __v: number;
 };

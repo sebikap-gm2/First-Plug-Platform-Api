@@ -1,23 +1,23 @@
 import { OrderRepository } from "../models";
-import { Order as OrderType, MongoOrder } from "../types";
+import { Order } from "../types";
 
 export class OrderServices {
-  static async getAllOrders(): Promise<OrderType[]> {
+  static async getAllOrders(): Promise<Order[]> {
     return await OrderRepository.find();
   }
-  static async getOneOrder(orderId: MongoOrder["_id"]) {
+  static async getOneOrder(orderId: Order["_id"]) {
     return await OrderRepository.findById(orderId);
   }
 
-  static async createOrder(data: OrderType) {
+  static async createOrder(data: Order) {
     return await OrderRepository.create(data);
   }
 
-  static async updateOrder(id: MongoOrder["_id"], data: OrderType) {
+  static async updateOrder(id: Order["_id"], data: Order) {
     return await OrderRepository.findOneAndUpdate({ id }, data);
   }
 
-  static async deleteOrder(id: MongoOrder["_id"]) {
+  static async deleteOrder(id: Order["_id"]) {
     return await OrderRepository.findOneAndDelete({ id });
   }
 }

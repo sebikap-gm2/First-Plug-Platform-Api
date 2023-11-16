@@ -1,12 +1,12 @@
 import { UserRepository } from "../models";
-import { User as UserType } from "../types";
+import { User } from "../types";
 
 export class AuthServices {
-  static async getUserbyEmail(email: string) {
+  static async getUserbyEmail(email: User["email"]) {
     return await UserRepository.findOne({ email: email }).exec();
   }
 
-  static async createUser(data: UserType) {
+  static async createUser(data: User) {
     return await UserRepository.create(data);
   }
 }

@@ -1,4 +1,6 @@
 export type Shipment = {
+  _id: string;
+  __v: number;
   fullName: string;
   date: Date;
   quantityProducts: string;
@@ -7,9 +9,4 @@ export type Shipment = {
   trackigURL: string;
   price: string;
   orders: string[];
-};
-
-export type MongoShipment = Shipment & {
-  _id: string;
-  __v: number;
 };
