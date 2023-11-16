@@ -2,7 +2,7 @@ import { generateToken } from "../config/token";
 import { AuthServices } from "../services";
 import { Request, Response } from "express";
 
-class AuthController {
+export class AuthController {
   static async register(req: Request, res: Response) {
     try {
       const { email } = req.body;
@@ -60,5 +60,3 @@ class AuthController {
     res.send(req.user);
   }
 }
-
-export { AuthController };
