@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { OrderServices } from "../services/orders.services";
+import { OrderServices } from "../services";
 
 class OrderController {
   static async getOrders(req: Request, res: Response, next: NextFunction) {
