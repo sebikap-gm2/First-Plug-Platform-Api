@@ -43,7 +43,7 @@ class AuthController {
       const payload = {
         id: user._id,
         email: user.email,
-        fullname: user.fullname,
+        name: user.name,
       };
 
       const token = generateToken(payload);
