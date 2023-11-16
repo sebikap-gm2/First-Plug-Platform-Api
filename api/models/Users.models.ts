@@ -134,4 +134,4 @@ UsersSchema.pre<UserEntity>("save", async function (next) {
   }
 });
 
-export const User = mongoose.model<UserEntity>("Users", UsersSchema);
+export const UserRepository = mongoose.model<UserEntity>("Users", UsersSchema);

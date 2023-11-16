@@ -67,4 +67,7 @@ const TeamsMemberSchema = new mongoose.Schema({
   },
 });
 
-export const TeamMember = mongoose.model("TeamMember", TeamsMemberSchema);
+export const TeamMemberRepository = mongoose.model(
+  "TeamMember",
+  TeamsMemberSchema
+);

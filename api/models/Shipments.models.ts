@@ -37,4 +37,4 @@ const ShipmentSchema = new mongoose.Schema({
   ],
 });
 
-export const Shipment = mongoose.model("Shipments", ShipmentSchema);
+export const ShipmentRepository  = mongoose.model("Shipments", ShipmentSchema);

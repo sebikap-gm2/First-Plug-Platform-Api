@@ -1,8 +1,15 @@
-import { Order } from "./Orders.models";
-import { Product } from "./Products.models";
-import { Shipment } from "./Shipments.models";
-import { TeamMember } from "./TeamMembers.models";
-import { Team } from "./Teams.models";
-import { User } from "./Users.models";
+import { OrderRepository } from "./Orders.models";
+import { ProductRepository } from "./Products.models";
+import { ShipmentRepository } from "./Shipments.models";
+import { TeamMemberRepository } from "./TeamMembers.models";
+import { TeamRepository } from "./Teams.models";
+import { UserRepository } from "./Users.models";
 
-export { Order, Product, Shipment, TeamMember, Team, User };
+export {
+  OrderRepository,
+  ProductRepository,
+  ShipmentRepository,
+  TeamMemberRepository,
+  TeamRepository,
+  UserRepository,
+};
