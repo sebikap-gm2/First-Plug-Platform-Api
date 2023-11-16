@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { AuthController } from "../controllers/auth.controller";
+import { AuthController } from "../controllers"
 import { AuthMiddleware } from "../middleware/auth.middleware";
 
 router.post("/register", AuthController.register);

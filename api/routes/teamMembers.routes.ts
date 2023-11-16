@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { TeamMembersController } from "../controllers/teamMembers.controller";
+import { TeamMembersController } from "../controllers";
 
 router.get("/", TeamMembersController.getAll);
 router.get("/:idMember", TeamMembersController.getById);

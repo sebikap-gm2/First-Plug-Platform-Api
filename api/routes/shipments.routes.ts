@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { ShipmentsController } from "../controllers/shipments.controller";
+import { ShipmentsController } from "../controllers";
 
 router.get("/", ShipmentsController.getShipments);
 router.get("/:id", ShipmentsController.getOneShipment);
