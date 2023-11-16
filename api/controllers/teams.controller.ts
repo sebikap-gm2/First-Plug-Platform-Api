@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { TeamMembersServices } from "../services";
 import { TeamsServices } from "../services";
 
-class TeamsController {
+export class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const teams = await TeamsServices.getAllTeams();
@@ -130,5 +130,3 @@ class TeamsController {
     }
   }
 }
-
-export { TeamsController };

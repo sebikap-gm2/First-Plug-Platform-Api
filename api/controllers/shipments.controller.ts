@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { ShipmentServices } from "../services";
-class ShipmentsController {
+export class ShipmentsController {
   static async getShipments(req: Request, res: Response, next: NextFunction) {
     try {
       const allShipments = await ShipmentServices.getAllShipments();
@@ -55,5 +55,3 @@ class ShipmentsController {
     }
   }
 }
-
-export { ShipmentsController };

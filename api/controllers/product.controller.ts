@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ProductServices } from "../services";
 
-class ProductController {
+export class ProductController {
   static async getAllProducts(req: Request, res: Response, next: NextFunction) {
     try {
       const allProducts = await ProductServices.findAllProducts();
@@ -66,5 +66,3 @@ class ProductController {
     }
   }
 }
-
-export { ProductController };

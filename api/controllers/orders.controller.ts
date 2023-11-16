@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { OrderServices } from "../services";
 
-class OrderController {
+export class OrderController {
   static async getOrders(req: Request, res: Response, next: NextFunction) {
     try {
       const orders = await OrderServices.getAllOrders();
@@ -54,5 +54,3 @@ class OrderController {
     }
   }
 }
-
-export { OrderController };
