@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { ShipmentServices } from "../services/shipment.services";
+import { ShipmentServices } from "../services";
 class ShipmentsController {
   static async getShipments(req: Request, res: Response, next: NextFunction) {
     try {

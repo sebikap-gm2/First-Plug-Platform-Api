@@ -1,5 +1,5 @@
-import { Order } from "../models/Orders.models";
-import { Order as OrderType, MongoOrder } from "../types/order";
+import { Order } from "../models";
+import { Order as OrderType, MongoOrder } from "../types";
 
 export class OrderServices {
   static async getAllOrders(): Promise<OrderType[]> {

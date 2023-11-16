@@ -1,5 +1,5 @@
-import { Team as TeamType, MongoTeam } from "../types/team";
-import { Team } from "../models/Teams.models";
+import { Team as TeamType, MongoTeam } from "../types";
+import { Team } from "../models";
 
 export class TeamsServices {
   static async getAllTeams() {

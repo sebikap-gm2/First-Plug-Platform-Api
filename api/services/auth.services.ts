@@ -1,5 +1,5 @@
-import { User } from "../models/Users.models";
-import { User as UserType } from "../types/User";
+import { User } from "../models";
+import { User as UserType } from "../types";
 
 export class AuthServices {
   static async getUserbyEmail(email: string) {

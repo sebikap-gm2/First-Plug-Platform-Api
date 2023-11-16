@@ -1,9 +1,10 @@
-import dotenv from "dotenv";
 import express, { Application, Request, Response, NextFunction } from "express";
-import { connectToDatabase } from "./config/db";
-import { env } from "./config/envCheck";
+import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+
+import { connectToDatabase } from "./config";
+import { env } from "./config";
 import { router } from "./routes";
 
 dotenv.config();

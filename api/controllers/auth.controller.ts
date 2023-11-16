@@ -1,5 +1,5 @@
 import { generateToken } from "../config/token";
-import { AuthServices } from "../services/auth.services";
+import { AuthServices } from "../services";
 import { Request, Response } from "express";
 
 class AuthController {

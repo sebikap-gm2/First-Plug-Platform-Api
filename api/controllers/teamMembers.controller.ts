@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { TeamMembersServices } from "../services/teamMembers.services";
+import { TeamMembersServices } from "../services";
 
 class TeamMembersController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
