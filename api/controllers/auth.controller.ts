@@ -1,6 +1,7 @@
-import { generateToken } from "../config/token";
+import { JWTtoken } from "api/config/token";
 import { AuthServices } from "../services";
 import { Request, Response } from "express";
+import { UserPayload } from "api/types";
 
 export class AuthController {
   static async register(req: Request, res: Response) {
@@ -40,13 +41,13 @@ export class AuthController {
         return;
       }
 
-      const payload = {
-        id: user._id,
+      const payload: UserPayload = {
+        _id: user._id,
         email: user.email,
         name: user.name,
       };
 
-      const token = generateToken(payload);
+      const token = JWTtoken.generateToken(payload);
 
       const response = { ...payload, token };
 
