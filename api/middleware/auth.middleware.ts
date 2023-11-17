@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { validateToken } from "../config/token";
-import { UserPayload } from "../config/token";
+import { JWTtoken } from "api/config/token";
+import { UserPayload } from "api/types";
 
 declare module "express-serve-static-core" {
   interface Request {
@@ -24,7 +24,7 @@ export class AuthMiddleware {
       return;
     }
 
-    const user = validateToken(token);
+    const user = JWTtoken.validateToken(token);
 
     if (!user) {
       res.status(401).json({ message: "Invalid authorization token" });

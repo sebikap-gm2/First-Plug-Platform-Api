@@ -8,6 +8,6 @@ export type User = {
   __v: number;
 };
 
-type UserJWT = Pick<User, '_id' | 'email'>
+type UserJWT = Pick<User, "_id" | "email">;
 
-export type UserPayload = JwtPayload & UserJWT
+export type UserPayload = JwtPayload & UserJWT;
