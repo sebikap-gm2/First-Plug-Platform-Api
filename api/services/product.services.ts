@@ -2,7 +2,7 @@ import { ProductRepository } from "../models";
 import { Product } from "../types";
 
 export class ProductServices {
-  static async findAllProducts(): Promise<Product[]> {
+  static async findAllProducts() {
     return await ProductRepository.find();
   }
 

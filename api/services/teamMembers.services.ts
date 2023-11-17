@@ -2,7 +2,7 @@ import { TeamMemberRepository } from "../models";
 import { TeamMember } from "../types";
 
 export class TeamMembersServices {
-  static async getAll(): Promise<TeamMember[]> {
+  static async getAll() {
     return await TeamMemberRepository.find();
   }
 
