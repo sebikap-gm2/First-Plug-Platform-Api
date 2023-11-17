@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { env } from "./envCheck";
-import { UserPayload } from "api/types";
+import { UserPayload } from "../types";
 
 const SECRET = env.SECRET_PASSWORD;
 

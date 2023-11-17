@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { JWTtoken } from "api/config/token";
-import { UserPayload } from "api/types";
+import { JWTtoken } from "../config";
+import { UserPayload } from "../types";
 
 declare module "express-serve-static-core" {
   interface Request {

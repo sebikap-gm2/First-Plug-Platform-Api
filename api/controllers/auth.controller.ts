@@ -1,4 +1,4 @@
-import { JWTtoken } from "api/config/token";
+import { JWTtoken } from "../config";
 import { AuthServices } from "../services";
 import { Request, Response } from "express";
 import { UserPayload } from "api/types";
