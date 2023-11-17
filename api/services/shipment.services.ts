@@ -2,7 +2,7 @@ import { ShipmentRepository } from "../models";
 import { Shipment } from "../types";
 
 export class ShipmentServices {
-  static async getAllShipments(): Promise<Shipment[]> {
+  static async getAllShipments() {
     return await ShipmentRepository.find();
   }
 

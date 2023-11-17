@@ -2,7 +2,7 @@ import { OrderRepository } from "../models";
 import { Order } from "../types";
 
 export class OrderServices {
-  static async getAllOrders(): Promise<Order[]> {
+  static async getAllOrders() {
     return await OrderRepository.find();
   }
   static async getOneOrder(orderId: Order["_id"]) {
