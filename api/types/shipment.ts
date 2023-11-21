@@ -5,9 +5,10 @@ export type Shipment = {
   __v: number;
   name: string;
   date: Date;
-  type: string;
+  types: string;
   trackingNumber: string;
-  trackigURL: string;
-  price: string;
+  trackingURL: string;
   orders: Order[];
 };
+
+export type CreationShipment = Omit<Shipment, "_id" | "__v">;

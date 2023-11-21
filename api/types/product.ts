@@ -25,3 +25,5 @@ export const PRODUCT_STATUSES = {
 } as const;
 
 export type ProductStatus = keyof typeof PRODUCT_STATUSES;
+
+export type CreationProduct = Omit<Product, "_id" | "__v">;

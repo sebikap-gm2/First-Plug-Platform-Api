@@ -1,6 +1,9 @@
+import { Team } from ".";
+
 export type TeamMember = {
   _id: string;
   firstName: string;
+  img: string;
   lastName: string;
   dateOfBirth: Date;
   phone: string;
@@ -13,6 +16,8 @@ export type TeamMember = {
   joiningDate: Date;
   timeSlotForDelivery: string;
   additionalInfo: string;
-  teams: string[];
+  teams: Team[];
   __v: number;
 };
+
+export type CreationTeamMember = Omit<TeamMember, "_id" | "__v">;

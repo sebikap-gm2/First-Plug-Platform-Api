@@ -11,3 +11,5 @@ export type User = {
 type UserJWT = Pick<User, "_id" | "email">;
 
 export type UserPayload = JwtPayload & UserJWT;
+
+export type CreationUser = Omit<User, "_id" | "__v">;

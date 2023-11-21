@@ -6,3 +6,5 @@ export type Team = {
   teamMember: TeamMember[];
   __v: number;
 };
+
+export type CreationTeam = Omit<Team, "_id" | "__v">;

@@ -18,3 +18,5 @@ export const OrderStatuses = {
 } as const;
 
 export type OrderStatus = keyof typeof OrderStatuses;
+
+export type CreationOrder = Omit<Order, "_id" | "__v">;
