@@ -1,7 +1,7 @@
 import { JWTtoken } from "../config";
 import { AuthServices } from "../services";
+import { UserPayload } from "../types";
 import { Request, Response } from "express";
-import { UserPayload } from "api/types";
 
 export class AuthController {
   static async register(req: Request, res: Response) {
