@@ -1,15 +1,6 @@
-import { AuthController } from "./auth.controller";
-import { OrderController } from "./orders.controller";
-import { ProductController } from "./product.controller";
-import { ShipmentsController } from "./shipments.controller";
-import { TeamsController } from "./teams.controller";
-import { TeamMembersController } from "./teamMembers.controller";
-
-export {
-  AuthController,
-  OrderController,
-  ProductController,
-  ShipmentsController,
-  TeamsController,
-  TeamMembersController,
-};
+export * from "./auth.controller";
+export * from "./orders.controller";
+export * from "./product.controller";
+export * from "./shipments.controller";
+export * from "./teams.controller";
+export * from "./teamMembers.controller";
