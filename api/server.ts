@@ -2,14 +2,13 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
-
-import { connectToDatabase } from "./config";
-import { env } from "./config";
+import { connectToDatabase, env } from "./config";
 import { router } from "./routes";
+
 
 dotenv.config();
 const app: Application = express();
-const PORT: string = env.PORT || "3000";
+const PORT = env.PORT || "3000";
 
 app.use(express.json());
 app.use(morgan("tiny"));
