@@ -1,5 +1,5 @@
 import { ShipmentRepository } from "../models";
-import { Shipment } from "../types";
+import { CreationShipment, Shipment } from "../types";
 
 export class ShipmentServices {
   static async getAllShipments() {
@@ -10,7 +10,7 @@ export class ShipmentServices {
     return await ShipmentRepository.findById(id);
   }
 
-  static async createShipment(data: Shipment) {
+  static async createShipment(data: CreationShipment) {
     return await ShipmentRepository.create(data);
   }
 

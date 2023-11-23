@@ -1,12 +1,12 @@
 import { TeamRepository } from "../models";
-import { Team } from "../types";
+import { CreationTeam, Team } from "../types";
 
 export class TeamsServices {
   static async getAllTeams() {
     return await TeamRepository.find().populate("teamMember");
   }
 
-  static async createTeam(data: Team) {
+  static async createTeam(data: CreationTeam) {
     return await TeamRepository.create(data);
   }
 

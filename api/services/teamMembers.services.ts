@@ -1,5 +1,5 @@
 import { TeamMemberRepository } from "../models";
-import { TeamMember } from "../types";
+import { CreationTeamMember, TeamMember } from "../types";
 
 export class TeamMembersServices {
   static async getAll() {
@@ -14,7 +14,7 @@ export class TeamMembersServices {
     return await TeamMemberRepository.findById(_id);
   }
 
-  static async create(data: TeamMember) {
+  static async create(data: CreationTeamMember) {
     return await TeamMemberRepository.create(data);
   }
 

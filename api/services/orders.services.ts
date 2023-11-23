@@ -1,5 +1,5 @@
 import { OrderRepository } from "../models";
-import { Order } from "../types";
+import { CreationOrder, Order } from "../types";
 
 export class OrderServices {
   static async getAllOrders() {
@@ -9,7 +9,7 @@ export class OrderServices {
     return await OrderRepository.findById(orderId);
   }
 
-  static async createOrder(data: Order) {
+  static async createOrder(data: CreationOrder) {
     return await OrderRepository.create(data);
   }
 

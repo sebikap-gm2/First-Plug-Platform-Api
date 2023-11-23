@@ -1,5 +1,5 @@
 import { ProductRepository } from "../models";
-import { Product } from "../types";
+import { CreationProduct, Product } from "../types";
 
 export class ProductServices {
   static async findAllProducts() {
@@ -16,7 +16,7 @@ export class ProductServices {
     });
   }
 
-  static async createNewProduct(data: Product) {
+  static async createNewProduct(data: CreationProduct) {
     return await ProductRepository.create(data);
   }
 
