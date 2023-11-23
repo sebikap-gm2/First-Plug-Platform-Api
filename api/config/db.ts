@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import { env } from "./envCheck";
-dotenv.config();
 import mongoose from "mongoose";
 
+dotenv.config();
 mongoose.set("strictQuery", true);
 
 export const connectToDatabase = async () => {
