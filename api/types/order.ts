@@ -3,7 +3,7 @@ import { Product } from "./product";
 
 export type Order = {
   _id: string;
-  teamMember: TeamMember[];
+  teamMembers: TeamMember[];
   status: OrderStatus;
   date: Date;
   products: Product[];
