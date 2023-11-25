@@ -1,3 +1,5 @@
+import { Schema } from "mongoose";
+import { TeamMembersServices } from ".";
 import { TeamRepository } from "../models";
 import { CreationTeam, Team } from "../types";
 
@@ -11,7 +13,13 @@ export class TeamsServices {
   }
 
   static async getOneTeam(id: Team["_id"]) {
-    return await TeamRepository.findById(id);
+    const team = await TeamRepository.findById(id);
+
+    if (!team) {
+      throw new Error("Team not found.");
+    }
+
+    return team;
   }
 
   static async updateTeam(id: Team["_id"], data: Team) {

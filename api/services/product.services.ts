@@ -7,13 +7,21 @@ export class ProductServices {
   }
 
   static async findProductsById(productId: Product["_id"]) {
-    return await ProductRepository.findById(productId);
+    try {
+      return await ProductRepository.findById(productId);
+    } catch (error) {
+      throw new Error("Product not found");
+    }
   }
 
   static async updateOneProduct(productId: Product["_id"], newData: Product) {
-    return await ProductRepository.findByIdAndUpdate(productId, newData, {
-      new: true,
-    });
+    try {
+      return await ProductRepository.findByIdAndUpdate(productId, newData, {
+        new: true,
+      });
+    } catch (error) {
+      throw new Error("Product not found");
+    }
   }
 
   static async createNewProduct(data: CreationProduct) {

@@ -15,9 +15,7 @@ export class ProductController {
     const { idProduct } = req.params;
     try {
       const product = await ProductServices.findProductsById(idProduct);
-      if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-      }
+
       res.status(200).json(product);
     } catch (error) {
       next(error);
@@ -29,14 +27,7 @@ export class ProductController {
       const productId = req.params.idProduct;
       const newData = req.body;
 
-      const updatedProduct = await ProductServices.updateOneProduct(
-        productId,
-        newData
-      );
-
-      if (!updatedProduct) {
-        return res.status(400).json({ message: "Product not found" });
-      }
+      await ProductServices.updateOneProduct(productId, newData);
 
       res.status(200).json({ message: "Product update succesfully" });
     } catch (error) {
@@ -46,9 +37,7 @@ export class ProductController {
 
   static async createProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const productData = req.body;
-
-      const newProduct = await ProductServices.createNewProduct(productData);
+      const newProduct = await ProductServices.createNewProduct(req.body);
       res.status(201).json(newProduct);
     } catch (error) {
       next(error);

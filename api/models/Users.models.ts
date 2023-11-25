@@ -101,13 +101,13 @@ UsersSchema.methods.validatePassword = async function (
   this: UserEntity,
   password: string
 ): Promise<boolean> {
-  try {
-    const hashedPassword = await bcrypt.hash(password, this.salt);
-    return this.password === hashedPassword;
-  } catch (error) {
-    console.log(error);
-    return false;
+  const hashedPassword = await bcrypt.hash(password, this.salt);
+
+  if (this.password !== hashedPassword) {
+    throw new Error(`Wrong password! Please try again `);
   }
+
+  return this.password === hashedPassword;
 };
 
 UsersSchema.methods.generateHash = async function (

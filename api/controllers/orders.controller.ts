@@ -26,7 +26,7 @@ export class OrderController {
     try {
       const orders = await OrderServices.createOrder(req.body);
 
-      res.status(201).json({ newOrder: orders });
+      res.status(201).json(orders);
     } catch (error) {
       next(error);
     }
@@ -36,7 +36,7 @@ export class OrderController {
       const { idOrder } = req.params;
       const orders = await OrderServices.updateOrder(idOrder, req.body);
 
-      res.status(200).json({ updatedOrder: orders });
+      res.status(200).json(orders);
     } catch (error) {
       next(error);
     }
@@ -46,9 +46,7 @@ export class OrderController {
       const { idOrder } = req.params;
       const orders = await OrderServices.deleteOrder(idOrder);
 
-      res
-        .status(200)
-        .json({ msg: "Order deleted succesfully", deletedOrder: orders });
+      res.status(200).json(orders);
     } catch (error) {
       next(error);
     }

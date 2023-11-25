@@ -7,7 +7,13 @@ export class ShipmentServices {
   }
 
   static async getOneShipment(id: Shipment["_id"]) {
-    return await ShipmentRepository.findById(id);
+    const shipment = ShipmentRepository.findById(id);
+
+    if (!shipment) {
+      throw new Error("Shipment not found!");
+    }
+
+    return shipment;
   }
 
   static async createShipment(data: CreationShipment) {

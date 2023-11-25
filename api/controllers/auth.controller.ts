@@ -1,45 +1,29 @@
 import { JWTtoken } from "../config";
 import { AuthServices } from "../services";
 import { UserPayload } from "../types";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export class AuthController {
-  static async register(req: Request, res: Response) {
+  static async register(req: Request, res: Response, next: NextFunction) {
     try {
       const { email } = req.body;
-
-      const user = await AuthServices.getUserbyEmail(email);
-
-      if (user) {
-        res.status(400).send("This mail has been already registered!");
-        return;
-      }
+      await AuthServices.getUserbyEmail(email);
 
       await AuthServices.createUser(req.body);
 
-      res.status(201).json("User register succed");
+      res.status(201).json("User register succeed");
     } catch (error) {
-      res.status(401).json("Error at register");
+      next(error);
     }
   }
 
-  static async login(req: Request, res: Response) {
+  static async login(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body;
 
       const user = await AuthServices.getUserbyEmail(email);
 
-      if (!user) {
-        res.status(404).send("This mail does not exists!");
-        return;
-      }
-
-      const isValid = await user.validatePassword(password);
-
-      if (!isValid) {
-        res.status(401).send("Wrong password! Please try again");
-        return;
-      }
+      await user.validatePassword(password);
 
       const payload: UserPayload = {
         _id: user._id,
@@ -49,11 +33,9 @@ export class AuthController {
 
       const token = JWTtoken.generateToken(payload);
 
-      const response = { ...payload, token };
-
-      res.send(response);
+      res.send({ ...payload, token });
     } catch (error) {
-      res.status(500).json("Error at login");
+      next(error);
     }
   }
 
