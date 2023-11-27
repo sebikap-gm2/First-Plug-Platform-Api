@@ -5,7 +5,7 @@ const TeamsSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  teamMember: [
+  teamMembers: [
     {
       default: [],
       type: mongoose.Schema.Types.ObjectId,
