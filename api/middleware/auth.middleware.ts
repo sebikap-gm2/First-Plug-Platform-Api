@@ -2,15 +2,9 @@ import { Request, Response, NextFunction } from "express";
 import { JWTtoken } from "../config";
 import { UserPayload } from "../types";
 
-declare module "express-serve-static-core" {
-  interface Request {
-    user?: UserPayload;
-  }
-}
-
 export class AuthMiddleware {
   static validateUser(req: Request, res: Response, next: NextFunction): void {
-    const authorizationHeader = req.headers.authorization as string | undefined;
+    const authorizationHeader = req.get('authorization')
 
     if (!authorizationHeader) {
       res.status(401).json({ message: "Missing authentication token" });
@@ -31,7 +25,7 @@ export class AuthMiddleware {
       return;
     }
 
-    req.user = user;
-    next();
+    req.body.user = user
+    next()
   }
 }

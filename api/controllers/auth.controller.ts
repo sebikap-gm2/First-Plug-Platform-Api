@@ -1,6 +1,6 @@
 import { JWTtoken } from "../config";
 import { AuthServices } from "../services";
-import { UserPayload } from "../types";
+import { TypedRequestBody, UserPayload } from "../types";
 import { NextFunction, Request, Response } from "express";
 
 export class AuthController {
@@ -39,7 +39,7 @@ export class AuthController {
     }
   }
 
-  static async me(req: Request, res: Response) {
-    res.send(req.user);
+  static async me(req: TypedRequestBody<{ user: UserPayload }>, res: Response) {
+    res.send(req.body.user);
   }
 }
