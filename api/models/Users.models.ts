@@ -1,6 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
+// TODO: This is the desired result
+// export interface UserEntity extends Document & User
 export interface UserEntity extends Document {
   name: string;
   email: string;
