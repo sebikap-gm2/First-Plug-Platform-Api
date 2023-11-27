@@ -1,12 +1,13 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
+import dotenv from "dotenv";
+import { env } from "./envCheck";
+import mongoose from "mongoose";
+
+dotenv.config();
+mongoose.set("strictQuery", true);
 
 export const connectToDatabase = async () => {
   try {
-    return await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    return await mongoose.connect(env.MONGO_URI);
   } catch (error) {
     console.error("Failed to connect to database", error);
   }

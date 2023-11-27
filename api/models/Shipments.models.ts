@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const ShipmentSchema = mongoose.Schema({
+const ShipmentSchema = new mongoose.Schema({
   fullname: {
     type: String,
     required: true,
@@ -37,6 +37,4 @@ const ShipmentSchema = mongoose.Schema({
   ],
 });
 
-const Shipment = mongoose.model("Shipments", ShipmentSchema);
-
-module.exports = Shipment;
+export const ShipmentRepository  = mongoose.model("Shipments", ShipmentSchema);

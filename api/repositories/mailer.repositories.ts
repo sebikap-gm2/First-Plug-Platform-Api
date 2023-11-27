@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-function sendMail(code: string, email: string) {
+export function sendMail(code: string, email: string) {
   const mailOptions: nodemailer.SendMailOptions = {
     from: MAIL,
     to: email,
@@ -31,5 +31,3 @@ function sendMail(code: string, email: string) {
     }
   });
 }
-
-export { sendMail };

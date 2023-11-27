@@ -1,25 +1,32 @@
-const Teams = require("../models/Teams.models");
+import { Schema } from "mongoose";
+import { TeamMembersServices } from ".";
+import { TeamRepository } from "../models";
+import { CreationTeam, Team } from "../types";
 
-class TeamsServices {
+export class TeamsServices {
   static async getAllTeams() {
-    return await Teams.find().populate("teamMember");
+    return await TeamRepository.find().populate("teamMember");
   }
 
-  static async createTeam(data: any) {
-    return await Teams.create(data);
+  static async createTeam(data: CreationTeam) {
+    return await TeamRepository.create(data);
   }
 
-  static async getOneTeam(id: string) {
-    return await Teams.findById(id);
+  static async getOneTeam(id: Team["_id"]) {
+    const team = await TeamRepository.findById(id);
+
+    if (!team) {
+      throw new Error("Team not found.");
+    }
+
+    return team;
   }
 
-  static async updateTeam(id: string, data: any) {
-    return await Teams.findByIdAndUpdate(id, data, { new: true });
+  static async updateTeam(id: Team["_id"], data: Team) {
+    return await TeamRepository.findByIdAndUpdate(id, data, { new: true });
   }
 
-  static async deleteTeam(id: string, data: any) {
-    return await Teams.findByIdAndDelete(id, data);
+  static async deleteTeam(id: Team["_id"]) {
+    return await TeamRepository.findByIdAndDelete(id);
   }
 }
-
-module.exports = TeamsServices;

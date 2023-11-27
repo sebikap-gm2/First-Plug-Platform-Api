@@ -1,29 +1,60 @@
-const TeamMembers = require("../models/TeamMember.models");
+import { TeamMemberRepository } from "../models";
+import { CreationTeamMember, TeamMember } from "../types";
 
-class TeamMembersServices {
+export class TeamMembersServices {
   static async getAll() {
-    return await TeamMembers.find();
+    return await TeamMemberRepository.find();
   }
 
-  static async getOne(identifier: string) {
-    return await TeamMembers.findOne({ identifier }).exec();
+  static async getOne(identifier: TeamMember["_id"]) {
+    const teamMember = await TeamMemberRepository.findOne({
+      identifier,
+    }).exec();
+
+    if (!teamMember) {
+      throw new Error("Team member not found");
+    }
+
+    return teamMember;
   }
 
-  static async getById(_id: string) {
-    return await TeamMembers.findById({ _id });
+  static async getById(_id: TeamMember["_id"]) {
+    const teamMember = await TeamMemberRepository.findById(_id);
+
+    if (!teamMember) {
+      throw new Error("Team Member not found.");
+    }
+
+    return teamMember;
   }
 
-  static async create(data: any) {
-    return await TeamMembers.create(data);
+  static async create(data: CreationTeamMember) {
+    return await TeamMemberRepository.create(data);
   }
 
-  static async update(id: string, data: any) {
-    return await TeamMembers.findByIdAndUpdate(id, data, { new: true });
+  static async update(id: TeamMember["_id"], data: TeamMember) {
+    const teamMemberUpdated = await TeamMemberRepository.findByIdAndUpdate(
+      id,
+      data,
+      {
+        new: true,
+      }
+    );
+
+    if (teamMemberUpdated) {
+      throw new Error("the team member was not found");
+    }
+
+    return teamMemberUpdated;
   }
 
-  static async delete(_id: string) {
-    return await TeamMembers.findByIdAndDelete(_id);
+  static async delete(_id: TeamMember["_id"]) {
+    const teamMemberDeleted = await TeamMemberRepository.findByIdAndDelete(_id);
+
+    if (!teamMemberDeleted) {
+      throw new Error("the team member was not found");
+    }
+
+    return teamMemberDeleted;
   }
 }
-
-module.exports = TeamMembersServices;

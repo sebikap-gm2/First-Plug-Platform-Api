@@ -1,13 +1,18 @@
-const User = require("../models/Users.models");
+import { UserRepository } from "../models";
+import { CreationUser, User } from "../types";
 
-class AuthServices {
-  static async getUserbyEmail(email: string) {
-    return await User.findOne({ email: email }).exec();
+export class AuthServices {
+  static async getUserbyEmail(email: User["email"]) {
+    const user = await UserRepository.findOne({ email: email }).exec();
+
+    if (!user) {
+      throw new Error(`This mail has been already registered!`);
+    }
+
+    return user;
   }
 
-  static async createUser(data: string) {
-    return await User.create(data);
+  static async createUser(data: CreationUser) {
+    return await UserRepository.create(data);
   }
 }
-
-module.exports = AuthServices;

@@ -1,8 +1,30 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import mongoose, { Document, Schema } from "mongoose";
+import bcrypt from "bcrypt";
 
-const UsersSchema = mongoose.Schema({
-  fullname: {
+// TODO: This is the desired result
+// export interface UserEntity extends Document & User
+export interface UserEntity extends Document {
+  name: string;
+  email: string;
+  password: string;
+  salt: string;
+  companyName?: string;
+  contactPhoneNumber?: string;
+  country?: string;
+  city?: string;
+  state?: string;
+  zipcode?: string;
+  address?: string;
+  apartment?: string;
+  teams: Schema.Types.ObjectId[];
+  shipments: Schema.Types.ObjectId[];
+  orders: Schema.Types.ObjectId[];
+  validatePassword(password: string): Promise<boolean>;
+  generateHash(password: string, salt: string): Promise<string>;
+}
+
+const UsersSchema = new mongoose.Schema<UserEntity>({
+  name: {
     type: String,
     required: true,
   },
@@ -18,49 +40,40 @@ const UsersSchema = mongoose.Schema({
   },
   salt: {
     type: String,
-    required: false,
     default: "",
   },
   companyName: {
     type: String,
-    required: false,
     default: "",
   },
   contactPhoneNumber: {
     type: String,
-    required: false,
     default: "",
     match: /^(\+\d{1,3}[- ]?)?\d{10}$/,
   },
   country: {
     type: String,
-    required: false,
     default: "",
   },
   city: {
     type: String,
-    required: false,
     default: "",
   },
   state: {
     type: String,
-    required: false,
     default: "",
   },
   zipcode: {
     type: String,
-    required: false,
     default: "",
     match: /^\d+$/,
   },
   address: {
     type: String,
-    required: false,
     default: "",
   },
   apartment: {
     type: String,
-    required: false,
     default: "",
   },
   teams: [
@@ -86,20 +99,27 @@ const UsersSchema = mongoose.Schema({
   ],
 });
 
-UsersSchema.methods.validatePassword = async function (password) {
-  try {
-    const hashedPassword = await bcrypt.hash(password, this.salt);
-    return this.password === hashedPassword;
-  } catch (error) {
-    console.log(error);
+UsersSchema.methods.validatePassword = async function (
+  this: UserEntity,
+  password: string
+): Promise<boolean> {
+  const hashedPassword = await bcrypt.hash(password, this.salt);
+
+  if (this.password !== hashedPassword) {
+    throw new Error(`Wrong password! Please try again `);
   }
+
+  return this.password === hashedPassword;
 };
 
-UsersSchema.methods.generateHash = async (password, salt) => {
+UsersSchema.methods.generateHash = async function (
+  password: string,
+  salt: string
+): Promise<string> {
   return bcrypt.hash(password, salt);
 };
 
-UsersSchema.pre("save", async function (next) {
+UsersSchema.pre<UserEntity>("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
@@ -112,10 +132,8 @@ UsersSchema.pre("save", async function (next) {
 
     next();
   } catch (error) {
-    return next(error);
+    return next(error as Error);
   }
 });
 
-const User = mongoose.model("Users", UsersSchema);
-
-module.exports = User;
+export const UserRepository = mongoose.model<UserEntity>("Users", UsersSchema);

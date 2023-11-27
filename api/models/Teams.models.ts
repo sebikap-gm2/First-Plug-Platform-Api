@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const TeamsSchema = mongoose.Schema({
+const TeamsSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
   },
-  teamMember: [
+  teamMembers: [
     {
       default: [],
       type: mongoose.Schema.Types.ObjectId,
@@ -14,6 +14,4 @@ const TeamsSchema = mongoose.Schema({
   ],
 });
 
-const Teams = mongoose.model("Teams", TeamsSchema);
-
-module.exports = Teams;
+export const TeamRepository = mongoose.model("Teams", TeamsSchema);

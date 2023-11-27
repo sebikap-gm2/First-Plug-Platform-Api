@@ -1,20 +1,20 @@
-import dotenv from "dotenv";
 import express, { Application, Request, Response, NextFunction } from "express";
-import { connectToDatabase } from "./config/db";
-import { checkEnvVariables } from "./config/envCheck";
+import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
+import { connectToDatabase, env } from "./config";
 import { router } from "./routes";
+
 
 dotenv.config();
 const app: Application = express();
-const PORT: number = parseInt(process.env.PORT || "3000", 10);
+const PORT = env.PORT || "3000";
 
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(
   cors({
-    origin: process.env.FIRST_PLUG_PLATFORM_CLIENT_HOST || "",
+    origin: env.FIRST_PLUG_PLATFORM_CLIENT_HOST,
     credentials: true,
   })
 );
@@ -28,7 +28,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 (async () => {
-  await checkEnvVariables();
   await connectToDatabase();
 
   app.listen(PORT, () => {

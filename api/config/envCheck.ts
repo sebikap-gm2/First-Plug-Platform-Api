@@ -1,29 +1,25 @@
-import * as dotenv from "dotenv";
+import { z } from "zod";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-export const checkEnvVariables = () => {
-  const requiredEnvVariables: string[] = [
-    "PORT",
-    "SECRET_PASSWORD",
-    "MONGO_URI",
-    "FIRST_PLUG_PLATFORM_CLIENT_HOST",
-  ];
+const envSchema = z.object({
+  PORT: z.string().optional(),
+  MONGO_URI: z.string().url(),
+  SECRET_PASSWORD: z.string(),
+  FIRST_PLUG_PLATFORM_CLIENT_HOST: z.string().url(),
+});
 
-  const missingVariables: string[] = [];
+const validatedEnv = envSchema.safeParse(process.env);
 
-  requiredEnvVariables.forEach((envVariable) => {
-    if (!process.env[envVariable]) {
-      missingVariables.push(envVariable);
-    }
-  });
+if (!validatedEnv.success) {
+  throw new Error(
+    `Environment validation error: ${JSON.stringify(
+      validatedEnv.error,
+      null,
+      2
+    )}`
+  );
+}
 
-  if (missingVariables.length > 0) {
-    console.error(
-      `These environment variables are required in the .env file: ${missingVariables.join(
-        ", "
-      )}`
-    );
-    process.exit(1);
-  }
-};
+export const env = validatedEnv.data;

@@ -1,8 +1,9 @@
-const TeamMembersServices = require("../services/teamMembers.services");
-const TeamsServices = require("../services/teams.services");
+import { Request, Response, NextFunction } from "express";
+import { TeamMembersServices } from "../services";
+import { TeamsServices } from "../services";
 
-class TeamsController {
-  static async getAll(req, res, next) {
+export class TeamsController {
+  static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const teams = await TeamsServices.getAllTeams();
       res.json(teams);
@@ -11,7 +12,7 @@ class TeamsController {
     }
   }
 
-  static async newTeam(req, res, next) {
+  static async newTeam(req: Request, res: Response, next: NextFunction) {
     try {
       const team = await TeamsServices.createTeam(req.body);
 
@@ -21,27 +22,28 @@ class TeamsController {
     }
   }
 
-  static async addTeamMemberToTeam(req, res, next) {
+  static async addTeamMemberToTeam(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     const { teamId, memberId } = req.body;
 
     try {
+      // Todo - validation with zod
       if (!teamId || !memberId) {
         return res.send("Missing data");
       }
-      const team = await TeamsServices.getOneTeam(teamId);
 
-      if (!team) {
-        return res.status(404).json({ message: "Team not found." });
-      }
+      const team = await TeamsServices.getOneTeam(teamId);
 
       const teamMember = await TeamMembersServices.getById(memberId);
 
-      if (!teamMember) {
-        return res.status(404).json({ message: "Team Member not found." });
-      }
+      // Todo - new service!!!
       if (team.teamMember.includes(memberId)) {
         return res.status(401).send("User is already in this team");
       }
+
       team.teamMember.push(memberId);
       teamMember.teams.push(team.name);
 
@@ -58,27 +60,30 @@ class TeamsController {
     }
   }
 
-  static async deleteTeamMemberFromTeam(req, res, next) {
+  static async deleteTeamMemberFromTeam(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
     const { teamId, memberId } = req.params;
 
     try {
+      // Todo - validation zod
       if (!teamId || !memberId) {
         return res.send("Missing data");
       }
+
       const team = await TeamsServices.getOneTeam(teamId);
 
-      if (!team) {
-        return res.status(404).json({ message: "Team not found." });
-      }
-
+      // Todo - validation in service
       const teamMember = await TeamMembersServices.getById(memberId);
 
-      if (!teamMember) {
-        return res.status(404).json({ message: "Team Member not found." });
-      }
-      if (!team.teamMember.includes(memberId)) {
+      // Todo - new service!!!
+      if (!team.teamMember.map((id) => id.toString()).includes(memberId)) {
         return res.status(401).send("Member is not in this team");
       }
+
+      // Todo - new service!!!
       team.teamMember = team.teamMember.filter(
         (member) => member.toString() !== memberId
       );
@@ -99,7 +104,7 @@ class TeamsController {
     }
   }
 
-  static async updateTeam(req, res, next) {
+  static async updateTeam(req: Request, res: Response, next: NextFunction) {
     try {
       const { idTeam } = req.params;
 
@@ -111,7 +116,7 @@ class TeamsController {
     }
   }
 
-  static async deleteTeam(req, res, next) {
+  static async deleteTeam(req: Request, res: Response, next: NextFunction) {
     try {
       const { idTeam } = req.params;
       const deletedTeam = await TeamsServices.deleteTeam(idTeam);
@@ -121,5 +126,3 @@ class TeamsController {
     }
   }
 }
-
-module.exports = TeamsController;

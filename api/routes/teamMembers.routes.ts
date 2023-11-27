@@ -1,12 +1,10 @@
-const express = require("express");
-const router = express.Router();
+import express from "express";
+export const teamMembersRoutes = express.Router();
 
-const TeamMembersControllers = require("../controllers/teamMembers.controllers");
+import { TeamMembersController } from "../controllers";
 
-router.get("/", TeamMembersControllers.getAll);
-router.get("/:idMember", TeamMembersControllers.getById);
-router.post("/", TeamMembersControllers.create);
-router.put("/:idMember", TeamMembersControllers.updateById);
-router.delete("/:idMember", TeamMembersControllers.deleteById);
-
-module.exports = router;
+teamMembersRoutes.get("/", TeamMembersController.getAll);
+teamMembersRoutes.get("/:idMember", TeamMembersController.getById);
+teamMembersRoutes.post("/", TeamMembersController.create);
+teamMembersRoutes.put("/:idMember", TeamMembersController.updateById);
+teamMembersRoutes.delete("/:idMember", TeamMembersController.deleteById);

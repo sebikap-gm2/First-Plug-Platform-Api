@@ -1,22 +1,23 @@
-const Orders = require("../models/Orders.models");
+import { OrderRepository } from "../models";
+import { CreationOrder, Order } from "../types";
 
-class OrderServices {
+export class OrderServices {
   static async getAllOrders() {
-    return await Orders.find();
+    return await OrderRepository.find();
   }
-  static async getOneOrder(orderId: string) {
-    return await Orders.findById(orderId);
+  static async getOneOrder(orderId: Order["_id"]) {
+    return await OrderRepository.findById(orderId);
   }
 
-  static async createOrder(data: any) {
-    return await Orders.create(data);
+  static async createOrder(data: CreationOrder) {
+    return await OrderRepository.create(data);
   }
-  static async updateOrder(id: string, data: any) {
-    return await Orders.findOneAndUpdate(id, data);
+
+  static async updateOrder(id: Order["_id"], data: Order) {
+    return await OrderRepository.findOneAndUpdate({ id }, data);
   }
-  static async deleteOrder(id: string) {
-    return await Orders.findOneAndDelete(id);
+
+  static async deleteOrder(id: Order["_id"]) {
+    return await OrderRepository.findOneAndDelete({ id });
   }
 }
-
-module.exports = OrderServices;
