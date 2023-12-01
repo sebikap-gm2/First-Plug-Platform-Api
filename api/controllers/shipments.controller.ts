@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { ShipmentServices } from "../services";
+import { generateMockShipments } from "../mock/shipment";
 export class ShipmentsController {
   static async getShipments(req: Request, res: Response, next: NextFunction) {
     try {
-      const shipments = await ShipmentServices.getAllShipments();
+      // const shipments = await ShipmentServices.getAllShipments();
+      const shipments = generateMockShipments(10);
 
       res.status(200).json(shipments);
     } catch (error) {

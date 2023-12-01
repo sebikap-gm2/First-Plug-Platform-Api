@@ -1,10 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { TeamMembersServices } from "../services";
+import { generateMockTeamMembers } from "../mock/teamMember";
 
 export class TeamMembersController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const teamMembers = await TeamMembersServices.getAll();
+      // const teamMembers = await TeamMembersServices.getAll();
+      const teamMembers = generateMockTeamMembers(10);
 
       res.status(200).json(teamMembers);
     } catch (error) {

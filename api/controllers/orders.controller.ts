@@ -1,10 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { OrderServices } from "../services";
+import { generateMockOrders } from "../mock/order";
 
 export class OrderController {
   static async getOrders(req: Request, res: Response, next: NextFunction) {
     try {
-      const orders = await OrderServices.getAllOrders();
+      // const orders = await OrderServices.getAllOrders();
+
+      const orders = generateMockOrders(10);
 
       res.status(200).json(orders);
     } catch (error) {

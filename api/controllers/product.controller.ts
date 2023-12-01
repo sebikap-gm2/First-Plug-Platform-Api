@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { ProductServices } from "../services";
+import { generateMockProducts } from "../mock/product";
 
 export class ProductController {
   static async getAllProducts(req: Request, res: Response, next: NextFunction) {
     try {
-      const allProducts = await ProductServices.findAllProducts();
+      // const allProducts = await ProductServices.findAllProducts();
+
+      const allProducts = generateMockProducts(10);
+
       res.status(200).json(allProducts);
     } catch (error) {
       next(error);
