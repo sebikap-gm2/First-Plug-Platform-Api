@@ -2,11 +2,18 @@ import { Request, Response, NextFunction } from "express";
 import { TeamMembersServices } from "../services";
 import { TeamsServices } from "../services";
 
+import { createMockTeam } from "../mocks/datamocks";
+
 export class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const teams = await TeamsServices.getAllTeams();
-      res.json(teams);
+      // const teams = await TeamsServices.getAllTeams();
+      // res.json(teams);
+
+      const mockTeams = Array.from({ length: 5 }).map((_, i) =>
+        createMockTeam(i)
+      );
+      res.status(200).json(mockTeams);
     } catch (error) {
       next(error);
     }
@@ -40,11 +47,11 @@ export class TeamsController {
       const teamMember = await TeamMembersServices.getById(memberId);
 
       // Todo - new service!!!
-      if (team.teamMember.includes(memberId)) {
+      if (team.teamMembers.includes(memberId)) {
         return res.status(401).send("User is already in this team");
       }
 
-      team.teamMember.push(memberId);
+      team.teamMembers.push(memberId);
       teamMember.teams.push(team.name);
 
       await team.save();
@@ -79,12 +86,12 @@ export class TeamsController {
       const teamMember = await TeamMembersServices.getById(memberId);
 
       // Todo - new service!!!
-      if (!team.teamMember.map((id) => id.toString()).includes(memberId)) {
+      if (!team.teamMembers.map((id) => id.toString()).includes(memberId)) {
         return res.status(401).send("Member is not in this team");
       }
 
       // Todo - new service!!!
-      team.teamMember = team.teamMember.filter(
+      team.teamMembers = team.teamMembers.filter(
         (member) => member.toString() !== memberId
       );
 
