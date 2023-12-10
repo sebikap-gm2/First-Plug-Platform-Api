@@ -1,8 +1,9 @@
+import { uuid } from "minifaker";
 import { Team, TeamMember } from "../types";
 
 const createMockTeamMember = (): TeamMember => {
   return {
-    _id: Math.random().toString(36).substr(2, 9),
+    _id: uuid.v4(),
     firstName: "John",
     lastName: "Doe",
     img: "path/to/image.jpg",
