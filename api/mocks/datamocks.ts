@@ -1,3 +1,4 @@
+/// <reference path="../types/minifaker.d.ts" />
 import { uuid } from "minifaker";
 import { Team, TeamMember } from "../types";
 
