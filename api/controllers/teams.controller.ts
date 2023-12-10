@@ -2,11 +2,18 @@ import { Request, Response, NextFunction } from "express";
 import { TeamMembersServices } from "../services";
 import { TeamsServices } from "../services";
 
+import { createMockTeam } from "../mocks/datamocks";
+
 export class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const teams = await TeamsServices.getAllTeams();
-      res.json(teams);
+      // const teams = await TeamsServices.getAllTeams();
+      // res.json(teams);
+
+      const mockTeams = Array.from({ length: 5 }).map((_, i) =>
+        createMockTeam(i)
+      );
+      res.status(200).json(mockTeams);
     } catch (error) {
       next(error);
     }
