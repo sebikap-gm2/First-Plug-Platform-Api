@@ -3,14 +3,17 @@ import { TeamMembersServices } from "../services";
 import { TeamsServices } from "../services";
 import { generateMockTeam } from "../mock/team";
 
+import { createMockTeam } from "../mocks/datamocks";
+
 export class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       // const teams = await TeamsServices.getAllTeams();
 
-      const teams = generateMockTeam(10);
-
-      res.json(teams);
+      const mockTeams = Array.from({ length: 10 }).map((_, i) =>
+        createMockTeam(i)
+      );
+      res.status(200).json(mockTeams);
     } catch (error) {
       next(error);
     }
