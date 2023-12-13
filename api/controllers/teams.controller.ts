@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { TeamMembersServices } from "../services";
-import { TeamsServices } from "../services";
-
+import { MembersServices, TeamsServices } from "../services";
 import { createMockTeam } from "../mocks/datamocks";
 
 export class TeamsController {
@@ -44,7 +42,7 @@ export class TeamsController {
 
       const team = await TeamsServices.getOneTeam(teamId);
 
-      const teamMember = await TeamMembersServices.getById(memberId);
+      const teamMember = await MembersServices.getById(memberId);
 
       // Todo - new service!!!
       if (team.teamMembers.includes(memberId)) {
@@ -83,7 +81,7 @@ export class TeamsController {
       const team = await TeamsServices.getOneTeam(teamId);
 
       // Todo - validation in service
-      const teamMember = await TeamMembersServices.getById(memberId);
+      const teamMember = await MembersServices.getById(memberId);
 
       // Todo - new service!!!
       if (!team.teamMembers.map((id) => id.toString()).includes(memberId)) {

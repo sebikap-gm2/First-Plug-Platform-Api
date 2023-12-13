@@ -19,11 +19,8 @@ export type Product = {
   __v: number;
 };
 
-export const PRODUCT_STATUSES = {
-  available: "Available",
-  delivered: "Delivered",
-} as const;
+export const PRODUCT_STATUSES = ["Available", "Delivered"] as const;
 
-export type ProductStatus = keyof typeof PRODUCT_STATUSES;
+export type ProductStatus = (typeof PRODUCT_STATUSES)[number];
 
 export type CreationProduct = Omit<Product, "_id" | "__v">;

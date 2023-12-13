@@ -1,5 +1,3 @@
-import { Schema } from "mongoose";
-import { TeamMembersServices } from ".";
 import { TeamRepository } from "../models";
 import { CreationTeam, Team } from "../types";
 

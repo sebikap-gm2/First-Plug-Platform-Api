@@ -1,22 +1,22 @@
-import { TeamMember } from "./teamMember";
+import { Member } from "./member";
 import { Product } from "./product";
 
 export type Order = {
   _id: string;
-  teamMembers: TeamMember[];
+  members: Member[];
   status: OrderStatus;
-  date: Date;
+  date: string;
   products: Product[];
   __v: number;
 };
 
-export const OrderStatuses = {
-  confirmed: "Confirmed",
-  canceled: "Canceled",
-  confirmationPending: "Confirmation pending",
-  paymentPending: "Payment pending",
-} as const;
+export const ORDER_STATUSES = [
+  "OrderConfirmed",
+  "OrderCanceled",
+  "ConfirmationPending",
+  "PaymentPending",
+] as const;
 
-export type OrderStatus = keyof typeof OrderStatuses;
+export type OrderStatus = (typeof ORDER_STATUSES)[number];
 
 export type CreationOrder = Omit<Order, "_id" | "__v">;

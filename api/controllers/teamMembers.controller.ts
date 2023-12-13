@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { TeamMembersServices } from "../services";
+import { MembersServices } from "../services";
 
 export class TeamMembersController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const teamMembers = await TeamMembersServices.getAll();
+      const teamMembers = await MembersServices.getAll();
 
       res.status(200).json(teamMembers);
     } catch (error) {
@@ -15,7 +15,7 @@ export class TeamMembersController {
   static async getById(req: Request, res: Response, next: NextFunction) {
     const { idMember } = req.params;
     try {
-      const teamMember = await TeamMembersServices.getById(idMember);
+      const teamMember = await MembersServices.getById(idMember);
 
       res.status(200).json(teamMember);
     } catch (error) {
@@ -25,7 +25,7 @@ export class TeamMembersController {
 
   static async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const newTeamMember = await TeamMembersServices.create(req.body);
+      const newTeamMember = await MembersServices.create(req.body);
 
       res.status(201).json(newTeamMember);
     } catch (error) {
@@ -36,7 +36,7 @@ export class TeamMembersController {
   static async updateById(req: Request, res: Response, next: NextFunction) {
     const { idMember } = req.params;
     try {
-      const updatedTeamMember = await TeamMembersServices.update(
+      const updatedTeamMember = await MembersServices.update(
         idMember,
         req.body
       );
@@ -50,7 +50,7 @@ export class TeamMembersController {
   static async deleteById(req: Request, res: Response, next: NextFunction) {
     const { idMember } = req.params;
     try {
-      const deletedTeamMember = await TeamMembersServices.delete(idMember);
+      const deletedTeamMember = await MembersServices.delete(idMember);
 
       res.status(200).json(deletedTeamMember);
     } catch (error) {

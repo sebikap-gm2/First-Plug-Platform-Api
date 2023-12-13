@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const TeamsMemberSchema = new mongoose.Schema({
+const MemberSchema = new mongoose.Schema({
   firstName: {
     type: String,
     require: true,
@@ -67,7 +67,4 @@ const TeamsMemberSchema = new mongoose.Schema({
   },
 });
 
-export const TeamMemberRepository = mongoose.model(
-  "TeamMember",
-  TeamsMemberSchema
-);
+export const MemberRepository = mongoose.model("TeamMember", MemberSchema);
