@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const OrdersSchema = new mongoose.Schema({
-  teamMember: [
+  member: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "TeamMember",
+      ref: "member",
     },
   ],
   status: {
@@ -30,4 +30,4 @@ const OrdersSchema = new mongoose.Schema({
   ],
 });
 
-export const OrderRepository  = mongoose.model("Orders", OrdersSchema);
+export const OrderRepository = mongoose.model("Orders", OrdersSchema);
