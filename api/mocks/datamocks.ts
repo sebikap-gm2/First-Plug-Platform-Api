@@ -27,7 +27,7 @@ export const createMockTeam = (i: number, memberCount: number = 2): Team => {
   return {
     _id: faker.string.uuid(),
     name: generateTeamName(),
-    Members: Array.from({ length: memberCount }, createMockMember),
+    members: Array.from({ length: memberCount }, createMockMember),
     __v: 0,
   };
 };
