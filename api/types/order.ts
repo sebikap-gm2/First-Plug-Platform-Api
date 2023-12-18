@@ -11,8 +11,8 @@ export type Order = {
 };
 
 export const ORDER_STATUSES = [
-  "OrderConfirmed",
-  "OrderCanceled",
+  "Confirmed",
+  "Canceled",
   "ConfirmationPending",
   "PaymentPending",
 ] as const;
