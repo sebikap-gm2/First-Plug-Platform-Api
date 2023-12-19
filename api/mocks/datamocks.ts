@@ -1,14 +1,14 @@
 /// <reference path="../types/minifaker.d.ts" />
 import { uuid } from "minifaker";
-import { Team, TeamMember } from "../types";
+import { Team, Member } from "../types";
 
-const createMockTeamMember = (): TeamMember => {
+const createMockTeamMember = (): Member => {
   return {
     _id: uuid.v4(),
     firstName: "John",
     lastName: "Doe",
     img: "path/to/image.jpg",
-    dateOfBirth: new Date(),
+    dateOfBirth: new Date().toISOString(),
     phone: "123-456-7890",
     email: "johndoe@example.com",
     jobPosition: "Developer",
@@ -16,7 +16,7 @@ const createMockTeamMember = (): TeamMember => {
     zipCode: "12345",
     address: "123 Main St",
     appartment: "Apt 1",
-    joiningDate: new Date(),
+    joiningDate: new Date().toISOString(),
     timeSlotForDelivery: "9am - 5pm",
     additionalInfo: "Additional info here",
     teams: [],
@@ -28,7 +28,7 @@ export const createMockTeam = (i: number, memberCount: number = 2): Team => {
   return {
     _id: Math.random().toString(36).substr(2, 9),
     name: `Team ${i}`,
-    teamMembers: Array.from({ length: memberCount }, createMockTeamMember),
+    Members: Array.from({ length: memberCount }, createMockTeamMember),
     __v: 0,
   };
 };

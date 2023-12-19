@@ -1,9 +1,9 @@
-import { TeamMember } from "./teamMember";
+import { Member } from "./member";
 
 export type Team = {
   _id: string;
   name: string;
-  teamMembers: TeamMember[];
+  Members: Member[];
   __v: number;
 };
 

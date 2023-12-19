@@ -1,14 +1,31 @@
-import { Order } from "./order";
+import { Product } from ".";
+
+export const SHIPMENT_STATUS = [
+  "Missing Data",
+  "Delivered",
+  "Preparing",
+  "Avaliable",
+  "Shipped",
+] as const;
+
+export type ShipmentStatus = (typeof SHIPMENT_STATUS)[number];
+
+export const SHIPMENT_TYPE = ["Courrier", "Internal"] as const;
+
+export type ShipmentType = (typeof SHIPMENT_TYPE)[number];
 
 export type Shipment = {
   _id: string;
-  __v: number;
+  memberId: string;
   name: string;
-  date: Date;
-  types: string;
+  lastName: string;
+  date: string;
+  status: ShipmentStatus;
+  type: ShipmentType;
   trackingNumber: string;
   trackingURL: string;
-  orders: Order[];
+  products: Product[];
+  __v: number;
 };
 
 export type CreationShipment = Omit<Shipment, "_id" | "__v">;

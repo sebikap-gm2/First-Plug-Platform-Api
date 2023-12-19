@@ -1,11 +1,11 @@
 import { Team } from ".";
 
-export type TeamMember = {
+export type Member = {
   _id: string;
   firstName: string;
   img: string;
   lastName: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   phone: string;
   email: string;
   jobPosition: string;
@@ -13,11 +13,11 @@ export type TeamMember = {
   zipCode: string;
   address: string;
   appartment: string;
-  joiningDate: Date;
+  joiningDate: string;
   timeSlotForDelivery: string;
   additionalInfo: string;
   teams: Team[];
   __v: number;
 };
 
-export type CreationTeamMember = Omit<TeamMember, "_id" | "__v">;
+export type CreationMember = Omit<Member, "_id" | "__v">;
