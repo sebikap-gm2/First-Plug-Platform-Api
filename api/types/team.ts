@@ -3,7 +3,7 @@ import { Member } from "./member";
 export type Team = {
   _id: string;
   name: string;
-  Members: Member[];
+  members: Member[];
   __v: number;
 };
 

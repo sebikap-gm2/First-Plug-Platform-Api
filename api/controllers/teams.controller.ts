@@ -5,10 +5,7 @@ import { createMockTeam } from "../mocks/datamocks";
 export class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      // const teams = await TeamsServices.getAllTeams();
-      // res.json(teams);
-
-      const mockTeams = Array.from({ length: 5 }).map((_, i) =>
+      const mockTeams = Array.from({ length: 10 }).map((_, i) =>
         createMockTeam(i)
       );
       res.status(200).json(mockTeams);
@@ -27,7 +24,7 @@ export class TeamsController {
     }
   }
 
-  static async addTeamMemberToTeam(
+  static async addMemberToTeam(
     req: Request,
     res: Response,
     next: NextFunction
@@ -42,30 +39,30 @@ export class TeamsController {
 
       const team = await TeamsServices.getOneTeam(teamId);
 
-      const teamMember = await MembersServices.getById(memberId);
+      const Member = await MembersServices.getById(memberId);
 
       // Todo - new service!!!
-      if (team.teamMembers.includes(memberId)) {
+      if (team.members.includes(memberId)) {
         return res.status(401).send("User is already in this team");
       }
 
-      team.teamMembers.push(memberId);
-      teamMember.teams.push(team.name);
+      team.members.push(memberId);
+      Member.teams.push(team.name);
 
       await team.save();
-      await teamMember.save();
+      await Member.save();
 
       res.status(200).json({
         message: "Team member add succesfully.",
         team,
-        teamMember,
+        Member,
       });
     } catch (error) {
       next(error);
     }
   }
 
-  static async deleteTeamMemberFromTeam(
+  static async deleteMemberFromTeam(
     req: Request,
     res: Response,
     next: NextFunction
@@ -81,28 +78,26 @@ export class TeamsController {
       const team = await TeamsServices.getOneTeam(teamId);
 
       // Todo - validation in service
-      const teamMember = await MembersServices.getById(memberId);
+      const Member = await MembersServices.getById(memberId);
 
       // Todo - new service!!!
-      if (!team.teamMembers.map((id) => id.toString()).includes(memberId)) {
+      if (!team.members.map((id) => id.toString()).includes(memberId)) {
         return res.status(401).send("Member is not in this team");
       }
 
       // Todo - new service!!!
-      team.teamMembers = team.teamMembers.filter(
+      team.members = team.members.filter(
         (member) => member.toString() !== memberId
       );
 
-      teamMember.teams = teamMember.teams.filter(
-        (member) => member !== team.name
-      );
+      Member.teams = Member.teams.filter((member) => member !== team.name);
       await team.save();
-      await teamMember.save();
+      await Member.save();
 
       res.status(200).json({
         message: "Team member has been deleted succesfully.",
         team,
-        teamMember,
+        Member,
       });
     } catch (error) {
       next(error);

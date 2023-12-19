@@ -1,11 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { ShipmentServices } from "../services";
+import { createMockShipment } from "../mocks/datamocks";
 export class ShipmentsController {
   static async getShipments(req: Request, res: Response, next: NextFunction) {
     try {
-      const shipments = await ShipmentServices.getAllShipments();
-
-      res.status(200).json(shipments);
+      const mockShipments = Array.from({ length: 10 }).map((_, i) =>
+        createMockShipment()
+      );
+      res.status(200).json(mockShipments);
     } catch (error) {
       next(error);
     }

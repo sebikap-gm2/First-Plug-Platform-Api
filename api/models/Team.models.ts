@@ -5,11 +5,11 @@ const TeamsSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  teamMembers: [
+  members: [
     {
       default: [],
       type: mongoose.Schema.Types.ObjectId,
-      ref: "TeamMember",
+      ref: "Member",
     },
   ],
 });

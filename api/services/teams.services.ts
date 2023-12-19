@@ -3,7 +3,7 @@ import { CreationTeam, Team } from "../types";
 
 export class TeamsServices {
   static async getAllTeams() {
-    return await TeamRepository.find().populate("teamMember");
+    return await TeamRepository.find().populate("member");
   }
 
   static async createTeam(data: CreationTeam) {

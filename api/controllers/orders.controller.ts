@@ -1,12 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import { OrderServices } from "../services";
+import { createMockOrder } from "../mocks/datamocks";
 
 export class OrderController {
   static async getOrders(req: Request, res: Response, next: NextFunction) {
     try {
-      const orders = await OrderServices.getAllOrders();
+      const mockOrders = Array.from({ length: 10 }).map((_, i) =>
+        createMockOrder()
+      );
 
-      res.status(200).json(orders);
+      res.status(200).json(mockOrders);
     } catch (error) {
       next(error);
     }
