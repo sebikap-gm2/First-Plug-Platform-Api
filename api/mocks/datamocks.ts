@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Team, Member, Product, Order, Shipment, User } from "../types";
+import { Member, Product, Order, Shipment, User } from "../types";
 
 export const createMockMember = (teamCount: number = 2): Member => {
   return {
@@ -23,20 +23,20 @@ export const createMockMember = (teamCount: number = 2): Member => {
   };
 };
 
-export const createMockTeam = (i: number, memberCount: number = 2): Team => {
-  return {
-    _id: faker.string.uuid(),
-    name: generateTeamName(),
-    members: Array.from({ length: memberCount }, createMockMember),
-    __v: 0,
-  };
-};
+// export const createMockTeam = (i: number, memberCount: number = 2): Team => {
+//   return {
+//     _id: faker.string.uuid(),
+//     name: generateTeamName(),
+//     members: Array.from({ length: memberCount }, createMockMember),
+//     __v: 0,
+//   };
+// };
 
-const generateTeamName = () => {
-  const adjective = faker.commerce.productAdjective();
-  const noun = faker.commerce.product();
-  return `${adjective} ${noun} Team`;
-};
+// const generateTeamName = () => {
+//   const adjective = faker.commerce.productAdjective();
+//   const noun = faker.commerce.product();
+//   return `${adjective} ${noun} Team`;
+// };
 
 export const createMockProduct = (): Product => {
   return {
