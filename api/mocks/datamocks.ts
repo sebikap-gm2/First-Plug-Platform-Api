@@ -83,8 +83,8 @@ export const createMockOrder = (
     _id: faker.string.uuid(),
     members: Array.from({ length: memberCount }, createMockMember),
     status: faker.helpers.arrayElement([
-      "OrderConfirmed",
-      "OrderCanceled",
+      "Confirmed",
+      "Canceled",
       "ConfirmationPending",
       "PaymentPending",
     ]),
