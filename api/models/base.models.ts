@@ -9,7 +9,7 @@ export const BaseSchema = new Schema<BaseEntity>(
   {
     tenantId: {
       type: Schema.Types.ObjectId,
-      required: true,
+      default: null,
     },
   },
   baseOptions
