@@ -7,7 +7,11 @@ export class AuthController {
   static async register(req: Request, res: Response, next: NextFunction) {
     try {
       const { email } = req.body;
-      await AuthServices.validateIfExistEmail(email);
+      const user = await AuthServices.validateIfExistEmail(email)
+
+      if (user) {
+        throw new Error(`This email has already been registered!`)
+      }
 
       await AuthServices.createUser(req.body);
 
