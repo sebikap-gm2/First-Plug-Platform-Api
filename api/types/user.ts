@@ -12,7 +12,7 @@ export type User = {
 
 export type RegisterUser = Pick<User, "name" | "email" | "password">;
 
-export type UserEntity = Document & User & BaseEntity;
+export type UserEntity = User & BaseEntity;
 
 type UserJWT = Pick<UserEntity, "_id" | "email">;
 
