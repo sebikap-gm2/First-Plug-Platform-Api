@@ -8,7 +8,7 @@ export async function validatePassword(
   const hashedPassword = await bcrypt.hash(password, user.salt);
 
   if (user.password !== hashedPassword) {
-    throw new Error(`Wrong password! Please try again`);
+    throw new Error(`The credentials are not valid, please try again.`);
   }
 
   return user.password === hashedPassword;
