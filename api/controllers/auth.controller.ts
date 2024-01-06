@@ -43,7 +43,7 @@ export class AuthController {
 
   // It is very similar to register but is used to register third-party platforms. Receive different data from the front
   // !TODO Has different zod validations than normal registration
-  static async registerPlatform(
+  static async registerAuthenticationProvider(
     req: Request,
     res: Response,
     next: NextFunction

@@ -5,4 +5,4 @@ import { AuthController } from "../controllers";
 
 authRoutes.post("/register", AuthController.register);
 authRoutes.post("/login", AuthController.login);
-authRoutes.post("/registerplatform", AuthController.registerPlatform);
+authRoutes.post("/registerAuthenticationProvider", AuthController.registerAuthenticationProvider);
