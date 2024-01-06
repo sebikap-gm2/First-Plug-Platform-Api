@@ -4,7 +4,7 @@ import { UserEntity } from "../types";
 export async function validatePassword(
   user: UserEntity,
   password: string
-): Promise<boolean> {
+){
   const hashedPassword = await bcrypt.hash(password, user.salt);
 
   if (user.password !== hashedPassword) {
