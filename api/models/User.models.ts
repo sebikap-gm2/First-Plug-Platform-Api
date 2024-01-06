@@ -1,10 +1,15 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 import { UserEntity } from "../types";
 import { generateHash } from "../utils";
 import { BaseSchema } from "./base.models";
 
 const UsersSchema = new mongoose.Schema<UserEntity>({
+  tenantId: {
+    type: Schema.Types.ObjectId,
+    required: false,
+    default: null,
+  },
   name: {
     type: String,
     required: true,
