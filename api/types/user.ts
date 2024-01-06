@@ -12,10 +12,11 @@ export type User = {
 
 export type RegisterUser = Pick<User, "name" | "email" | "password">;
 
+export type UserEntity = Document & User & BaseEntity;
+
 type UserJWT = Pick<UserEntity, "_id" | "email">;
 
 export type UserPayload = JwtPayload & UserJWT;
 
 export type CreationUser = Omit<User, "_id" | "__v">;
 
-export type UserEntity = Document & User & BaseEntity;
