@@ -32,9 +32,8 @@ const UsersSchema = new mongoose.Schema<UserEntity>({
     type: String,
     default: null,
   },
-});
+}, {timestamps: true});
 
-UsersSchema.add(BaseSchema);
 
 UsersSchema.pre<UserEntity>("save", async function (next) {
   if (!this.isModified("password") || !this.password) {
