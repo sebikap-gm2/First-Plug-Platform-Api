@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Member, Product, Order, Shipment, User } from "../types";
+import { Document, Types } from "mongoose";
 
 export const createMockMember = (teamCount: number = 2): Member => {
   return {
@@ -116,12 +117,12 @@ export const createMockShipment = (productCount: number = 2): Shipment => {
   };
 };
 
-export const createMockUser = (): User => {
+export const createMockUser = (): User & Pick<Document, "_id"> => {
   return {
-    _id: faker.string.uuid(),
     name: faker.person.fullName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
-    __v: faker.number.int(),
+    image: faker.internet.avatar(),
+    salt: faker.string.uuid(),
   };
 };

@@ -1,15 +1,22 @@
 import { JwtPayload } from "jsonwebtoken";
+import { Document } from "mongoose";
+import { BaseEntity } from ".";
 
 export type User = {
-  _id: string;
   name: string;
   email: string;
+  image: string;
   password: string;
-  __v: number;
+  salt: string;
 };
 
-type UserJWT = Pick<User, "_id" | "email">;
+export type RegisterUser = Pick<User, "name" | "email" | "password">;
+
+export type UserEntity = User & BaseEntity;
+
+type UserJWT = Pick<UserEntity, "_id" | "email">;
 
 export type UserPayload = JwtPayload & UserJWT;
 
 export type CreationUser = Omit<User, "_id" | "__v">;
+
