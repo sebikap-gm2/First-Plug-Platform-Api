@@ -2,8 +2,8 @@ import { UserRepository } from "../models";
 import { CreationUser, User } from "../types";
 
 export class AuthServices {
-  static async validateIfExistEmail(email: User["email"]){
-    return  await UserRepository.findOne({ email }).exec();
+  static async validateIfExistEmail(email: User["email"]) {
+    return await UserRepository.findOne({ email }).exec();
   }
 
   static async createUser(data: CreationUser) {
@@ -14,7 +14,7 @@ export class AuthServices {
     const user = await UserRepository.findOne({ email }).exec();
 
     if (!user) {
-      return Promise.reject(new Error(`There is no user with that email`));
+      throw new Error(`There is no user with that email`);
     }
 
     return user;
