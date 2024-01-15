@@ -67,4 +67,4 @@ const MemberSchema = new mongoose.Schema({
   },
 });
 
-export const MemberRepository = mongoose.model("Member", MemberSchema);
+export const MemberRepository = mongoose.model("members", MemberSchema);

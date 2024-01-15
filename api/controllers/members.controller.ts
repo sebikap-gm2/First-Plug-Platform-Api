@@ -1,15 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import { MembersServices } from "../services";
-import { createMockMember } from "../mocks/datamocks";
 
 export class MembersController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const mockMembers = Array.from({ length: 10 }).map((_, i) =>
-        createMockMember()
-      );
+      const members = await MembersServices.getAll()
 
-      res.status(200).json(mockMembers);
+      res.status(200).json(members);
     } catch (error) {
       next(error);
     }
