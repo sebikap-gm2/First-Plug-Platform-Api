@@ -1,13 +1,14 @@
 import dotenv from "dotenv";
 import { env } from "./envCheck";
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
+import { UserRepository } from "../models/User.models";
 
 dotenv.config();
 mongoose.set("strictQuery", true);
 
-export const connectToDatabase = async () => {
+export const connectToDatabase = async (dbName: ConnectOptions['dbName']) => {
   try {
-    return await mongoose.connect(env.MONGO_URI);
+    return await mongoose.connect(env.MONGO_URI, { dbName });
   } catch (error) {
     console.error("Failed to connect to database", error);
   }

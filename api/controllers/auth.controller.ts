@@ -1,19 +1,21 @@
 import { validatePassword } from "../utils";
-import { AuthServices } from "../services";
 import { NextFunction, Request, Response } from "express";
 import { UserRepository } from "../models";
+import { MainService } from "../services";
 
 export class AuthController {
   static async register(req: Request, res: Response, next: NextFunction) {
+    console.log('SEBA register')
     try {
+      const mainService = new MainService({ dbName: 'test' })
       const { email } = req.body;
-      const user = await AuthServices.validateIfExistEmail(email)
+      const user = await mainService.auth.validateIfExistEmail(email)
 
       if (user) {
         throw new Error(`This email has already been registered!`)
       }
 
-      await AuthServices.createUser(req.body);
+      await mainService.auth.createUser(req.body);
 
       res.status(201).json("User register succeed");
     } catch (error) {
@@ -22,10 +24,13 @@ export class AuthController {
   }
 
   static async login(req: Request, res: Response, next: NextFunction) {
+    console.log('SEBA login')
     try {
-      const { email, password } = req.body;
+      console.log(req)
+      const mainService = new MainService({ dbName: 'test' })
 
-      const user = await AuthServices.getUser(email);
+      const { email, password } = req.body;
+      const user = await mainService.auth.getUser(email);
 
       await validatePassword(user, password);
 
@@ -48,12 +53,14 @@ export class AuthController {
     res: Response,
     next: NextFunction
   ) {
+    console.log('SEBA registerAuthenticationProvider')
     try {
       const { email } = req.body;
-      const user = await UserRepository.findOne({ email }).exec();
+      const mainService = new MainService({ dbName: 'test' })
+      const user = await mainService.user.getByEmail(email)
 
       if (!user) {
-        await AuthServices.createUser(req.body);
+        await mainService.auth.createUser(req.body);
       }
 
       res.status(201).json("User register succeed");

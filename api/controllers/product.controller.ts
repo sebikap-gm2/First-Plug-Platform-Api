@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { ProductServices } from "../services";
 import { createMockProduct } from "../mocks/datamocks";
+import { MainService } from "../services";
 
 export class ProductController {
   static async getAllProducts(req: Request, res: Response, next: NextFunction) {
@@ -17,7 +17,8 @@ export class ProductController {
   static async getProductById(req: Request, res: Response, next: NextFunction) {
     const { idProduct } = req.params;
     try {
-      const product = await ProductServices.findProductsById(idProduct);
+      const mainService = new MainService({ dbName: 'test' })
+      const product = await mainService.product.findProductsById(idProduct);
 
       res.status(200).json(product);
     } catch (error) {
@@ -30,7 +31,8 @@ export class ProductController {
       const productId = req.params.idProduct;
       const newData = req.body;
 
-      await ProductServices.updateOneProduct(productId, newData);
+      const mainService = new MainService({ dbName: 'test' })
+      await mainService.product.updateOneProduct(productId, newData);
 
       res.status(200).json({ message: "Product update succesfully" });
     } catch (error) {
@@ -40,7 +42,8 @@ export class ProductController {
 
   static async createProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const newProduct = await ProductServices.createNewProduct(req.body);
+      const mainService = new MainService({ dbName: 'test' })
+      const newProduct = await mainService.product.createNewProduct(req.body);
       res.status(201).json(newProduct);
     } catch (error) {
       next(error);
@@ -50,7 +53,8 @@ export class ProductController {
   static async deleteProduct(req: Request, res: Response, next: NextFunction) {
     try {
       const { idProduct } = req.params;
-      const deleteProduct = await ProductServices.deleteProductById(idProduct);
+      const mainService = new MainService({ dbName: 'test' })
+      const deleteProduct = await mainService.product.deleteProductById(idProduct);
 
       res.status(200).json(deleteProduct);
     } catch (error) {
