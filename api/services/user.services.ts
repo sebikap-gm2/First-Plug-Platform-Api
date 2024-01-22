@@ -1,5 +1,5 @@
 import { User } from "api/types";
-import { UserRepository } from "api/models";
+import { UserRepository } from "../models";
 
 export class UserService {
   static async getByEmail(email: User['email']) {

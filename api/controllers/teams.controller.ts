@@ -1,5 +1,5 @@
-import { MainService } from "api/services";
 import { Request, Response, NextFunction } from "express";
+import { MainService } from "../services";
 
 export class TeamsController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
