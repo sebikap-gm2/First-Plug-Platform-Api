@@ -3,37 +3,38 @@ import bcrypt from "bcrypt";
 import { UserEntity } from "../types";
 import { generateHash } from "../utils";
 
-
-const UsersSchema = new mongoose.Schema<UserEntity>({
-  tenantId: {
-    type: Schema.Types.ObjectId,
-    required: false,
-    default: null,
+const UsersSchema = new mongoose.Schema<UserEntity>(
+  {
+    tenantName: {
+      type: Schema.Types.String,
+      required: false,
+      default: null,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
+    },
+    image: {
+      type: String,
+      default: null,
+    },
+    password: {
+      type: String,
+      default: null,
+    },
+    salt: {
+      type: String,
+      default: null,
+    },
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    match: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
-  },
-  image: {
-    type: String,
-    default: null,
-  },
-  password: {
-    type: String,
-    default: null,
-  },
-  salt: {
-    type: String,
-    default: null,
-  },
-}, {timestamps: true});
-
+  { timestamps: true }
+);
 
 UsersSchema.pre<UserEntity>("save", async function (next) {
   if (!this.isModified("password") || !this.password) {

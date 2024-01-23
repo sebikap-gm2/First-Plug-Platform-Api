@@ -7,8 +7,8 @@ const baseOptions = {
 
 export const BaseSchema = new Schema<BaseEntity>(
   {
-    tenantId: {
-      type: Schema.Types.ObjectId,
+    tenantName: {
+      type: Schema.Types.String,
       required: true,
       default: null,
     },
