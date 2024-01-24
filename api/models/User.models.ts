@@ -53,4 +53,5 @@ UsersSchema.pre<UserEntity>("save", async function (next) {
   }
 });
 
+// !TODO We need this model to be assigned to our tenant db and not to all db
 export const UserRepository = mongoose.model<UserEntity>("Users", UsersSchema);
