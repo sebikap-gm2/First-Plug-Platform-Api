@@ -1,12 +1,11 @@
 import dotenv from "dotenv";
 import { env } from "./envCheck";
 import mongoose, { ConnectOptions } from "mongoose";
-import { UserRepository } from "../models/User.models";
 
 dotenv.config();
 mongoose.set("strictQuery", true);
 
-export const connectToDatabase = async (dbName: ConnectOptions['dbName']) => {
+export const connectToDatabase = async (dbName: ConnectOptions["dbName"]) => {
   try {
     return await mongoose.connect(env.MONGO_URI, { dbName });
   } catch (error) {
