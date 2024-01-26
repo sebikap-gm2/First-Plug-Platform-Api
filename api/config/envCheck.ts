@@ -6,7 +6,8 @@ dotenv.config();
 const envSchema = z.object({
   PORT: z.string().optional(),
   MONGO_URI: z.string().url(),
-  SECRET_PASSWORD: z.string(),
+  JWTSECRETKEY: z.string(),
+  JWTREFRESHTOKENKEY: z.string(),
   FIRST_PLUG_PLATFORM_CLIENT_HOST: z.string().url(),
 });
 
