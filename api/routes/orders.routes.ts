@@ -4,7 +4,7 @@ export const ordersRoutes = express.Router();
 import { OrderController } from "../controllers";
 
 ordersRoutes.get("/", OrderController.getOrders);
-ordersRoutes.get("/:idOrder", OrderController.getOrderById);
+ordersRoutes.get("/:id", OrderController.getOrderById);
 ordersRoutes.post("/", OrderController.newOrder);
-ordersRoutes.put("/:idOrder", OrderController.updateOrder);
-ordersRoutes.delete("/:idOrder", OrderController.deleteOrder);
+ordersRoutes.put("/:id", OrderController.updateOrder);
+ordersRoutes.delete("/:id", OrderController.deleteOrder);

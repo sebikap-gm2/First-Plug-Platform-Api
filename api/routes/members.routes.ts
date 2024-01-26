@@ -4,7 +4,7 @@ export const membersRoutes = express.Router();
 import { MembersController } from "../controllers";
 
 membersRoutes.get("/", MembersController.getAll);
-membersRoutes.get("/:idMember", MembersController.getById);
+membersRoutes.get("/:id", MembersController.getById);
 membersRoutes.post("/", MembersController.create);
-membersRoutes.put("/:idMember", MembersController.updateById);
-membersRoutes.delete("/:idMember", MembersController.deleteById);
+membersRoutes.put("/:id", MembersController.updateById);
+membersRoutes.delete("/:id", MembersController.deleteById);
