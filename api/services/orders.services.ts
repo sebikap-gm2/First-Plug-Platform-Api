@@ -13,7 +13,7 @@ export class OrderServices {
     return await OrderRepository.create(data);
   }
 
-  static async updateOrder(id: Order["_id"], data: Order) {
+  static async updateOrder({ id, data }: { id: Order["_id"]; data: Order }) {
     return await OrderRepository.findOneAndUpdate({ id }, data);
   }
 

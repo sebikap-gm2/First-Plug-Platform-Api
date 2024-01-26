@@ -32,7 +32,7 @@ export class MembersServices {
     return await MemberRepository.create(data);
   }
 
-  static async update(id: Member["_id"], data: Member) {
+  static async update({ id, data }: { id: string; data: Member }) {
     const MemberUpdated = await MemberRepository.findByIdAndUpdate(id, data, {
       new: true,
     });
