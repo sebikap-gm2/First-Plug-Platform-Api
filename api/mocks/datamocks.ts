@@ -119,6 +119,7 @@ export const createMockShipment = (productCount: number = 2): Shipment => {
 
 export const createMockUser = (): User & Pick<Document, "_id"> => {
   return {
+    tenantName: faker.company.name(),
     name: faker.person.fullName(),
     email: faker.internet.email(),
     password: faker.internet.password(),
