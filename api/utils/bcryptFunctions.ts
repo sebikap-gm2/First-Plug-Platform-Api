@@ -1,10 +1,7 @@
 import bcrypt from "bcrypt";
-import { UserEntity } from "../types";
+import { validateUser } from "../types";
 
-export async function validatePassword(
-  user: UserEntity,
-  password: string
-){
+export async function validatePassword(user: validateUser, password: string) {
   const hashedPassword = await bcrypt.hash(password, user.salt);
 
   if (user.password !== hashedPassword) {

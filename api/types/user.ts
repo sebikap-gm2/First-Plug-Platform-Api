@@ -1,8 +1,7 @@
-import { JwtPayload } from "jsonwebtoken";
-import { Document } from "mongoose";
 import { BaseEntity } from ".";
 
 export type User = {
+  tenantName: string;
   name: string;
   email: string;
   image: string;
@@ -10,13 +9,25 @@ export type User = {
   salt: string;
 };
 
-export type RegisterUser = Pick<User, "name" | "email" | "password">;
-
 export type UserEntity = User & BaseEntity;
 
-type UserJWT = Pick<UserEntity, "_id" | "email">;
+export type UserJWT = Pick<UserEntity, "_id" | "name" | "email" | "image">;
 
-export type UserPayload = JwtPayload & UserJWT;
+export type CreationUser = Omit<User, "salt" | "tenantName"> & {
+  password?: string;
+};
 
-export type CreationUser = Omit<User, "_id" | "__v">;
+export type LoginUser = Pick<User, "email" | "password">;
 
+export type validateUser = Pick<User, "password" | "salt">;
+
+export type PayloadUser = {
+  user: string;
+  backendTokens: BackendTokens;
+  expireIn: number;
+};
+
+export interface BackendTokens {
+  accessToken: string;
+  refreshToken: string;
+}
