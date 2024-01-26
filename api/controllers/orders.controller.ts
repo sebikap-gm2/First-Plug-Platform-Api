@@ -17,9 +17,13 @@ export class OrderController {
 
   static async getOrderById(req: Request, res: Response, next: NextFunction) {
     try {
-      const { idOrder } = req.params;
-      const mainService = new MainService({ dbName: 'test' })
-      const orders = await mainService.order.getOneOrder(idOrder);
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const orders = await mainService.runCommand("order", "getOneOrder", id);
 
       res.status(200).json(orders);
     } catch (error) {
@@ -28,8 +32,15 @@ export class OrderController {
   }
   static async newOrder(req: Request, res: Response, next: NextFunction) {
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const orders = await mainService.order.createOrder(req.body);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const orders = await mainService.runCommand(
+        "order",
+        "createOrder",
+        req.body
+      );
 
       res.status(201).json(orders);
     } catch (error) {
@@ -38,9 +49,16 @@ export class OrderController {
   }
   static async updateOrder(req: Request, res: Response, next: NextFunction) {
     try {
-      const { idOrder } = req.params;
-      const mainService = new MainService({ dbName: 'test' })
-      const orders = await mainService.order.updateOrder(idOrder, req.body);
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const orders = await mainService.runCommand("order", "updateOrder", {
+        id,
+        data: req.body,
+      });
 
       res.status(200).json(orders);
     } catch (error) {
@@ -49,9 +67,12 @@ export class OrderController {
   }
   static async deleteOrder(req: Request, res: Response, next: NextFunction) {
     try {
-      const { idOrder } = req.params;
-      const mainService = new MainService({ dbName: 'test' })
-      const orders = await mainService.order.deleteOrder(idOrder);
+      const { id } = req.params;
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const orders = await mainService.runCommand("order", "deleteOrder", id);
 
       res.status(200).json(orders);
     } catch (error) {

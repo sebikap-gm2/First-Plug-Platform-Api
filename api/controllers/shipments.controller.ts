@@ -15,8 +15,17 @@ export class ShipmentsController {
 
   static async getOneShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const shipment = await mainService.shipment.getOneShipment(req.params.id);
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const shipment = await mainService.runCommand(
+        "shipment",
+        "getOneShipment",
+        id
+      );
 
       res.status(200).json(shipment);
     } catch (error) {
@@ -25,8 +34,15 @@ export class ShipmentsController {
   }
   static async createShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const newShipment = await mainService.shipment.createShipment(req.body);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const newShipment = await mainService.runCommand(
+        "shipment",
+        "createShipment",
+        req.body
+      );
 
       res.status(201).json(newShipment);
     } catch (error) {
@@ -35,10 +51,16 @@ export class ShipmentsController {
   }
   static async updateShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const shipmentUpdated = await mainService.shipment.updateShipment(
-        req.params.id,
-        req.body
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const shipmentUpdated = await mainService.runCommand(
+        "shipment",
+        "updateShipment",
+        { id, data: req.body }
       );
 
       res.status(200).json(shipmentUpdated);
@@ -48,9 +70,16 @@ export class ShipmentsController {
   }
   static async deleteShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const shipmentDeleted = await mainService.shipment.deleteShipment(
-        req.params.id
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const shipmentDeleted = await mainService.runCommand(
+        "shipment",
+        "deleteShipment",
+        id
       );
 
       res.status(200).json(shipmentDeleted);

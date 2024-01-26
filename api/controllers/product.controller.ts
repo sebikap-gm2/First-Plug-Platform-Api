@@ -15,10 +15,18 @@ export class ProductController {
   }
 
   static async getProductById(req: Request, res: Response, next: NextFunction) {
-    const { idProduct } = req.params;
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const product = await mainService.product.findProductsById(idProduct);
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const product = await mainService.runCommand(
+        "product",
+        "findProductsById",
+        id
+      );
 
       res.status(200).json(product);
     } catch (error) {
@@ -28,11 +36,16 @@ export class ProductController {
 
   static async updateProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const productId = req.params.idProduct;
-      const newData = req.body;
+      const { id } = req.params;
 
-      const mainService = new MainService({ dbName: 'test' })
-      await mainService.product.updateOneProduct(productId, newData);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      await mainService.runCommand("product", "updateOneProduct", {
+        id,
+        data: req.body,
+      });
 
       res.status(200).json({ message: "Product update succesfully" });
     } catch (error) {
@@ -42,8 +55,15 @@ export class ProductController {
 
   static async createProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const mainService = new MainService({ dbName: 'test' })
-      const newProduct = await mainService.product.createNewProduct(req.body);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const newProduct = await mainService.runCommand(
+        "product",
+        "createNewProduct",
+        req.body
+      );
       res.status(201).json(newProduct);
     } catch (error) {
       next(error);
@@ -52,9 +72,16 @@ export class ProductController {
 
   static async deleteProduct(req: Request, res: Response, next: NextFunction) {
     try {
-      const { idProduct } = req.params;
-      const mainService = new MainService({ dbName: 'test' })
-      const deleteProduct = await mainService.product.deleteProductById(idProduct);
+      const { id } = req.params;
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const deleteProduct = await mainService.runCommand(
+        "product",
+        "deleteProductById",
+        id
+      );
 
       res.status(200).json(deleteProduct);
     } catch (error) {
