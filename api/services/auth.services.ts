@@ -19,7 +19,7 @@ export class AuthServices {
       user: payload,
       backendTokens: {
         accessToken: await JWTtoken.generateToken(payload, {
-          expiresIn: "60s",
+          expiresIn: "1h",
           secret: "JWTSECRETKEY",
         }),
 
