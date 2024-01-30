@@ -1,4 +1,4 @@
-import { ConnectOptions } from "mongoose";
+import mongoose from "mongoose";
 import { connectToDatabase } from "../config";
 import { AuthServices } from "./auth.services";
 import { MembersServices } from "./member";
@@ -51,7 +51,19 @@ export class MainService {
       const user = await Services.user.getById(userId);
 
       if (user) {
-        await connectToDatabase(user.tenantName);
+        const admin = mongoose.connection.db.admin();
+
+        const listDatabasesResult = await admin.listDatabases();
+
+        if (
+          listDatabasesResult.databases.some(
+            (db) => db.name === user.tenantName
+          )
+        ) {
+          await connectToDatabase(user.tenantName);
+        } else {
+          throw new Error("Database does not exist");
+        }
       } else {
         throw new Error("User not found");
       }
