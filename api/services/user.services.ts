@@ -14,7 +14,7 @@ export class UserService {
   }
 
   static async create(dto: CreationUser) {
-    const user = await this.getByEmail(dto.email);
+    const user = await UserService.getByEmail(dto.email);
 
     if (user) throw new Error("email duplicated");
 
