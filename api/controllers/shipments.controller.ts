@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { ShipmentServices } from "../services";
 import { createMockShipment } from "../mocks/datamocks";
+import { MainService } from "../services";
 export class ShipmentsController {
   static async getShipments(req: Request, res: Response, next: NextFunction) {
     try {
@@ -15,7 +15,17 @@ export class ShipmentsController {
 
   static async getOneShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const shipment = await ShipmentServices.getOneShipment(req.params.id);
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const shipment = await mainService.runCommand(
+        "shipment",
+        "getOneShipment",
+        id
+      );
 
       res.status(200).json(shipment);
     } catch (error) {
@@ -24,7 +34,15 @@ export class ShipmentsController {
   }
   static async createShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const newShipment = await ShipmentServices.createShipment(req.body);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const newShipment = await mainService.runCommand(
+        "shipment",
+        "createShipment",
+        req.body
+      );
 
       res.status(201).json(newShipment);
     } catch (error) {
@@ -33,9 +51,16 @@ export class ShipmentsController {
   }
   static async updateShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const shipmentUpdated = await ShipmentServices.updateShipment(
-        req.params.id,
-        req.body
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const shipmentUpdated = await mainService.runCommand(
+        "shipment",
+        "updateShipment",
+        { id, data: req.body }
       );
 
       res.status(200).json(shipmentUpdated);
@@ -45,8 +70,16 @@ export class ShipmentsController {
   }
   static async deleteShipment(req: Request, res: Response, next: NextFunction) {
     try {
-      const shipmentDeleted = await ShipmentServices.deleteShipment(
-        req.params.id
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const shipmentDeleted = await mainService.runCommand(
+        "shipment",
+        "deleteShipment",
+        id
       );
 
       res.status(200).json(shipmentDeleted);

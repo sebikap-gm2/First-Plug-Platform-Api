@@ -2,7 +2,7 @@ import { MemberRepository } from "../models";
 
 export class TeamsServices {
   static async getAll() {
-    const result = await MemberRepository.aggregate([
+    const result = await MemberRepository.aggregate<{ data: string[] }>([
       {
         $match: {
           teams: { $not: { $size: 0 } },
@@ -24,7 +24,7 @@ export class TeamsServices {
         },
       },
     ]).exec();
-    return result[0].data;
+    return result[0]?.data ?? [];
   }
   // static async createTeam(data: CreationTeam) {
   //   return await TeamRepository.create(data);

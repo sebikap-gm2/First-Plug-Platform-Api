@@ -1,23 +1,22 @@
 import jwt from "jsonwebtoken";
 import { env } from "./envCheck";
-import { UserPayload } from "../types";
+import { UserJWT } from "../types";
 
-const SECRET = env.SECRET_PASSWORD;
+interface JwtOptions {
+  expiresIn: string;
+  secret: "JWTSECRETKEY" | "JWTREFRESHTOKENKEY";
+}
+
+const JWT_SECRET_KEYS: Record<"JWTSECRETKEY" | "JWTREFRESHTOKENKEY", string> = {
+  JWTSECRETKEY: env.JWTSECRETKEY,
+  JWTREFRESHTOKENKEY: env.JWTREFRESHTOKENKEY,
+};
 
 export class JWTtoken {
-  static generateToken(payload: UserPayload) {
-    return jwt.sign(payload, SECRET);
-  }
-
-  static validateToken(token: string): UserPayload | null {
-    try {
-      const decoded = jwt.verify(token, SECRET);
-      if (typeof decoded === "object" && decoded !== null) {
-        return decoded as UserPayload;
-      }
-      return null;
-    } catch {
-      return null;
-    }
+  static async generateToken(
+    payload: UserJWT,
+    { expiresIn, secret }: JwtOptions
+  ) {
+    return jwt.sign({ data: payload }, JWT_SECRET_KEYS[secret], { expiresIn });
   }
 }

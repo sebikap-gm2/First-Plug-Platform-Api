@@ -24,7 +24,13 @@ export class ShipmentServices {
     return await ShipmentRepository.findByIdAndDelete(id);
   }
 
-  static async updateShipment(id: Shipment["_id"], data: Shipment) {
+  static async updateShipment({
+    id,
+    data,
+  }: {
+    id: Shipment["_id"];
+    data: Shipment;
+  }) {
     return await ShipmentRepository.findByIdAndUpdate(id, data);
   }
 }

@@ -14,9 +14,15 @@ export class ProductServices {
     }
   }
 
-  static async updateOneProduct(productId: Product["_id"], newData: Product) {
+  static async updateOneProduct({
+    id,
+    data,
+  }: {
+    id: Product["_id"];
+    data: Product;
+  }) {
     try {
-      return await ProductRepository.findByIdAndUpdate(productId, newData, {
+      return await ProductRepository.findByIdAndUpdate(id, data, {
         new: true,
       });
     } catch (error) {

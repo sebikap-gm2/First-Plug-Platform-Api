@@ -1,5 +1,3 @@
-import { Team } from ".";
-
 export type Member = {
   _id: string;
   firstName: string;
@@ -16,7 +14,7 @@ export type Member = {
   joiningDate: string;
   timeSlotForDelivery: string;
   additionalInfo: string;
-  teams: Team[];
+  teams: [];
   __v: number;
 };
 

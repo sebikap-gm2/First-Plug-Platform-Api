@@ -1,10 +1,15 @@
 import { Request, Response, NextFunction } from "express";
-import { MembersServices } from "../services";
+import { MainService } from "../services";
+import { Member } from "../types";
 
 export class MembersController {
   static async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const members = await MembersServices.getAll()
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const members = await mainService.runCommand("member", "getAll", {});
 
       res.status(200).json(members);
     } catch (error) {
@@ -13,9 +18,14 @@ export class MembersController {
   }
 
   static async getById(req: Request, res: Response, next: NextFunction) {
-    const { idMember } = req.params;
     try {
-      const member = await MembersServices.getById(idMember);
+      const { id } = req.params;
+
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const member = await mainService.runCommand("member", "getById", id);
 
       res.status(200).json(member);
     } catch (error) {
@@ -25,7 +35,15 @@ export class MembersController {
 
   static async create(req: Request, res: Response, next: NextFunction) {
     try {
-      const newMember = await MembersServices.create(req.body);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const newMember = await mainService.runCommand(
+        "member",
+        "create",
+        req.body
+      );
 
       res.status(201).json(newMember);
     } catch (error) {
@@ -34,9 +52,16 @@ export class MembersController {
   }
 
   static async updateById(req: Request, res: Response, next: NextFunction) {
-    const { idMember } = req.params;
+    const { id } = req.params;
     try {
-      const updatedMember = await MembersServices.update(idMember, req.body);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const updatedMember = await mainService.runCommand("member", "update", {
+        id,
+        data: req.body,
+      });
 
       res.status(200).json(updatedMember);
     } catch (error) {
@@ -45,9 +70,17 @@ export class MembersController {
   }
 
   static async deleteById(req: Request, res: Response, next: NextFunction) {
-    const { idMember } = req.params;
+    const { id } = req.params;
     try {
-      const deletedMember = await MembersServices.delete(idMember);
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const deletedMember = await mainService.runCommand(
+        "member",
+        "delete",
+        id
+      );
 
       res.status(200).json(deletedMember);
     } catch (error) {
