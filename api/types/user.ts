@@ -11,7 +11,11 @@ export type User = {
 
 export type UserEntity = User & BaseEntity;
 
-export type UserJWT = Pick<UserEntity, "_id" | "name" | "email" | "image">;
+type Required<T> = {
+  [P in keyof T]-?: T[P]
+}
+
+export type UserJWT = Required<Pick<UserEntity, "_id" | "name" | "email" | "image">>;
 
 export type CreationUser = Omit<User, "salt" | "tenantName"> & {
   password?: string;

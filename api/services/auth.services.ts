@@ -8,15 +8,17 @@ export class AuthServices {
   static async login(dto: LoginUser) {
     const user = await AuthServices.validateUser(dto);
 
+    const { _id, email, name, image } = user
+
     const payload: UserJWT = {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      image: user.image,
-    };
+      _id: _id.toString(),
+      email,
+      name,
+      image
+    }
 
     return {
-      user: payload,
+      user,
       backendTokens: {
         accessToken: await JWTtoken.generateToken(payload, {
           expiresIn: "1h",
@@ -27,45 +29,37 @@ export class AuthServices {
           expiresIn: "7h",
           secret: "JWTREFRESHTOKENKEY",
         }),
-      },
-      expireIn: new Date().setTime(new Date().getTime()) * EXPIRE_TIME,
+      }
     };
   }
 
   static async validateUser(dto: LoginUser) {
     const user = await UserService.getByEmail(dto.email);
 
-    if (
-      user &&
-      (await validatePassword(
-        { salt: user.salt, password: user.password },
-        dto.password
-      ))
-    ) {
+    if (!user) throw new Error('Unauthorized')
+
+    const authorized = await validatePassword(
+      { salt: user.salt, password: user.password },
+      dto.password
+    )
+
+    if (authorized) {
       return user;
     }
 
     throw new Error("Unauthorized");
   }
 
-  static async refreshToken(user: any) {
-    const payload = {
-      name: user.name,
-      email: user.email,
-      image: user.image,
-      tenantName: user.tenantName,
-    };
-
+  static async refreshToken(user: UserJWT) {
     return {
-      accessToken: await JWTtoken.generateToken(payload, {
-        expiresIn: "20s",
+      accessToken: await JWTtoken.generateToken(user, {
+        expiresIn: "1h",
         secret: "JWTSECRETKEY",
       }),
-      refreshToken: await JWTtoken.generateToken(payload, {
+      refreshToken: await JWTtoken.generateToken(user, {
         expiresIn: "7h",
         secret: "JWTREFRESHTOKENKEY",
-      }),
-      expireIn: new Date().setTime(new Date().getTime()) * EXPIRE_TIME,
+      })
     };
   }
 }
