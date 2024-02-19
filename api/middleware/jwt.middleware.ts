@@ -16,7 +16,7 @@ export class JwtMiddleware {
 
       if (typeof payload === 'string') throw new Error('Unauthorized')
 
-      req["user"] = payload.data.data;
+      req["user"] = payload.data;
     } catch (error) {
       res.status(401).json({ message: "Missing authentication token" });
       return;

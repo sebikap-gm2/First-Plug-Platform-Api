@@ -45,7 +45,7 @@ export class AuthController {
       const payload = await mainService.runCommand(
         "auth",
         "refreshToken",
-        req.user
+        req.user.data
       );
 
       res.send(payload);

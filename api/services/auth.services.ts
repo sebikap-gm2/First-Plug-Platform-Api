@@ -29,6 +29,7 @@ export class AuthServices {
           expiresIn: "7h",
           secret: "JWTREFRESHTOKENKEY",
         }),
+        expireIn: new Date().setTime(new Date().getTime()) * EXPIRE_TIME,
       }
     };
   }
@@ -51,15 +52,25 @@ export class AuthServices {
   }
 
   static async refreshToken(user: UserJWT) {
+    const { _id, email, name, image } = user
+
+    const payload: UserJWT = {
+      _id: _id?.toString(),
+      email,
+      name,
+      image
+    }
+
     return {
-      accessToken: await JWTtoken.generateToken(user, {
+      accessToken: await JWTtoken.generateToken(payload, {
         expiresIn: "1h",
         secret: "JWTSECRETKEY",
       }),
-      refreshToken: await JWTtoken.generateToken(user, {
+      refreshToken: await JWTtoken.generateToken(payload, {
         expiresIn: "7h",
         secret: "JWTREFRESHTOKENKEY",
-      })
+      }),
+      expireIn: new Date().setTime(new Date().getTime()) * EXPIRE_TIME,
     };
   }
 }
