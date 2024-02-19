@@ -13,7 +13,10 @@ export class JwtMiddleware {
 
     try {
       const payload = jwt.verify(token, env.JWTSECRETKEY);
-      req["user"] = payload;
+
+      if (typeof payload === 'string') throw new Error('Unauthorized')
+
+      req["user"] = payload.data.data;
     } catch (error) {
       res.status(401).json({ message: "Missing authentication token" });
       return;

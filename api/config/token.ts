@@ -17,6 +17,6 @@ export class JWTtoken {
     payload: UserJWT,
     { expiresIn, secret }: JwtOptions
   ) {
-    return jwt.sign(payload, JWT_SECRET_KEYS[secret], { expiresIn });
+    return jwt.sign({ data: payload }, JWT_SECRET_KEYS[secret], { expiresIn });
   }
 }
