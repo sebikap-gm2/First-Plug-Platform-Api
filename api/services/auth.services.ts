@@ -48,20 +48,13 @@ export class AuthServices {
     throw new Error("Unauthorized");
   }
 
-  static async refreshToken(user: any) {
-    const payload = {
-      name: user.name,
-      email: user.email,
-      image: user.image,
-      tenantName: user.tenantName,
-    };
-
+  static async refreshToken(user: UserJWT) {
     return {
-      accessToken: await JWTtoken.generateToken(payload, {
+      accessToken: await JWTtoken.generateToken(user, {
         expiresIn: "20s",
         secret: "JWTSECRETKEY",
       }),
-      refreshToken: await JWTtoken.generateToken(payload, {
+      refreshToken: await JWTtoken.generateToken(user, {
         expiresIn: "7h",
         secret: "JWTREFRESHTOKENKEY",
       }),

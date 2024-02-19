@@ -7,6 +7,7 @@ export class MembersController {
     try {
       const mainService = new MainService();
 
+      console.log("User id : ", req);
       await mainService.initalize(req.user._id);
 
       const members = await mainService.runCommand("member", "getAll", {});

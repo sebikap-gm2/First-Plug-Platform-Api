@@ -54,7 +54,8 @@ export class MainService {
         const admin = mongoose.connection.db.admin();
 
         const listDatabasesResult = await admin.listDatabases();
-
+        console.log(listDatabasesResult.databases);
+        console.log({ user });
         if (
           listDatabasesResult.databases.some(
             (db) => db.name === user.tenantName
