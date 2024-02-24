@@ -10,7 +10,7 @@ const MemberSchema = new mongoose.Schema({
     require: true,
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
     required: true,
   },
   phone: {
@@ -25,7 +25,7 @@ const MemberSchema = new mongoose.Schema({
   },
   DNI: {
     type: String,
-    require: false,
+    require: true,
   },
   jobPosition: {
     type: String,
@@ -45,7 +45,7 @@ const MemberSchema = new mongoose.Schema({
   },
   appartment: {
     type: String,
-    require: true,
+    require: false,
   },
   joiningDate: {
     type: Date,
