@@ -42,8 +42,6 @@ export const createMockMember = (teamCount: number = 2): Member => {
 export const createMockProduct = (): Product => {
   return {
     _id: faker.string.uuid(),
-    name: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
     category: faker.commerce.department(),
     model: faker.lorem.word(),
     color: faker.color.human(),
