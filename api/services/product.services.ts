@@ -34,6 +34,10 @@ export class ProductServices {
     return await ProductRepository.create(data);
   }
 
+  static async bulkCreate(data: CreationProduct) {
+    return await ProductRepository.insertMany(data);
+  }
+
   static async deleteProductById(productId: Product["_id"]) {
     return await ProductRepository.findOneAndRemove({ productId });
   }

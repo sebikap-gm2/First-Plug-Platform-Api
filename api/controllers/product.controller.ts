@@ -70,6 +70,23 @@ export class ProductController {
     }
   }
 
+  static async bulkCreate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const newProduct = await mainService.runCommand(
+        "product",
+        "bulkCreate",
+        req.body
+      );
+      res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async deleteProduct(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
