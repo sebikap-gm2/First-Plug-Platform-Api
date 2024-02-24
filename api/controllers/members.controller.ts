@@ -51,6 +51,24 @@ export class MembersController {
     }
   }
 
+  static async bulkCreate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const newMember = await mainService.runCommand(
+        "member",
+        "bulkCreate",
+        req.body
+      );
+
+      res.status(201).json(newMember);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   static async updateById(req: Request, res: Response, next: NextFunction) {
     const { id } = req.params;
     try {
