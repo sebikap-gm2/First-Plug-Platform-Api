@@ -1,11 +1,15 @@
 import mongoose from "mongoose";
 
 const ProductsSchema = new mongoose.Schema({
-  category: {
+  name: {
     type: String,
     require: true,
   },
-  model: {
+  description: {
+    type: String,
+    require: false,
+  },
+  category: {
     type: String,
     require: true,
   },
@@ -49,10 +53,6 @@ const ProductsSchema = new mongoose.Schema({
     require: false,
     default: "",
   },
-  price: {
-    type: String,
-    require: true,
-  },
   status: {
     type: String,
     enum: ["Available", "Delivered"],
@@ -70,4 +70,4 @@ const ProductsSchema = new mongoose.Schema({
   },
 });
 
-export const ProductRepository  = mongoose.model("Products", ProductsSchema);
+export const ProductRepository = mongoose.model("Products", ProductsSchema);

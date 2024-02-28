@@ -42,8 +42,9 @@ export const createMockMember = (teamCount: number = 2): Member => {
 export const createMockProduct = (): Product => {
   return {
     _id: faker.string.uuid(),
+    name: faker.commerce.productName(),
+    description: faker.commerce.productDescription(),
     category: faker.commerce.department(),
-    model: faker.lorem.word(),
     color: faker.color.human(),
     screen: `${faker.number.int({
       min: 10,
@@ -66,7 +67,6 @@ export const createMockProduct = (): Product => {
       max: 10,
     })}GB`,
     serialNumber: faker.string.uuid(),
-    price: faker.commerce.price(),
     status: faker.helpers.arrayElement(["Available", "Delivered"]),
     imgUrl: faker.image.url(),
     stock: faker.number.int({ min: 0, max: 100 }),

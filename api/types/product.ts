@@ -1,7 +1,8 @@
 export type Product = {
   _id: string;
+  name: string;
+  description?: string;
   category: string;
-  model: string;
   color?: string;
   screen?: string;
   keyboard?: string;
@@ -10,7 +11,6 @@ export type Product = {
   storage?: string;
   gpu?: string;
   serialNumber?: string;
-  price: string;
   status: ProductStatus;
   imgUrl?: string;
   stock: number;
