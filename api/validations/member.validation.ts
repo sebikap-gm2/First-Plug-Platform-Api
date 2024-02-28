@@ -1,7 +1,7 @@
 import { isISODate } from "../utils";
 import { z } from "zod";
 
-export const memberSchemaValidationStore = z.object({
+export const memberSchemaValidation = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),
   dateOfBirth: z
@@ -23,4 +23,4 @@ export const memberSchemaValidationStore = z.object({
   teams: z.array(z.string()),
 });
 
-export const memberCollection = z.array(memberSchemaValidationStore);
+export const memberCollectionValidation = z.array(memberSchemaValidation);

@@ -1,8 +1,9 @@
 import { z } from "zod";
 
-export const productSchemaValidationStore = z.object({
+export const productSchemaValidation = z.object({
+  name: z.string().min(1),
+  description: z.string().min(1),
   category: z.string().min(1),
-  model: z.string().min(1),
   color: z.string().nullable(),
   screen: z.string().nullable(),
   keyboard: z.string().nullable(),
@@ -11,10 +12,9 @@ export const productSchemaValidationStore = z.object({
   storage: z.string().nullable(),
   gpu: z.string().nullable(),
   serialNumber: z.string().nullable(),
-  price: z.string(),
   status: z.enum(["Available", "Delivered"]),
   imgUrl: z.string().optional(),
   stock: z.number(),
 });
 
-export const productCollection = z.array(productSchemaValidationStore);
+export const productCollectionValidation = z.array(productSchemaValidation);
