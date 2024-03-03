@@ -1,21 +1,11 @@
-export type Member = {
+import z from "zod";
+import { memberValidation } from "../validations";
+
+export type Member = z.infer<typeof memberValidation>;
+
+export type MemberSchema = Member & {
   _id: string;
-  firstName: string;
-  img: string;
-  lastName: string;
-  dateOfBirth: string;
-  phone: string;
-  email: string;
-  jobPosition: string;
-  city: string;
-  zipCode: string;
-  address: string;
-  appartment: string;
-  joiningDate: string;
-  timeSlotForDelivery: string;
-  additionalInfo: string;
-  teams: [];
   __v: number;
 };
 
-export type CreationMember = Omit<Member, "_id" | "__v">;
+export type CreationMember = Omit<MemberSchema, "_id" | "__v">;
