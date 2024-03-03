@@ -1,13 +1,13 @@
 import { productCollectionValidation } from "../validations";
 import { ProductRepository } from "../models";
-import { CreationProduct, Product } from "../types";
+import { CreationProduct, Product, ProductSchema } from "../types";
 
 export class ProductServices {
   static async findAllProducts() {
     return await ProductRepository.find();
   }
 
-  static async findProductsById(productId: Product["_id"]) {
+  static async findProductsById(productId: ProductSchema["_id"]) {
     try {
       return await ProductRepository.findById(productId);
     } catch (error) {
@@ -19,7 +19,7 @@ export class ProductServices {
     id,
     data,
   }: {
-    id: Product["_id"];
+    id: ProductSchema["_id"];
     data: Product;
   }) {
     try {
@@ -37,10 +37,10 @@ export class ProductServices {
 
   static async bulkCreate(data: CreationProduct[]) {
     productCollectionValidation.parse(data);
-    return await ProductRepository.insertMany(data);
+    return (await ProductRepository.insertMany(data)).length;
   }
 
-  static async deleteProductById(productId: Product["_id"]) {
+  static async deleteProductById(productId: ProductSchema["_id"]) {
     return await ProductRepository.findOneAndRemove({ productId });
   }
 }
