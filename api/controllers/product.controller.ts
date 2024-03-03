@@ -76,12 +76,15 @@ export class ProductController {
 
       await mainService.initalize(req.user._id);
 
-      const newProduct = await mainService.runCommand(
+      const rowsCreated = await mainService.runCommand(
         "product",
         "bulkCreate",
         req.body
       );
-      res.status(201).json(newProduct);
+
+      res.status(201).json({
+        message: `Bulk create successful: ${rowsCreated} documents inserted successfully out of ${req.body.length}.`,
+      });
     } catch (error) {
       next(error);
     }

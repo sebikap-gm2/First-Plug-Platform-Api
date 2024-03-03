@@ -57,13 +57,15 @@ export class MembersController {
 
       await mainService.initalize(req.user._id);
 
-      const newMember = await mainService.runCommand(
+      const rowsCreated = await mainService.runCommand(
         "member",
         "bulkCreate",
         req.body
       );
 
-      res.status(201).json(newMember);
+      res.status(201).json({
+        message: `Bulk create successful: ${rowsCreated} documents inserted successfully out of ${req.body.length}.`,
+      });
     } catch (error) {
       next(error);
     }
