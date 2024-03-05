@@ -1,7 +1,7 @@
 import z from "zod";
-import { productValidation } from "../validations";
+import { ProductValidation } from "../validations";
 
-export type Product = z.infer<typeof productValidation>;
+export type Product = z.infer<typeof ProductValidation>;
 
 export type ProductSchema = Product & {
   _id: string;

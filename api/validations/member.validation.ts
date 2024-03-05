@@ -1,7 +1,7 @@
 import { isISODate } from "../utils";
 import { z } from "zod";
 
-export const memberValidation = z.object({
+export const MemberValidation = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),
   dateOfBirth: z
@@ -9,7 +9,7 @@ export const memberValidation = z.object({
     .refine(isISODate, { message: "Not a valid ISO string date " }),
   phone: z.string().min(1),
   email: z.string().min(1).email(),
-  DNI: z.string().min(1),
+  dni: z.string().min(1),
   jobPosition: z.string().min(1),
   city: z.string().min(1),
   zipCode: z.string().min(1),
@@ -23,4 +23,4 @@ export const memberValidation = z.object({
   teams: z.array(z.string()),
 });
 
-export const memberCollectionValidation = z.array(memberValidation);
+export const MemberCollectionValidation = z.array(MemberValidation);

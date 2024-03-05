@@ -1,4 +1,4 @@
-import { productCollectionValidation } from "../validations";
+import { ProductCollectionValidation } from "../validations";
 import { ProductRepository } from "../models";
 import { CreationProduct, Product, ProductSchema } from "../types";
 
@@ -36,7 +36,7 @@ export class ProductServices {
   }
 
   static async bulkCreate(data: CreationProduct[]) {
-    productCollectionValidation.parse(data);
+    ProductCollectionValidation.parse(data);
     return (await ProductRepository.insertMany(data)).length;
   }
 

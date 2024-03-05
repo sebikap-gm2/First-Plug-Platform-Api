@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const productValidation = z.object({
+export const ProductValidation = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
   category: z.string().min(1),
@@ -17,4 +17,4 @@ export const productValidation = z.object({
   stock: z.number(),
 });
 
-export const productCollectionValidation = z.array(productValidation);
+export const ProductCollectionValidation = z.array(ProductValidation);

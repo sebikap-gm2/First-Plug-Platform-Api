@@ -1,4 +1,4 @@
-import { memberCollectionValidation } from "../validations";
+import { MemberCollectionValidation } from "../validations";
 import { MemberRepository } from "../models";
 import { CreationMember, Member, MemberSchema } from "../types";
 
@@ -34,7 +34,7 @@ export class MembersServices {
   }
 
   static async bulkCreate(data: CreationMember) {
-    memberCollectionValidation.parse(data);
+    MemberCollectionValidation.parse(data);
     return (await MemberRepository.insertMany(data)).length;
   }
 

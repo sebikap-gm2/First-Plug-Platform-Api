@@ -23,7 +23,7 @@ const MemberSchema = new mongoose.Schema({
     unique: true,
     match: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
   },
-  DNI: {
+  dni: {
     type: String,
     require: true,
   },

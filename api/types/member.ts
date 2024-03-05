@@ -1,7 +1,7 @@
 import z from "zod";
-import { memberValidation } from "../validations";
+import { MemberValidation } from "../validations";
 
-export type Member = z.infer<typeof memberValidation>;
+export type Member = z.infer<typeof MemberValidation>;
 
 export type MemberSchema = Member & {
   _id: string;
