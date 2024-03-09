@@ -2,7 +2,7 @@ import { isISODate } from "../utils";
 import { z } from "zod";
 
 export const ShipmentValidation = z.object({
-  fullname: z.string().min(1),
+  member: z.string().min(1),
   date: z
     .string()
     .refine(isISODate, { message: "Not a valid ISO string date " }),

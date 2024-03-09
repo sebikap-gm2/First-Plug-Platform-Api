@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const ShipmentSchema = new mongoose.Schema(
   {
-    fullname: {
+    member: {
       type: String,
       required: true,
     },

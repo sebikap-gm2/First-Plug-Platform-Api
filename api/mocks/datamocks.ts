@@ -104,7 +104,7 @@ export const createMockOrder = (
 export const createMockShipment = (): ShipmentSchema => {
   return {
     _id: faker.string.uuid(),
-    fullname: faker.person.firstName(),
+    member: faker.person.firstName(),
     date: faker.date.recent().toISOString(),
     status: faker.helpers.arrayElement([
       "Missing Data",
