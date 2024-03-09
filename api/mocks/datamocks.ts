@@ -1,5 +1,12 @@
 import { faker } from "@faker-js/faker";
-import { Order, Shipment, User, ProductSchema, MemberSchema } from "../types";
+import {
+  Order,
+  Shipment,
+  User,
+  ProductSchema,
+  MemberSchema,
+  OrderSchema,
+} from "../types";
 import { Document, Types } from "mongoose";
 
 export const createMockMember = (teamCount: number = 2): MemberSchema => {
@@ -77,18 +84,18 @@ export const createMockProduct = (): ProductSchema => {
 export const createMockOrder = (
   memberCount: number = 2,
   productCount: number = 2
-): Order => {
+): OrderSchema => {
   return {
     _id: faker.string.uuid(),
-    members: Array.from({ length: memberCount }, createMockMember),
+    member: faker.person.fullName(),
     status: faker.helpers.arrayElement([
-      "Confirmed",
-      "Canceled",
-      "ConfirmationPending",
-      "PaymentPending",
+      "Order confirmed",
+      "Order canceled",
+      "Confirmation pending",
+      "Payment pending",
     ]),
     date: faker.date.anytime().toISOString(),
-    products: Array.from({ length: productCount }, createMockProduct),
+    total: faker.commerce.price(),
     __v: faker.number.int(),
   };
 };

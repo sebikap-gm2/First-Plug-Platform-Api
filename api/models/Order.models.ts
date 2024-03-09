@@ -1,33 +1,32 @@
 import mongoose from "mongoose";
 
-const OrdersSchema = new mongoose.Schema({
-  member: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "member",
+const OrdersSchema = new mongoose.Schema(
+  {
+    member: {
+      type: String,
+      required: true,
     },
-  ],
-  status: {
-    type: String,
-    enum: [
-      "order confirmed",
-      "order canceled",
-      "confirmation pending",
-      "payment pending",
-    ],
-    default: "confirmation pending",
-    required: true,
-  },
-  date: {
-    type: Date,
-    required: true,
-  },
-  products: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Products",
+    status: {
+      type: String,
+      enum: [
+        "Order confirmed",
+        "Order canceled",
+        "Confirmation pending",
+        "Payment pending",
+      ],
+      default: "confirmation pending",
+      required: true,
     },
-  ],
-});
+    date: {
+      type: Date,
+      required: true,
+    },
+    total: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 export const OrderRepository = mongoose.model("Orders", OrdersSchema);
