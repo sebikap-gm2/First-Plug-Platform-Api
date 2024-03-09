@@ -1,12 +1,13 @@
+import { ShipmentCollectionValidation } from "../validations";
 import { ShipmentRepository } from "../models";
-import { CreationShipment, Shipment } from "../types";
+import { CreationShipment, Shipment, ShipmentSchema } from "../types";
 
 export class ShipmentServices {
   static async getAllShipments() {
     return await ShipmentRepository.find();
   }
 
-  static async getOneShipment(id: Shipment["_id"]) {
+  static async getOneShipment(id: ShipmentSchema["_id"]) {
     const shipment = ShipmentRepository.findById(id);
 
     if (!shipment) {
@@ -20,7 +21,12 @@ export class ShipmentServices {
     return await ShipmentRepository.create(data);
   }
 
-  static async deleteShipment(id: Shipment["_id"]) {
+  static async bulkCreate(data: CreationShipment[]) {
+    ShipmentCollectionValidation.parse(data);
+    return (await ShipmentRepository.insertMany(data)).length;
+  }
+
+  static async deleteShipment(id: ShipmentSchema["_id"]) {
     return await ShipmentRepository.findByIdAndDelete(id);
   }
 
@@ -28,7 +34,7 @@ export class ShipmentServices {
     id,
     data,
   }: {
-    id: Shipment["_id"];
+    id: ShipmentSchema["_id"];
     data: Shipment;
   }) {
     return await ShipmentRepository.findByIdAndUpdate(id, data);

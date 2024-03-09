@@ -6,8 +6,9 @@ import {
   ProductSchema,
   MemberSchema,
   OrderSchema,
+  ShipmentSchema,
 } from "../types";
-import { Document, Types } from "mongoose";
+import { Document } from "mongoose";
 
 export const createMockMember = (teamCount: number = 2): MemberSchema => {
   return {
@@ -100,12 +101,10 @@ export const createMockOrder = (
   };
 };
 
-export const createMockShipment = (productCount: number = 2): Shipment => {
+export const createMockShipment = (): ShipmentSchema => {
   return {
     _id: faker.string.uuid(),
-    memberId: faker.string.uuid(),
-    name: faker.person.firstName(),
-    lastName: faker.person.lastName(),
+    fullname: faker.person.firstName(),
     date: faker.date.recent().toISOString(),
     status: faker.helpers.arrayElement([
       "Missing Data",
@@ -117,7 +116,7 @@ export const createMockShipment = (productCount: number = 2): Shipment => {
     type: faker.helpers.arrayElement(["Courrier", "Internal"]),
     trackingNumber: faker.string.numeric(),
     trackingURL: faker.internet.url(),
-    products: Array.from({ length: productCount }, createMockProduct),
+    price: faker.commerce.price(),
     __v: faker.number.int(),
   };
 };
