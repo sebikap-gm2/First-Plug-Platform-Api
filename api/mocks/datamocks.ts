@@ -110,7 +110,7 @@ export const createMockShipment = (): ShipmentSchema => {
       "Missing Data",
       "Delivered",
       "Preparing",
-      "Avaliable",
+      "Available",
       "Shipped",
     ]),
     type: faker.helpers.arrayElement(["Courrier", "Internal"]),
