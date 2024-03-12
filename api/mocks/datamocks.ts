@@ -104,7 +104,7 @@ export const createMockShipment = (productCount: number = 2): Shipment => {
       "Missing Data",
       "Delivered",
       "Preparing",
-      "Avaliable",
+      "Available",
       "Shipped",
     ]),
     type: faker.helpers.arrayElement(["Courrier", "Internal"]),
