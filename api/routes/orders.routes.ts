@@ -6,5 +6,6 @@ import { OrderController } from "../controllers";
 ordersRoutes.get("/", OrderController.getOrders);
 ordersRoutes.get("/:id", OrderController.getOrderById);
 ordersRoutes.post("/", OrderController.newOrder);
+ordersRoutes.post("/bulkcreate", OrderController.bulkCreate);
 ordersRoutes.put("/:id", OrderController.updateOrder);
 ordersRoutes.delete("/:id", OrderController.deleteOrder);

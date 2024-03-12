@@ -49,6 +49,25 @@ export class ShipmentsController {
       next(error);
     }
   }
+  static async bulkCreate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const mainService = new MainService();
+
+      await mainService.initalize(req.user._id);
+
+      const rowsCreated = await mainService.runCommand(
+        "shipment",
+        "bulkCreate",
+        req.body
+      );
+
+      res.status(201).json({
+        message: `Bulk create successful: ${rowsCreated} documents inserted successfully out of ${req.body.length}.`,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
   static async updateShipment(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;

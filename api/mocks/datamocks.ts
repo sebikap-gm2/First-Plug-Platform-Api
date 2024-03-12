@@ -1,6 +1,14 @@
 import { faker } from "@faker-js/faker";
-import { Order, Shipment, User, ProductSchema, MemberSchema } from "../types";
-import { Document, Types } from "mongoose";
+import {
+  Order,
+  Shipment,
+  User,
+  ProductSchema,
+  MemberSchema,
+  OrderSchema,
+  ShipmentSchema,
+} from "../types";
+import { Document } from "mongoose";
 
 export const createMockMember = (teamCount: number = 2): MemberSchema => {
   return {
@@ -77,28 +85,26 @@ export const createMockProduct = (): ProductSchema => {
 export const createMockOrder = (
   memberCount: number = 2,
   productCount: number = 2
-): Order => {
+): OrderSchema => {
   return {
     _id: faker.string.uuid(),
-    members: Array.from({ length: memberCount }, createMockMember),
+    member: faker.person.fullName(),
     status: faker.helpers.arrayElement([
-      "Confirmed",
-      "Canceled",
-      "ConfirmationPending",
-      "PaymentPending",
+      "Order confirmed",
+      "Order canceled",
+      "Confirmation pending",
+      "Payment pending",
     ]),
     date: faker.date.anytime().toISOString(),
-    products: Array.from({ length: productCount }, createMockProduct),
+    total: faker.commerce.price(),
     __v: faker.number.int(),
   };
 };
 
-export const createMockShipment = (productCount: number = 2): Shipment => {
+export const createMockShipment = (): ShipmentSchema => {
   return {
     _id: faker.string.uuid(),
-    memberId: faker.string.uuid(),
-    name: faker.person.firstName(),
-    lastName: faker.person.lastName(),
+    member: faker.person.firstName(),
     date: faker.date.recent().toISOString(),
     status: faker.helpers.arrayElement([
       "Missing Data",
@@ -110,7 +116,7 @@ export const createMockShipment = (productCount: number = 2): Shipment => {
     type: faker.helpers.arrayElement(["Courrier", "Internal"]),
     trackingNumber: faker.string.numeric(),
     trackingURL: faker.internet.url(),
-    products: Array.from({ length: productCount }, createMockProduct),
+    price: faker.commerce.price(),
     __v: faker.number.int(),
   };
 };
