@@ -5,7 +5,7 @@ export const SHIPMENT_STATUS = [
   "Missing Data",
   "Delivered",
   "Preparing",
-  "Avaliable",
+  "Available",
   "Shipped",
 ] as const;
 
