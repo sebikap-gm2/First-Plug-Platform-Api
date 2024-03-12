@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { connectToDatabase } from "../config";
 import { AuthServices } from "./auth.services";
-import { MembersServices } from "./member";
+import { MembersServices } from "./member.services";
 import { OrderServices } from "./orders.services";
 import { ProductServices } from "./product.services";
 import { ShipmentServices } from "./shipment.services";

@@ -1,18 +1,18 @@
 import { faker } from "@faker-js/faker";
-import { Member, Product, Order, Shipment, User } from "../types";
+import { Order, Shipment, User, ProductSchema, MemberSchema } from "../types";
 import { Document, Types } from "mongoose";
 
-export const createMockMember = (teamCount: number = 2): Member => {
+export const createMockMember = (teamCount: number = 2): MemberSchema => {
   return {
     _id: faker.string.uuid(),
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    img: faker.image.avatar(),
     dateOfBirth: faker.date.birthdate().toISOString(),
     phone: faker.phone.number(),
     email: faker.internet.email(),
     jobPosition: faker.person.jobTitle(),
     city: faker.location.city(),
+    dni: faker.person.suffix(),
     zipCode: faker.location.zipCode(),
     address: faker.location.streetAddress(),
     appartment: faker.location.secondaryAddress(),
@@ -39,13 +39,12 @@ export const createMockMember = (teamCount: number = 2): Member => {
 //   return `${adjective} ${noun} Team`;
 // };
 
-export const createMockProduct = (): Product => {
+export const createMockProduct = (): ProductSchema => {
   return {
     _id: faker.string.uuid(),
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     category: faker.commerce.department(),
-    model: faker.lorem.word(),
     color: faker.color.human(),
     screen: `${faker.number.int({
       min: 10,
@@ -68,7 +67,6 @@ export const createMockProduct = (): Product => {
       max: 10,
     })}GB`,
     serialNumber: faker.string.uuid(),
-    price: faker.commerce.price(),
     status: faker.helpers.arrayElement(["Available", "Delivered"]),
     imgUrl: faker.image.url(),
     stock: faker.number.int({ min: 0, max: 100 }),

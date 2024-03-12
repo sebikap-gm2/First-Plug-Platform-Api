@@ -1,12 +1,13 @@
+import { MemberCollectionValidation } from "../validations";
 import { MemberRepository } from "../models";
-import { CreationMember, Member } from "../types";
+import { CreationMember, Member, MemberSchema } from "../types";
 
 export class MembersServices {
   static async getAll() {
     return await MemberRepository.find();
   }
 
-  static async getOne(identifier: Member["_id"]) {
+  static async getOne(identifier: MemberSchema["_id"]) {
     const Member = await MemberRepository.findOne({
       identifier,
     }).exec();
@@ -18,7 +19,7 @@ export class MembersServices {
     return Member;
   }
 
-  static async getById(_id: Member["_id"]) {
+  static async getById(_id: MemberSchema["_id"]) {
     const Member = await MemberRepository.findById(_id);
 
     if (!Member) {
@@ -30,6 +31,11 @@ export class MembersServices {
 
   static async create(data: CreationMember) {
     return await MemberRepository.create(data);
+  }
+
+  static async bulkCreate(data: CreationMember) {
+    MemberCollectionValidation.parse(data);
+    return (await MemberRepository.insertMany(data)).length;
   }
 
   static async update({ id, data }: { id: string; data: Member }) {
@@ -44,7 +50,7 @@ export class MembersServices {
     return MemberUpdated;
   }
 
-  static async delete(_id: Member["_id"]) {
+  static async delete(_id: MemberSchema["_id"]) {
     const MemberDeleted = await MemberRepository.findByIdAndDelete(_id);
 
     if (!MemberDeleted) {
