@@ -1,3 +1,4 @@
+import { SHIPMENT_STATUS, SHIPMENT_TYPE } from "../types";
 import mongoose from "mongoose";
 
 const ShipmentSchema = new mongoose.Schema(
@@ -12,6 +13,7 @@ const ShipmentSchema = new mongoose.Schema(
     },
     type: {
       type: String,
+      enum: SHIPMENT_TYPE,
       required: true,
     },
     trackingNumber: {
@@ -28,7 +30,7 @@ const ShipmentSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Missing Data", "Delivered", "Preparing", "Avaliable", "Shipped"],
+      enum: SHIPMENT_STATUS,
       required: true,
     },
   },

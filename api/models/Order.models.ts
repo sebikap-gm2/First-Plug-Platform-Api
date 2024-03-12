@@ -1,3 +1,4 @@
+import { ORDER_STATUSES } from "../types";
 import mongoose from "mongoose";
 
 const OrdersSchema = new mongoose.Schema(
@@ -8,13 +9,7 @@ const OrdersSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: [
-        "Order confirmed",
-        "Order canceled",
-        "Confirmation pending",
-        "Payment pending",
-      ],
-      default: "confirmation pending",
+      enum: ORDER_STATUSES,
       required: true,
     },
     date: {
