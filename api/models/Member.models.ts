@@ -31,6 +31,10 @@ const MemberSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  country: {
+    type: String,
+    require: true,
+  },
   city: {
     type: String,
     require: true,

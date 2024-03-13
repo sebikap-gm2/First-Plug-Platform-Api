@@ -19,6 +19,7 @@ export const createMockMember = (teamCount: number = 2): MemberSchema => {
     phone: faker.phone.number(),
     email: faker.internet.email(),
     jobPosition: faker.person.jobTitle(),
+    country: faker.location.country(),
     city: faker.location.city(),
     dni: faker.person.suffix(),
     zipCode: faker.location.zipCode(),

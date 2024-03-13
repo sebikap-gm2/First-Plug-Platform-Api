@@ -11,6 +11,7 @@ export const MemberValidation = z.object({
   email: z.string().min(1).email(),
   dni: z.string().min(1),
   jobPosition: z.string().min(1),
+  country: z.string().min(1),
   city: z.string().min(1),
   zipCode: z.string().min(1),
   address: z.string().min(1),
