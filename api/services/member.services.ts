@@ -1,4 +1,4 @@
-import { MemberCollectionValidation } from "../validations";
+import { MemberCollectionValidation, MemberValidation } from "../validations";
 import { MemberRepository } from "../models";
 import { CreationMember, Member, MemberSchema } from "../types";
 
@@ -7,29 +7,18 @@ export class MembersServices {
     return await MemberRepository.find();
   }
 
-  static async getOne(identifier: MemberSchema["_id"]) {
-    const Member = await MemberRepository.findOne({
-      identifier,
-    }).exec();
+  static async getById(id: MemberSchema["_id"]) {
+    const Member = await MemberRepository.findById(id);
 
     if (!Member) {
-      throw new Error("Team member not found");
-    }
-
-    return Member;
-  }
-
-  static async getById(_id: MemberSchema["_id"]) {
-    const Member = await MemberRepository.findById(_id);
-
-    if (!Member) {
-      throw new Error("Team Member not found.");
+      throw new Error("The member was not found");
     }
 
     return Member;
   }
 
   static async create(data: CreationMember) {
+    MemberValidation.parse(data);
     return await MemberRepository.create(data);
   }
 
@@ -39,24 +28,28 @@ export class MembersServices {
   }
 
   static async update({ id, data }: { id: string; data: Member }) {
+    MemberValidation.parse(data);
+
     const MemberUpdated = await MemberRepository.findByIdAndUpdate(id, data, {
       new: true,
     });
 
-    if (MemberUpdated) {
-      throw new Error("the team member was not found");
+    if (!MemberUpdated) {
+      throw new Error("The member was not found");
     }
 
     return MemberUpdated;
   }
 
-  static async delete(_id: MemberSchema["_id"]) {
-    const MemberDeleted = await MemberRepository.findByIdAndDelete(_id);
+  static async delete(id: MemberSchema["_id"]) {
+    const MemberDeleted = await MemberRepository.findByIdAndDelete(id);
 
     if (!MemberDeleted) {
-      throw new Error("the team member was not found");
+      throw new Error("The member was not found");
     }
 
     return MemberDeleted;
   }
+
+  // TODO: The logic of receiving the products and assigning it to a member is missing
 }
