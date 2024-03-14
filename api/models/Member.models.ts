@@ -69,6 +69,11 @@ const MemberSchema = new mongoose.Schema({
     require: false,
     default: [],
   },
+  products: {
+    type: Array,
+    require: false,
+    default: [],
+  },
 });
 
 export const MemberRepository = mongoose.model("members", MemberSchema);

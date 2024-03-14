@@ -1,5 +1,6 @@
 import { isISODate } from "../utils";
 import { z } from "zod";
+import { ProductValidation } from "./product.validation";
 
 export const MemberValidation = z.object({
   firstName: z.string().min(1),
@@ -22,6 +23,7 @@ export const MemberValidation = z.object({
   timeSlotForDelivery: z.string(),
   additionalInfo: z.string().nullable(),
   teams: z.array(z.string()),
+  products: z.array(ProductValidation).optional(),
 });
 
 export const MemberCollectionValidation = z.array(MemberValidation);
