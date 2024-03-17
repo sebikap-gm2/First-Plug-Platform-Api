@@ -8,9 +8,9 @@ export class ProductController {
 
       await mainService.initalize(req.user._id);
 
-      const orders = await mainService.runCommand("product", "getAll", {});
+      const products = await mainService.runCommand("product", "getAll", {});
 
-      res.status(200).json(orders);
+      res.status(200).json(products);
     } catch (error) {
       next(error);
     }
