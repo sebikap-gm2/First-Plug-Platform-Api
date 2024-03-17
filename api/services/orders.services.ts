@@ -3,14 +3,14 @@ import { OrderRepository } from "../models";
 import { CreationOrder, Order, OrderSchema } from "../types";
 
 export class OrderServices {
-  static async getAllOrders() {
+  static async getAll() {
     return await OrderRepository.find();
   }
-  static async getOneOrder(orderId: OrderSchema["_id"]) {
+  static async getById(orderId: OrderSchema["_id"]) {
     return await OrderRepository.findById(orderId);
   }
 
-  static async createOrder(data: CreationOrder) {
+  static async create(data: CreationOrder) {
     return await OrderRepository.create(data);
   }
 
@@ -19,17 +19,11 @@ export class OrderServices {
     return (await OrderRepository.insertMany(data)).length;
   }
 
-  static async updateOrder({
-    id,
-    data,
-  }: {
-    id: OrderSchema["_id"];
-    data: Order;
-  }) {
+  static async update({ id, data }: { id: OrderSchema["_id"]; data: Order }) {
     return await OrderRepository.findOneAndUpdate({ id }, data);
   }
 
-  static async deleteOrder(id: OrderSchema["_id"]) {
+  static async delete(id: OrderSchema["_id"]) {
     return await OrderRepository.findOneAndDelete({ id });
   }
 }
