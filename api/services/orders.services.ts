@@ -1,5 +1,5 @@
 import { OrderCollectionValidation } from "../validations";
-import { OrderRepository } from "../models";
+import { MemberRepository, OrderRepository } from "../models";
 import { CreationOrder, Order, OrderSchema } from "../types";
 
 export class OrderServices {
@@ -14,9 +14,42 @@ export class OrderServices {
     return await OrderRepository.create(data);
   }
 
-  static async bulkCreate(data: CreationOrder) {
+  static async bulkCreate(data: CreationOrder[]) {
+    //TODO: used in more than one place possible refactoring
     OrderCollectionValidation.parse(data);
-    return (await OrderRepository.insertMany(data)).length;
+
+    const memberNames = data.map((order) => order.member);
+    const uniqueMemberNames = [...new Set(memberNames)];
+
+    const members = await MemberRepository.find({
+      $or: uniqueMemberNames.map((fullName) => {
+        const [firstName, lastName] = fullName.split(" ");
+        return {
+          firstName: firstName,
+          lastName: lastName,
+        };
+      }),
+    });
+
+    const memberMap = new Map();
+    members.forEach((member) => {
+      memberMap.set(member.firstName + " " + member.lastName, member);
+    });
+
+    const ordersWithMembers = data.map((order) => {
+      const member = memberMap.get(order.member);
+      return { ...order, member: member || null };
+    });
+
+    const validOrders = ordersWithMembers.filter(
+      (order) => order.member !== null
+    );
+
+    console.log(validOrders);
+
+    const insertedOrders = await OrderRepository.insertMany(validOrders);
+
+    return insertedOrders.length;
   }
 
   static async updateOrder({

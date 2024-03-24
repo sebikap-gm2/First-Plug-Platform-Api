@@ -1,6 +1,7 @@
 import { ProductCollectionValidation } from "../validations";
 import { ProductRepository } from "../models";
 import { CreationProduct, Product, ProductSchema } from "../types";
+import { ClientSession, Types } from "mongoose";
 
 export class ProductServices {
   static async findAllProducts() {
@@ -42,5 +43,52 @@ export class ProductServices {
 
   static async deleteProductById(productId: ProductSchema["_id"]) {
     return await ProductRepository.findOneAndRemove({ productId });
+  }
+
+  static async getAllProductsByIds(
+    productIds: ProductSchema["_id"][],
+    session?: ClientSession
+  ) {
+    let query = ProductRepository.find({ _id: { $in: productIds } });
+
+    if (session) {
+      query = query.session(session);
+    }
+
+    const products = await query.exec();
+
+    if (!products || products.length === 0) {
+      throw new Error(`No products found for the provided IDs`);
+    }
+
+    if (products.length !== productIds.length) {
+      const foundProductIds = products.map((product) => product._id);
+
+      const notFoundProductIds = productIds.filter((productId) => {
+        const objectId = new Types.ObjectId(productId);
+        return !foundProductIds.some((foundId) => foundId.equals(objectId));
+      });
+
+      throw new Error(
+        `Products with IDs ${notFoundProductIds.join(", ")} not found`
+      );
+    }
+
+    return products;
+  }
+
+  static async getAllProductsByIdsAndDelete(
+    productIdsToDelete: ProductSchema["_id"][],
+    session?: ClientSession
+  ) {
+    let query = ProductRepository.deleteMany({
+      _id: { $in: productIdsToDelete },
+    });
+
+    if (session) {
+      query = query.session(session);
+    }
+
+    return query.exec();
   }
 }
