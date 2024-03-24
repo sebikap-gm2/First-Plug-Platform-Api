@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MemberSchema = new mongoose.Schema({
+export const MemberSchema = new mongoose.Schema({
   firstName: {
     type: String,
     require: true,
@@ -20,7 +20,7 @@ const MemberSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
     match: /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/,
   },
   dni: {

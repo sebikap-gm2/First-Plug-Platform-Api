@@ -2,6 +2,7 @@ import { MemberCollectionValidation, MemberValidation } from "../validations";
 import { MemberRepository, ProductRepository } from "../models";
 import { CreationMember, Member, MemberSchema } from "../types";
 import mongoose from "mongoose";
+import { ProductServices } from "./product.services";
 
 export class MembersServices {
   static async getAll() {
@@ -23,27 +24,6 @@ export class MembersServices {
     return await MemberRepository.create(data);
   }
 
-  static async assignProductToMember({
-    productId,
-    memberId,
-  }: {
-    productId: string;
-    memberId: string;
-  }) {
-    const member = await MemberRepository.findById(memberId);
-    const product = await ProductRepository.findById(productId);
-
-    if (!member || !product) {
-      throw new Error("Member or product not found");
-    }
-
-    member.products.push(product);
-
-    await member.save();
-
-    await product.remove();
-  }
-
   static async assignManyProductsToMember({
     memberId,
     productsIds,
@@ -61,30 +41,26 @@ export class MembersServices {
         throw new Error("Member not found");
       }
 
-      for (const productId of productsIds) {
-        const product = await ProductRepository.findById(productId).session(
-          session
-        );
+      const productsToDelete = await ProductServices.getAllProductsByIds(
+        productsIds,
+        session
+      );
 
-        if (!product) {
-          throw new Error(`Product with ID ${productId} not found`);
-        }
+      await ProductServices.getAllProductsByIdsAndDelete(productsIds, session);
 
-        member.products.push(product);
+      member.products.push(...productsToDelete);
 
-        await product.remove();
-      }
-
-      await member.save();
+      await member.save({ session });
 
       await session.commitTransaction();
-      session.endSession();
     } catch (error) {
       await session.abortTransaction();
-      session.endSession();
       throw error;
+    } finally {
+      session.endSession();
     }
   }
+
   static async bulkCreate(data: CreationMember) {
     MemberCollectionValidation.parse(data);
     return (await MemberRepository.insertMany(data)).length;

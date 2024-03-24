@@ -50,38 +50,13 @@ export class MembersController {
     }
   }
 
-  static async assignProductToMember(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    try {
-      const { productId, memberId } = req.params;
-
-      const mainService = new MainService();
-
-      await mainService.initalize(req.user._id);
-
-      await mainService.runCommand("member", "assignProductToMember", {
-        productId,
-        memberId,
-      });
-
-      res.status(201).send();
-    } catch (error) {
-      next(error);
-    }
-  }
-
   static async assignManyProductsToMember(
     req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const { memberId } = req.params;
-
-      const { productsIds } = req.body;
+      const { productsIds, memberId } = req.body;
 
       const mainService = new MainService();
 
