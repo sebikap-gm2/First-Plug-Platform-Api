@@ -45,8 +45,6 @@ export class OrderServices {
       (order) => order.member !== null
     );
 
-    console.log(validOrders);
-
     const insertedOrders = await OrderRepository.insertMany(validOrders);
 
     return insertedOrders.length;
